@@ -7,7 +7,7 @@ import flaskapp
 
 lock = threading.Lock()
 
-state = "klok"
+state = "alarm"
 keyPressed = False
 
 alarmTime = datetime.now()  + timedelta( seconds = 5 )
@@ -46,8 +46,9 @@ def updateThread():
         #    state = 'event'
         # try to change state of clock from flask
         
-        if variable == 1:
+        if flaskapp.variable == 1:
             state = "klok"
+            print('state change by flaskapp is working!!!!!!!!!!!!!!!!')
         
         lock.release()
         time.sleep(1) # wait 5 seconds  
@@ -70,11 +71,11 @@ def keyboardThread():
         lock.release()
 
 def flaskThread():
-    global state, variable
+    global state
     while True:
         #lock.acquire()
         print("flaskThread running")
-        print (variable)
+        
         flaskapp.flaskRunner()
         #lock.release()
         time.sleep(0.1)
