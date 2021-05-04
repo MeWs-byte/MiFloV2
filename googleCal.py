@@ -6,6 +6,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 import pytz
+from datetime import timedelta
 
 
 # If modifying these scopes, delete the file token.json.
@@ -13,7 +14,7 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 
 def getGoogle():
-    global event_time
+    
     """Shows basic usage of the Google Calendar API.
     Prints the start and name of the next 10 events on the user's calendar.
     """
@@ -57,14 +58,21 @@ def getGoogle():
         import pytz
          
         event_time = start.astimezone(pytz.utc).replace(tzinfo=now.tzinfo)
+        global right_event_time
+        right_event_time = event_time + timedelta( hours = 2 )
+
+        print(right_event_time) # this time is correct !!!! timedelta magic , now see if you can compare results
+        #print(event_time)
         #print('this is the time of the event :   ', start)
-        print("event info: ")
+        #print("event info: ")
         print(event['summary']) 
-        #print(" this is the event_time:")
-        #print(event_time) # this time is wrong but the format is correct
+        #print(" this is the event_time, this time is wrong but the format is correct:")
+        #right_event_time =+ timedelta( seconds = 10 )
+        #print(event_time)  
         #print(type(event_time)) 
-        #print(" this is the same event_time:")
+        #print(" this is the same event_time with wrong format but right time:")
         #print(event['start']) # this time is correct but format is wrong
         #print(type(event['start']))
+        # return right_event_time
 #if __name__ == '__main__':
 #    getGoogle()

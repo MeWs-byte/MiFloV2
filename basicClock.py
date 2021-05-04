@@ -158,7 +158,6 @@ def drawString( s, x, y, color ):
     	x += drawChar( c, x, y, color )
 
 def clock_Render():
-	
     # Comment this line out if you have RGBW/GRBW NeoPixels
     pixels.fill((0, 0, 0))
 
@@ -168,9 +167,9 @@ def clock_Render():
 
     pixels.show()
     time.sleep(1)
-    #print('current_time :')
-    #print(current_time) 
-    #print(type(current_time))
+    	#print('current_time :')
+    	#print(current_time) 
+    	#print(type(current_time))
 
 
 def alarm_Render():
