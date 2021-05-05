@@ -3,7 +3,7 @@ a KISS implementation of the MiFlo Smart Clock
 
 - run threadMachine.py as root
 
-
+- go to the bottom of this page for personal notes
 
 current setup and connections:
 
@@ -25,3 +25,11 @@ Push button
        -> 10k resistor -> GND
 
 
+
+
+
+
+
+----
+notes : 
+5th of may , added timeTimer.py , integrate it into the rest of the program asap
