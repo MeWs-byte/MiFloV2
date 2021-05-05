@@ -4,6 +4,7 @@ from basicClock import *
 from googleCal import getGoogle
 import threading
 import flaskapp
+import button
 
 lock = threading.Lock()
 
@@ -29,10 +30,10 @@ def renderThread():
         
         if state == 'event':
             print('event')
-        time.sleep(1)
+        time.sleep(0.1)
 
 def updateThread():
-    global state, alarmTime, keyPressed, right_event_time, variable
+    global state, alarmTime, keyPressed, right_event_time, clockStateButton, pushbutton
     while True:
         now = datetime.now()
         lock.acquire()
@@ -45,10 +46,16 @@ def updateThread():
         #if right_event_time <= now:
         #    state = 'event'
         # try to change state of clock from flask
-        
-        if flaskapp.variable == 1:
+        if button.pushbutton == 'on':
             state = "klok"
-            print('state change by flaskapp is working!!!!!!!!!!!!!!!!')
+            print('state change with pushbutton is working!!!!!')
+
+
+        if flaskapp.clockStateButton == 1:
+            state = "klok"
+            
+        
+
         
         lock.release()
         time.sleep(1) # wait 5 seconds  
@@ -65,10 +72,13 @@ def keyboardThread():
     global state, keyPressed
     while True:
         print("keyboard")
-        input()
+        #input()
         lock.acquire()
-        keyPressed = True
+        #keyPressed = True
+        button.waitforpushbutton()
         lock.release()
+        time.sleep(0.1)
+        
 
 def flaskThread():
     global state

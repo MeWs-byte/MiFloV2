@@ -187,4 +187,5 @@ def alarm_Render():
     drawString( current_time, 2, 1, (255, 0, 0) )
 
     pixels.show()
+	
     time.sleep(1)

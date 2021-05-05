@@ -4,23 +4,23 @@ app = Flask(__name__)
 app.secret_key = b'_1#y2l"F4Q8z\n\xec]/'
 
 
-variable = 0
+clockStateButton = 0
 
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index/', methods=['GET', 'POST'])
 def index():
-    global variable
+    global clockStateButton
     if request.method == "POST":
         try:
-            variable = int(request.form.get("variable"))
-            print('this is the variable named variable: ',variable)
+            clockStateButton = int(request.form.get("clockStateButton"))
+            print('this is the clockStateButton named clockStateButton: ',clockStateButton)
             return redirect(url_for('index'))
             
         except:
-            flash("Invalid type for variable")
+            flash("Invalid type for clockStateButton")
         return redirect(url_for('index'))
-    return render_template('index.html', variable=variable)
+    return render_template('index.html', clockStateButton=clockStateButton)
     
 
 def flaskRunner():
