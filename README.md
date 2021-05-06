@@ -2,6 +2,25 @@
 a KISS implementation of the MiFlo Smart Clock
 
 ### Software
+#### Calendar
+https://developers.google.com/calendar/quickstart/python
+
+current setup 
+
+##### On Desktop
+
+- get credentials 
+
+https://developers.google.com/workspace/guides/create-project
+
+- download .json creds as described and rename credentials.json
+
+- run quickstart.py 
+
+- copy token.json to project folder on Pi 
+
+##### On Pi
+
 - sudo pip3 install -r requirements.txt
 - sudo python3 threadMachine.py
 
