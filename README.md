@@ -45,7 +45,7 @@ Push button -> Pi
 
 - Leg1 -> - 3.3V
 - Leg2 -> - 15
-       <br />_____-> - 10k resistor -> GND
+       <br />leg2-> - 10k resistor -> GND
 
 
 
