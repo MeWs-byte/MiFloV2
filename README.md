@@ -43,9 +43,9 @@ LED matrix -> Pi
 
 Push button -> Pi
 
-- Leg1 -> 3.3V
-- Leg2 -> 15
-       -> 10k resistor -> GND
+- Leg1 -> - 3.3V
+- Leg2 -> - 15
+       -> - 10k resistor -> GND
 
 
 
