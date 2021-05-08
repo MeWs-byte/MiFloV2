@@ -1,62 +1,118 @@
 import time
 from datetime import datetime, timedelta
+
 from basicClock import *
 from googleCal import getGoogle
 import threading
 import flaskapp
 import button
-
+import timeTimer
+from timeTimer import countdown
+from flaskapp import timer
 lock = threading.Lock()
 
-state = "alarm"
+
+state = "klok"
 keyPressed = False
 
-alarmTime = datetime.now()  + timedelta( seconds = 5 )
+# for testing 
+alarmTime = datetime.now()  + timedelta( seconds = 1000 )
 
 
 def renderThread():
+    global timer
+    timer = 0
     while True:
         global state
         if state == 'klok':
 
             clock_Render()
-            print(datetime.now())
-            print("clockmode")
+            #print(datetime.now())
+            print("clockstate")
+            #print(timer)
 
         if state == 'alarm':
 
             alarm_Render()
-            print("alarmmode")
-        
+            print("alarmstate")
+        # event state not implemented yet 
         if state == 'event':
-            print('event')
+            print('eventstate')
+        # new for timer, not implemented yet 
+        if state == 'timer':
+            print('timerstate')
+        
+            timeTimer.timer_Render()
+
+
         time.sleep(0.1)
 
 def updateThread():
-    global state, alarmTime, keyPressed, right_event_time, clockStateButton, pushbutton
+    global state, alarmTime, keyPressed, right_event_time, clockStateButton, pushbutton, timer, tm
     while True:
         now = datetime.now()
+        dnow=datetime.now()
+        nowcurrent_time = dnow.strftime("%H:%M")
+        noAlarm = len(flaskapp.alarmTime)
+        timerValue = flaskapp.timer
+        tm = 0
+        
         lock.acquire()
+        
+        
         if now > alarmTime: 
             state = "alarm"
+
         if state == "alarm" and keyPressed:
             alarmTime = datetime.now()  + timedelta( seconds = 10 )
             state = "klok"
             keyPressed = False
-        #if right_event_time <= now:
+        #if right_event_time <= now:            # for the event state
         #    state = 'event'
-        # try to change state of clock from flask
-        if button.pushbutton == 'on':
+        
+        if button.pushbutton == 'on':   # if button = high and state = alarm -> change state to clock     # physical button to turn the alarm back to clock state
+            noAlarm = 0
             state = "klok"
             print('state change with pushbutton is working!!!!!')
 
 
-        if flaskapp.clockStateButton == 1:
+        if flaskapp.clockStateButton == 1:         # web button to turn the alarm back to clock state
             state = "klok"
+
+        if isinstance(flaskapp.timer, int) == False and state != 'alarm':
+            state = 'klok'
+        #if timeTimer.tm > 0 and state != 'alarm':
+        #if flaskapp.timer != 0:
+        if isinstance(flaskapp.timer, int) == True:                                                   # going to the timer
+            
+            flasktimerfunct = flaskapp.timer
+            flasktimerint = int(flasktimerfunct)
+            if flasktimerint == 0:
+                state = "klok"
+            if flasktimerint > 0:
+                state = "timer"
+            
+        #    print(flaskapp.timer)
+        #    print(type(timer))
+            #state = "timer"
+
+            
             
         
 
-        
+        if flaskapp.alarmTime <= nowcurrent_time and noAlarm != 0:                  # going to the alarm state
+            print('the alarmtime variable has entered the updateThread')
+            state = 'alarm'
+            
+            
+            #print('this is the current time : ', nowcurrent_time)
+            #print('this is the alarmtime:', flaskapp.alarmTime)
+            #print('this is the type of the alarmtime:')
+            #print(type(flaskapp.alarmTime))
+            #print('this is noAlarm: !!!!!!!!')
+            #print(noAlarm)
+
+
         lock.release()
         time.sleep(1) # wait 5 seconds  
 
@@ -65,13 +121,13 @@ def taskThread():
     while True:
 
         getGoogle()
-        time.sleep(10)
+        time.sleep(60)
     
     
 def keyboardThread():
     global state, keyPressed
     while True:
-        print("keyboard")
+        
         #input()
         lock.acquire()
         #keyPressed = True

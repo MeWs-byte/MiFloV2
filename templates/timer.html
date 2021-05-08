@@ -1,0 +1,18 @@
+timer = {{ timer }}
+
+
+<form action="{{ url_for('timer') }}" method="post">
+    <input type="text" value="1" name="timer">
+    <input type="submit" value="set the timer">
+</form>
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li style="color:red">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}

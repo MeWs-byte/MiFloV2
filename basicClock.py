@@ -189,3 +189,5 @@ def alarm_Render():
     pixels.show()
 	
     time.sleep(1)
+
+

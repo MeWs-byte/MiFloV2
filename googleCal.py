@@ -61,7 +61,7 @@ def getGoogle():
         global right_event_time
         right_event_time = event_time + timedelta( hours = 2 )
 
-        print(right_event_time) # this time is correct !!!! timedelta magic , now see if you can compare results
+        #print(right_event_time) # this time is correct !!!! timedelta magic , now see if you can compare results
         #print(event_time)
         #print('this is the time of the event :   ', start)
         #print("event info: ")
