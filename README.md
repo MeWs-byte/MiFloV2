@@ -3,6 +3,8 @@ a KISS implementation of the MiFlo Smart Clock
 
 ### Software
 #### Calendar
+
+grab quickstart.py from here
 https://developers.google.com/calendar/quickstart/python
 
 current setup 
