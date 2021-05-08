@@ -3,6 +3,8 @@ a KISS implementation of the MiFlo Smart Clock
 
 ### Software
 #### Calendar
+
+grab quickstart.py from here
 https://developers.google.com/calendar/quickstart/python
 
 current setup 
@@ -41,9 +43,9 @@ LED matrix -> Pi
 
 Push button -> Pi
 
-- Leg1 -> 3.3V
-- Leg2 -> 15
-       -> 10k resistor -> GND
+- Leg1 -> - 3.3V
+- Leg2 -> - 15
+       <br />leg2-> - 10k resistor -> GND
 
 
 
