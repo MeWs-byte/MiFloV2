@@ -54,5 +54,5 @@ Push button -> Pi
 
 
 ----
-notes : 
+notes :  run renderip.py to render the ip;  go to /timer to set the timer ; go to /input to set the alarm ; press the pushbutton to return back to clockstate ; press the submit button or input 1 to go back to clockstate ;
 
