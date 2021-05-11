@@ -9,6 +9,8 @@ import button
 import timeTimer
 from timeTimer import countdown
 from flaskapp import timer
+from googleCal import eventList
+
 lock = threading.Lock()
 
 
@@ -38,7 +40,7 @@ def renderThread():
         # event state not implemented yet 
         if state == 'event':
             print('eventstate')
-        # new for timer, not implemented yet 
+        
         if state == 'timer':
             print('timerstate')
         
@@ -74,6 +76,11 @@ def updateThread():
             noAlarm = 0
             state = "klok"
             print('state change with pushbutton is working!!!!!')
+
+            #from getIP import whatsMyIp         # i just put this code here for testing untill i connect a dedicated button for showing the ip on screen
+
+            #whatsMyIp()
+            #button.pushbutton = 'off'
 
 
         if flaskapp.clockStateButton == 1:         # web button to turn the alarm back to clock state
@@ -118,9 +125,17 @@ def updateThread():
 
 
 def taskThread():
+    global eventList
+    
     while True:
+        
+        getGoogle()         # google cal 
+        print('this is the output of the eventList')
+        for x in eventList:
+            print(x['summary'])             # this works    
 
-        getGoogle()
+            #print(eventList[1]['summary'])
+            #print(eventList)
         time.sleep(60)
     
     

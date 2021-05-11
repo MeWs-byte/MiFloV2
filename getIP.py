@@ -8,11 +8,12 @@ def whatsMyIp():
     s.connect(("8.8.8.8",80))
     ip_address = s.getsockname()[0]
     s.close()
-    mystring = f'Hi there!, you can find me @ http://{ip_address}:5000 !'
+    #mystring = f'Hi there!, you can find me @ http://{ip_address}:5000 !'
+    mystring = f'http://{ip_address}:5000 :)'
     print(mystring)
     #print(f'go to http://{ip_address}:5000')
 
-
+    return mystring
 if __name__=='__main__':
     whatsMyIp()
         

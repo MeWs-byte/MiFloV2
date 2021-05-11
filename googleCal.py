@@ -8,12 +8,15 @@ from google.oauth2.credentials import Credentials
 import pytz
 from datetime import timedelta
 
+# get events out of loop
+eventList = []
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 
 def getGoogle():
+    global eventList
     
     """Shows basic usage of the Google Calendar API.
     Prints the start and name of the next 10 events on the user's calendar.
@@ -44,7 +47,7 @@ def getGoogle():
     now = datetime.datetime.utcnow()#.isoformat() + 'Z' # 'Z' indicates UTC time
     print('Getting the next event: ')
     events_result = service.events().list(calendarId='primary', timeMin=now.isoformat() + 'Z',
-                                        maxResults=1, singleEvents=True,
+                                        maxResults=10, singleEvents=True,
                                         orderBy='startTime').execute()
     events = events_result.get('items', [])
 
@@ -61,18 +64,14 @@ def getGoogle():
         global right_event_time
         right_event_time = event_time + timedelta( hours = 2 )
 
-        #print(right_event_time) # this time is correct !!!! timedelta magic , now see if you can compare results
-        #print(event_time)
-        #print('this is the time of the event :   ', start)
-        #print("event info: ")
+        print(right_event_time) # this time is correct !!!! timedelta magic , now see if you can compare results
+       
+
         print(event['summary']) 
-        #print(" this is the event_time, this time is wrong but the format is correct:")
-        #right_event_time =+ timedelta( seconds = 10 )
-        #print(event_time)  
-        #print(type(event_time)) 
-        #print(" this is the same event_time with wrong format but right time:")
-        #print(event['start']) # this time is correct but format is wrong
-        #print(type(event['start']))
-        # return right_event_time
+
+        eventList.append(event)
+        
+     
+       
 #if __name__ == '__main__':
-#    getGoogle()
+    #getGoogle()

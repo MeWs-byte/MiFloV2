@@ -65,7 +65,12 @@ def input():
 
 def flaskRunner():          #  who runs the world?
 
-    app.run()
+    app.run(host="0.0.0.0")
+    import socket
+    h_name = socket.gethostname()
+    IP_addres = socket.gethostbyname(h_name)
+    print("Host Name is:" + h_name)
+    print("Computer IP Address is:" + IP_addres)
     
     
     
