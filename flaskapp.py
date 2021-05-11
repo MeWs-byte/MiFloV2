@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import timeTimer
-
+from googleCal import eventList
 
 app = Flask(__name__)
 app.secret_key = b'_1#y2l"F4Q8z\n\xec]/'
@@ -62,6 +62,15 @@ def input():
               </form>"""
               + alarmTime
               )
+
+
+@app.route('/events')
+def events():
+    global eventList
+
+    
+    return render_template('events.html', eventList=eventList)
+
 
 def flaskRunner():          #  who runs the world?
 
