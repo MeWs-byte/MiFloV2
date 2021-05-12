@@ -10,6 +10,8 @@ import timeTimer
 from timeTimer import countdown
 from flaskapp import timer
 from googleCal import eventList
+from eventclass import Event
+from flaskapp import *
 
 lock = threading.Lock()
 
@@ -125,7 +127,7 @@ def updateThread():
 
 
 def taskThread():
-    global eventList
+    global eventList, toDoInfo, toDoTime
     
     while True:
         
@@ -135,8 +137,10 @@ def taskThread():
             print(x['summary'])             # this works    
 
             #print(eventList[1]['summary'])
-            #print(eventList)
-        time.sleep(60)
+        #print(eventList)
+        print('this is toDoInfo: ',flaskapp.toDoInfo)    # ok! these work now ! time to put them in your event class!!!!
+        print('this is toDoTime: ',flaskapp.toDoTime)
+        time.sleep(10)
     
     
 def keyboardThread():
