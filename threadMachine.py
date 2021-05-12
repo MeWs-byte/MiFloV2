@@ -139,16 +139,16 @@ def taskThread():
 
             #print(eventList[1]['summary'])
         #print(eventList)
-        print('this is toDoInfo: ',flaskapp.toDoInfo)    # ok! these work now ! time to put them in your event class!!!!
-        print('this is toDoTime: ',flaskapp.toDoTime)
+        #print('this is toDoInfo: ',flaskapp.toDoInfo)    # ok! these work now ! time to put them in your event class!!!!
+        #print('this is toDoTime: ',flaskapp.toDoTime)
 
-        todo1 = Event(flaskapp.toDoTime,None,"todo",flaskapp.toDoInfo)
-        print('this is todo1 as an event class object')
+        #todo1 = Event(flaskapp.toDoTime,None,"todo",flaskapp.toDoInfo)
+        #print('this is todo1 as an event class object')
         
         #pprint(vars(todo1))
 
-        pprint(todo1.eventContent) # this works 
-        pprint(todo1.startTime)
+        #pprint(todo1.eventContent) # this works 
+        #pprint(todo1.startTime)
         time.sleep(10)
     
     
