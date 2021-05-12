@@ -1,8 +1,56 @@
 # MiFloV2
 a KISS implementation of the MiFlo Smart Clock
 
-### Software
-#### Calendar
+## Setup instructions
+
+### Fresh raspberry pi:
+
+#### Setup raspberry pi boot volume
+
+* Get Lite OS from https://www.raspberrypi.org/software/operating-systems/
+* Flash on SD card
+* On `/boot` volume on SD card:
+* Touch an empty `ssh` file so SSH will be enabled on boot
+* Create `wpa_supplicant.conf` with contents (update `SSID` and `PASSWORD`):
+
+```
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=BE
+network={
+ ssid="SSID"
+ psk="PASSWORD"
+}
+```
+
+* Boot the raspberry pi, find the pi on the network, ssh to it
+* `ssh pi@RASPPBERYIPADDRESS` and use the default `raspberry` password
+* Change the default password with `passwd`
+
+#### Essentials
+
+* `sudo apt-get update`
+* `sudo apt-get install git python3-pip libopenjp2-7-dev libtiff5`
+
+#### Git repo
+
+Set up github access
+
+* `ssh-keygen -t rsa -C "EMAIL@ADDRESS"`
+* `cat /home/pi/.ssh/id_rsa.pub`
+* Add this key to https://github.com/settings/keys
+
+Clone the repo
+
+* `git clone git@github.com:MeWs-byte/MiFloV2.git`
+* `cd MiFloV2`
+* `pip3 install -r requirements.txt`
+* `pip3 uninstall board`
+* Make sure `.local/bin` is in your path by reloading your profile, with `source ~/.profile`
+
+### Google calendar access
+
+#### Quickstart.py
 
 grab quickstart.py from here
 https://developers.google.com/calendar/quickstart/python
@@ -47,12 +95,13 @@ Push button -> Pi
 - Leg2 -> - 15
        <br />leg2-> - 10k resistor -> GND
 
+## Run
 
 
+When running, go to `localhost:5000/timer` to set the timer, `/alarm` to set the alarm, `/events` for incoming events, `/home` to enter todos. Press the submit button or input 1 to go back to clockstate.
 
+In alarm mode, press the pushbutton to return back to clockstate.
 
+### Extras
 
-
-----
-notes :  run renderip.py to render the ip;  go to /timer to set the timer ; go to /alarm to set the alarm ; go to /events for incoming events; press the pushbutton to return back to clockstate ; press the submit button or input 1 to go back to clockstate ; /home to enter todo 
-
+Run `renderip.py` to render the ip
