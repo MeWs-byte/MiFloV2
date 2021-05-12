@@ -12,6 +12,7 @@ from flaskapp import timer
 from googleCal import eventList
 from eventclass import Event
 from flaskapp import *
+from pprint import pprint
 
 lock = threading.Lock()
 
@@ -140,6 +141,14 @@ def taskThread():
         #print(eventList)
         print('this is toDoInfo: ',flaskapp.toDoInfo)    # ok! these work now ! time to put them in your event class!!!!
         print('this is toDoTime: ',flaskapp.toDoTime)
+
+        todo1 = Event(flaskapp.toDoTime,None,"todo",flaskapp.toDoInfo)
+        print('this is todo1 as an event class object')
+        
+        #pprint(vars(todo1))
+
+        pprint(todo1.eventContent) # this works 
+        pprint(todo1.startTime)
         time.sleep(10)
     
     
