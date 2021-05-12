@@ -54,5 +54,5 @@ Push button -> Pi
 
 
 ----
-notes :  run renderip.py to render the ip;  go to /timer to set the timer ; go to /alarm to set the alarm ; go to /events for incoming events; press the pushbutton to return back to clockstate ; press the submit button or input 1 to go back to clockstate ;
+notes :  run renderip.py to render the ip;  go to /timer to set the timer ; go to /alarm to set the alarm ; go to /events for incoming events; press the pushbutton to return back to clockstate ; press the submit button or input 1 to go back to clockstate ; /home to enter todo 
 
