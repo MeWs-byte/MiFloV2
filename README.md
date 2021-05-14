@@ -106,3 +106,11 @@ In alarm mode, press the pushbutton to return back to clockstate.
 ### Extras
 
 Run `renderip.py` to render the ip
+
+
+### Troubleshooting 
+
+#### Google Api 
+
+Token revoked error: go to https://console.cloud.google.com/ , click on the hamburger menu ( left) , choose Api & Services -> Credentials tab -> choose the client you were using and click on "reset secret". Download the JSON again and rename it credentials.json. 
+When you run quickstart.py again (on your desktop) you should be able to receive a new token. Copy said token to the project folder on the Pi
