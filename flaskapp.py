@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import timeTimer
 from googleCal import eventList
+from eventclass import Event
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = b'_1#y2l"F4Q8z\n\xec]/'
@@ -12,6 +14,7 @@ alarmTime = ''
 todo = ''
 toDoInfo = ''
 toDoTime = ''
+#todoList = [] old todList , everything is merged into one list now
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index/', methods=['GET', 'POST'])      # get a mini dash going here to control all the states and see incoming events
@@ -69,14 +72,14 @@ def input():
 @app.route('/home')   # for some reason changing every instance of home doesnt work when trying to change the url
 def home():
     global toDoInfo, toDoTime
-    return HOME_HTML
+    return home_HTML
 
-HOME_HTML = """
+home_HTML = """
     <html><body>
         <h2>My ToDo Flow</h2>
         <form action="/greet">
              What's the activity <input type='text' name='toDoInfo'><br>
-             When should you be notified? <input type='time' name='toDoTime'><br>
+             When should you be notified? <input type='datetime-local' name='toDoTime'><br>
              <input type='submit' value='Submit'>
          </form>
      </body></html>"""
@@ -84,15 +87,36 @@ HOME_HTML = """
 
 @app.route('/greet')
 def greet():
-    global toDoInfo, toDoTime
+    global toDoInfo, toDoTime, eventList
+    # global todoList
+    
     toDoInfo = request.args.get('toDoInfo', '')
     toDoTime = request.args.get('toDoTime', '')
+    #print(toDoInfo,toDoTime)
+    
     if toDoInfo == '':
-        toDoInfo = 'World'
+        toDoInfo = 'No Description entered'
     if toDoTime == '':
         msg = 'No input received'
     else:
-        msg = 'alert set for: ' + toDoTime 
+        msg = 'alert set for: ' + toDoTime
+    
+    #print(toDoTime)
+    #print('type of todotime')
+    #print(type(toDoTime)) 
+    
+    dt_string = toDoTime 
+    format = "%Y-%m-%dT%H:%M"
+    dt_object = datetime.strptime(dt_string, format)
+    #print(dt_object)
+    #print(type(dt_object))
+    toDoTime = dt_object
+    todo1 = Event(toDoTime,None,"todo",toDoInfo)
+    #print('this is todo1 as an event class object')
+    #print(todo1.startTime,todo1.eventContent) 
+    
+    #todoList.append(todo1) # this is the old todoList , everything is merged into one list now
+    eventList.append(todo1)
 
 
     return GREET_HTML.format(toDoInfo, msg)

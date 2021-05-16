@@ -1,10 +1,11 @@
 import datetime
 import pytz
+from datetime import timedelta
 
 
 class Event:
     datetimeNow = datetime.datetime.utcnow()
-    now = datetimeNow
+    now = datetimeNow + timedelta( hours = 2)
     #now = datetime.datetime.fromisoformat()
     def __init__(self,startTime,endTime,typeOfEvent,eventContent):
         
@@ -13,14 +14,29 @@ class Event:
         self.endTime = endTime
         self.typeOfEvent = typeOfEvent
         self.eventContent = eventContent
-        
-        #def __str__(self):
+   
+    #def __str__(self):
         #    myString = ' '.join(str(i) for i in self.event)
         #    return myString
+    
+    # def __repr__(self):
+    #    return self.eventContent     go back to this __repr_ if you are having issues with the one below     
+    def __repr__(self):
+        return f"starttime: {self.startTime} endtime: {self.endTime} type: {self.typeOfEvent} description:{self.eventContent} "
         
     def __str__(self):
             
         return f"starttime: {self.startTime} endtime: {self.endTime} type: {self.typeOfEvent} description:{self.eventContent} "
+    
+    def __iter__(self):
+        yield 'start', self.startTime
+        yield 'end', self.endTime
+        yield 'type', self.typeOfEvent
+        yield 'descr', self.eventContent
+        
+    def asdict(self):
+        return {'start': self.startTime, 'end': self.endTime, 'type': self.typeOfEvent, 'descr': self.eventContent}
+    
         
     def getTypeOfEvent(self):
         return self.typeOfEvent
@@ -60,7 +76,7 @@ allEvents = [eventOne, eventTwo, eventThree]
  '''
 # a different queue
 
-class Queue(object):
+class Queueueue(object):
     def __init__(self, size):
         self.queue = []
         self.size = size
@@ -99,13 +115,13 @@ class Queue(object):
             
             
 
-if __name__ == '__main__':
-    myQueue = Queue(10)
-    myQueue.enqueue(eventOne)
-    myQueue.enqueue(eventTwo)
+#if __name__ == '__main__':
+#    myQueue = Queue(10)
+#    myQueue.enqueue(eventOne)
+#    myQueue.enqueue(eventTwo)
     
     
-    print(myQueue)
+#    print(myQueue)
     
 
  

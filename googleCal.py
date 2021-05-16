@@ -7,9 +7,14 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 import pytz
 from datetime import timedelta
+from eventclass import Event
+
+
+
 
 # get events out of loop
 eventList = []
+eventDict = {}
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
@@ -17,6 +22,7 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 def getGoogle():
     global eventList
+    global eventDict
     
     """Shows basic usage of the Google Calendar API.
     Prints the start and name of the next 10 events on the user's calendar.
@@ -64,14 +70,37 @@ def getGoogle():
         global right_event_time
         right_event_time = event_time + timedelta( hours = 2 )
 
-        print(right_event_time) # this time is correct !!!! timedelta magic , now see if you can compare results
+        #print(right_event_time) # this time is correct !!!! timedelta magic , now see if you can compare results
        
-
-        print(event['summary']) 
-
-        eventList.append(event)
         
-     
-       
+        print(event['summary'])
+        
+        #event['kind'] # maybe play with this later
+        
+        #print(type(right_event_time))
+        
+        #print('this is event["start"]datetime')
+        #print(event['start']['dateTime'])
+        #print('this is event end')
+        #print(event["end"]['dateTime']) # find a way to fix the end time later, lets make it None for now                                                             
+        #print(event_time)
+        inComingingEvent = Event(right_event_time,event['end']['dateTime'],'google',event['summary'])
+        #print('this is the output of the event class object within the googlecal file, figure out how to accesss it from another file      
+        nowy = datetime.datetime.utcnow()
+        nowyhere = nowy + timedelta( hours = 2)
+        if inComingingEvent.startTime > nowyhere:
+            
+        
+            eventList.append(inComingingEvent)
+            if inComingingEvent.startTime < nowyhere:
+                eventList.pop(inComingingEvent)
+        # this seems to work if you want to access this list in another file
+        #todoList.append(inComingingEvent)
+        #print(inComingingEvent.startTime['dateTime'])
+        #print(inComingingEvent) # full description thanks to __str__ method 
+        
+        #eventDict.update(inComingingEvent)
+        #print('this is the eventdict!!!!!!!!!')
+        #print(eventDict)
 #if __name__ == '__main__':
     #getGoogle()

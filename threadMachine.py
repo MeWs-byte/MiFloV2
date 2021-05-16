@@ -1,6 +1,8 @@
 import time
 from datetime import datetime, timedelta
 
+import flask
+
 from basicClock import *
 from googleCal import getGoogle
 import threading
@@ -13,19 +15,24 @@ from googleCal import eventList
 from eventclass import Event
 from flaskapp import *
 from pprint import pprint
+import queue
+import heapq
+from playSounds import alarmSound
+from eventRender import eventTextRender
 
 lock = threading.Lock()
 
 
 state = "klok"
 keyPressed = False
+eventRenderString = ''
 
 # for testing 
 alarmTime = datetime.now()  + timedelta( seconds = 1000 )
 
 
 def renderThread():
-    global timer
+    global timer, eventRenderString
     timer = 0
     while True:
         global state
@@ -40,9 +47,12 @@ def renderThread():
 
             alarm_Render()
             print("alarmstate")
+            alarmSound()
         # event state not implemented yet 
         if state == 'event':
             print('eventstate')
+            eventTextRender(eventRenderString)
+            state = 'klok'
         
         if state == 'timer':
             print('timerstate')
@@ -51,6 +61,8 @@ def renderThread():
 
 
         time.sleep(0.1)
+        
+    
 
 def updateThread():
     global state, alarmTime, keyPressed, right_event_time, clockStateButton, pushbutton, timer, tm
@@ -83,7 +95,7 @@ def updateThread():
             #from getIP import whatsMyIp         # i just put this code here for testing untill i connect a dedicated button for showing the ip on screen
 
             #whatsMyIp()
-            #button.pushbutton = 'off'
+            button.pushbutton = 'off'
 
 
         if flaskapp.clockStateButton == 1:         # web button to turn the alarm back to clock state
@@ -128,24 +140,111 @@ def updateThread():
 
 
 def taskThread():
-    global eventList, toDoInfo, toDoTime
+    global eventList, toDoInfo, toDoTime, state, eventRenderString
+    #global todoList
     
     while True:
         
-        getGoogle()         # google cal 
-        print('this is the output of the eventList')
-        for x in eventList:
-            print(x['summary'])             # this works    
-
-            #print(eventList[1]['summary'])
+        getGoogle()         # google cal ,
+        
+        
+        #for x in eventList:
+        #    print('this is google eventlist')
+        #    print(x.startTime)             # this works for eventList 
+        
+           
+        #for z in todoList:          # this works for todoList 
+        #    print('this is todo event list')
+        #    print(z.startTime)
+        #    
+        #    print("this is z.method")
+        #    print(z.eventContent)
+            
+        #pprint("this is printing the todoList from updatethread!!!!!")
+        #pprint(todoList) # now the list items are visible thanks to the __repr__ method in the Event class, pimp it a bit more to return the full picture of the obkect
+        #todoList.sort(key = lambda Event: Event.startTime)#about 9 - 6.1 = 3 secs
+        #pprint(todoList)
+        
+        
+        #print("this is printing the eventList from updatethread!!!!!")
+        #eventList.sort(key = lambda Event: Event.startTime)#about 9 - 6.1 = 3 secs
+        
+        #pprint(eventList)
+        
+        
+        complete_Event_list = eventList # + todoList
+        
+        #print('printing the complete event list with sorting!!!!!')
+        complete_Event_list.sort(key = lambda Event: Event.startTime)
+        for r in complete_Event_list:
+            
+            nowa = datetime.utcnow()
+            nowahere = nowa + timedelta( hours = 2)
+            if r.startTime < nowahere:
+                complete_Event_list.pop(0)
+        
+        #pprint('this is the complete event list ')
+        #pprint(complete_Event_list)        #this has duplicates from google every time it runs
+        print('this is the for loop that end up becoming  complete_Event_List_no_Dups')
+        complete_Event_list_no_duplicate = []
+        for i in complete_Event_list:
+            if i.startTime not in complete_Event_list_no_duplicate:
+                complete_Event_list_no_duplicate.append(i.startTime)
+                complete_Event_list_no_duplicate.append(i.eventContent)
+                print('-----------------------------------------------------------------------------------------------------')
+                
+                
+                
+                nowy = datetime.utcnow()
+                nowyhere = nowy + timedelta( hours = 2)
+                #print(nowyhere)
+                
+                if i.startTime <= nowyhere:
+                    print(f'You have to {i.eventContent}')
+                    
+                    state = 'event'
+                    eventRenderString = i.eventContent
+                    complete_Event_list_no_duplicate.pop(0)
+                    complete_Event_list_no_duplicate.pop(0)
+        print('complete event list')
+        #pprint(complete_Event_list)
+        print('complete event list no dups')
+        
+        print('this is the new shit , check if items are popped from the list ')
+        pprint(complete_Event_list_no_duplicate)        
+        for v in complete_Event_list_no_duplicate:
+            print(v)
+        
+        print('popped list')
+        
+        for h in complete_Event_list_no_duplicate:
+            print(h)
+        #print('this s complete list no duplicates')
+        #for t in complete_Event_list_no_duplicate:
+        #    print(t)
+        
+        #print(complete_Event_list_no_duplicate)    this also works to remove duplicates, just turn it into a dictionary 
+        #new_dict = dict()
+        #for obj in complete_Event_list:
+        #    if obj.startTime not in new_dict:
+        #        new_dict[obj.startTime] = obj
+        #print('this is new dicttttttttttt') 
+              
+        #pprint(new_dict)                        # duplicates are now removed from the list
+        
+        
+                     
+        #pprint(complete_Event_list_no_duplicate)            # this is the last thing you were working on !!!!! come back here after playing with sound
+        
+        #print(str(complete_Event_list_no_duplicate))
+        #heapq.heapify(todoList) no < allowed here
+        #print(eventList[1]['summary'])
         #print(eventList)
         #print('this is toDoInfo: ',flaskapp.toDoInfo)    # ok! these work now ! time to put them in your event class!!!!
         #print('this is toDoTime: ',flaskapp.toDoTime)
 
-        #todo1 = Event(flaskapp.toDoTime,None,"todo",flaskapp.toDoInfo)
-        #print('this is todo1 as an event class object')
         
-        #pprint(vars(todo1))
+      
 
         #pprint(todo1.eventContent) # this works 
         #pprint(todo1.startTime)
