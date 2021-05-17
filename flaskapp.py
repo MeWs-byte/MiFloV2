@@ -3,6 +3,7 @@ import timeTimer
 from googleCal import eventList
 from eventclass import Event
 from datetime import datetime
+#from threadMachine import getCompleteList
 
 
 app = Flask(__name__)
@@ -16,6 +17,12 @@ todo = ''
 toDoInfo = ''
 toDoTime = ''
 #todoList = [] old todList , everything is merged into one list now
+
+
+#print('eyes up here brooo!!!!!!!!!!!')
+#getCompleteList()
+
+#print(complete_Event_list_no_duplicate)
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index/', methods=['GET', 'POST'])      # get a mini dash going here to control all the states and see incoming events
@@ -139,10 +146,10 @@ GREET_HTML = """
 
 @app.route('/events')
 def events():
-    global eventList, complete_Event_list_no_duplicate
+    global eventList
 
     
-    return render_template('events.html', complete_Event_list_no_duplicate=complete_Event_list_no_duplicate)
+    return render_template('events.html', eventList=eventList)
 
 
 

@@ -125,7 +125,7 @@ def updateThread():
         
 
         if flaskapp.alarmTime <= nowcurrent_time and noAlarm != 0:                  # going to the alarm state
-            print('the alarmtime variable has entered the updateThread')
+            print('state = alarm')
             state = 'alarm'
             
             
@@ -194,7 +194,8 @@ def taskThread():
                 complete_Event_list_no_duplicate.append(i.startTime)
                 complete_Event_list_no_duplicate.append(i.eventContent)
                 print('-----------------------------------------------------------------------------------------------------')
-                
+                print(i.startTime)
+                print(i.eventContent)
                 
                 
                 nowy = datetime.utcnow()
@@ -210,17 +211,19 @@ def taskThread():
                     complete_Event_list_no_duplicate.pop(0)
         #print('complete event list')
         #pprint(complete_Event_list)
-        print('complete event list no dups')
+        
         
         print('this is the new shit , check if items are popped from the list ')
-        pprint(complete_Event_list_no_duplicate)        
-        for v in complete_Event_list_no_duplicate:
-            print(v)
+        pprint(complete_Event_list_no_duplicate)
         
-        print('popped list')
         
-        for h in complete_Event_list_no_duplicate:
-            print(h)
+        #for v in complete_Event_list_no_duplicate:
+        #    print(v)
+        #
+        #print('popped list')
+        
+        #for h in complete_Event_list_no_duplicate:
+        #    print(h)
         #print('this s complete list no duplicates')
         #for t in complete_Event_list_no_duplicate:
         #    print(t)
@@ -235,8 +238,6 @@ def taskThread():
         #pprint(new_dict)                        # duplicates are now removed from the list
         
         
-        print('this is new complete event list no dups!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')             
-        pprint(complete_Event_list_no_duplicate)            # this is the last thing you were working on !!!!! come back here after playing with sound
         
         #print(str(complete_Event_list_no_duplicate))
         #heapq.heapify(todoList) no < allowed here

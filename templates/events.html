@@ -1,12 +1,43 @@
-Upcoming events = {{ complete_Event_list_no_duplicate[0] }}
+Upcoming events = {{ eventList[:][1] }}
 <p></p>
 
-{% for each in complete_Event_list_no_duplicate %}
+{% for each in eventList[0]['start']['dateTime'] %}
 {{ each }}
 {% endfor %}
 <span><span/>&nbsp
+{% for each in eventList[0]['summary'] %}
+{{ each }}
+{% endfor %}
 
 
+<p></p>
+
+{% for each in eventList[1]['start']['dateTime'] %}
+{{ each }}
+{% endfor %}
+<span><span/>&nbsp
+{% for each in eventList[1]['summary'] %}
+{{ each }}
+{% endfor %}
 
 
+<p></p>
 
+{% for each in eventList[2]['start']['dateTime'] %}
+{{ each }}
+{% endfor %}
+<span><span/>&nbsp
+{% for each in eventList[2]['summary'] %}
+{{ each }}
+{% endfor %}
+
+
+<p></p>
+
+{% for each in eventList[3]['start']['dateTime'] %}
+{{ each }}
+{% endfor %}
+<span><span/>&nbsp
+{% for each in eventList[3]['summary'] %}
+{{ each }}
+{% endfor %}
