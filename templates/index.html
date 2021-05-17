@@ -2,11 +2,24 @@ clockStateButton = {{ clockStateButton }}
 
 
 <form action="{{ url_for('index') }}" method="post">
-    <input type="text" value="1" name="clockStateButton">
+    <input type="button" value="1" name="clockStateButton">
     <input type="submit" value="switch off the alarm!!!">
 </form>
 
+<p>
+        Go to the <a href="alarm">alarm</a>
+    </p>
+    <p>
+        Go to the <a href="timer">TimeTimer</a>
+    </p>
+    
+    <p>
+        Go to the <a href="home">ToDo's</a>
+    </p>
 
+        <p>
+        See upcoming <a href="events">events</a>
+    </p>
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 <ul>

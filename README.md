@@ -104,6 +104,10 @@ When running, go to `localhost:5000/timer` to set the timer, `/alarm` to set the
 
 In alarm mode, press the pushbutton to return back to clockstate.
 
+## External Soundcard 
+
+https://learn.adafruit.com/usb-audio-cards-with-a-raspberry-pi/updating-alsa-config
+
 ### Extras
 
 Run `renderip.py` to render the ip

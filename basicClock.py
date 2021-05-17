@@ -169,10 +169,10 @@ def clock_Render():
     drawString( current_time, 2, 1, (255, 255, 255) )
 
     pixels.show()
-    time.sleep(1)
-    	#print('current_time :')
-    	#print(current_time) 
-    	#print(type(current_time))
+    time.sleep(0.1)
+    #print('current_time :')
+    #print(current_time) 
+    #print(type(current_time))
 
 
 def alarm_Render():

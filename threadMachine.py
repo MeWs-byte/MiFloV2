@@ -20,15 +20,17 @@ import heapq
 from playSounds import alarmSound
 from eventRender import eventTextRender
 
+
 lock = threading.Lock()
 
 
 state = "klok"
 keyPressed = False
 eventRenderString = ''
+complete_Event_list_no_duplicate = []
 
 # for testing 
-alarmTime = datetime.now()  + timedelta( seconds = 1000 )
+alarmTime = datetime.now()  + timedelta( seconds = 100000 )
 
 
 def renderThread():
@@ -47,7 +49,7 @@ def renderThread():
 
             alarm_Render()
             print("alarmstate")
-            alarmSound()
+            #alarmSound() wait till you have a connector for the pi zerow
         # event state not implemented yet 
         if state == 'event':
             print('eventstate')
@@ -95,7 +97,7 @@ def updateThread():
             #from getIP import whatsMyIp         # i just put this code here for testing untill i connect a dedicated button for showing the ip on screen
 
             #whatsMyIp()
-            button.pushbutton = 'off'
+            #button.pushbutton = 'off'
 
 
         if flaskapp.clockStateButton == 1:         # web button to turn the alarm back to clock state
@@ -140,7 +142,7 @@ def updateThread():
 
 
 def taskThread():
-    global eventList, toDoInfo, toDoTime, state, eventRenderString
+    global eventList, toDoInfo, toDoTime, state, eventRenderString, complete_Event_list_no_duplicate
     #global todoList
     
     while True:
@@ -206,7 +208,7 @@ def taskThread():
                     eventRenderString = i.eventContent
                     complete_Event_list_no_duplicate.pop(0)
                     complete_Event_list_no_duplicate.pop(0)
-        print('complete event list')
+        #print('complete event list')
         #pprint(complete_Event_list)
         print('complete event list no dups')
         
@@ -233,8 +235,8 @@ def taskThread():
         #pprint(new_dict)                        # duplicates are now removed from the list
         
         
-                     
-        #pprint(complete_Event_list_no_duplicate)            # this is the last thing you were working on !!!!! come back here after playing with sound
+        print('this is new complete event list no dups!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')             
+        pprint(complete_Event_list_no_duplicate)            # this is the last thing you were working on !!!!! come back here after playing with sound
         
         #print(str(complete_Event_list_no_duplicate))
         #heapq.heapify(todoList) no < allowed here

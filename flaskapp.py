@@ -4,6 +4,7 @@ from googleCal import eventList
 from eventclass import Event
 from datetime import datetime
 
+
 app = Flask(__name__)
 app.secret_key = b'_1#y2l"F4Q8z\n\xec]/'
 
@@ -63,7 +64,10 @@ def input():
     return ("""<form action="" method="get">
                 <input type="time" name="alarmTime">
                 <input type="submit" value="submit">
-              </form>"""
+              </form>
+              <p>
+        Go to the <a href="index">main menu</a>
+    </p>"""
               + alarmTime
               )
 
@@ -113,7 +117,7 @@ def greet():
     toDoTime = dt_object
     todo1 = Event(toDoTime,None,"todo",toDoInfo)
     #print('this is todo1 as an event class object')
-    #print(todo1.startTime,todo1.eventContent) 
+    print(todo1.startTime,todo1.eventContent) 
     
     #todoList.append(todo1) # this is the old todoList , everything is merged into one list now
     eventList.append(todo1)
@@ -125,16 +129,20 @@ GREET_HTML = """
      <html><body>
          <h2>Ah cool, so you will be {0}!</h2>
          {1}
+         
+         <p>
+        Go to the <a href="index">home menu</a>
+    </p>
      </body></html>
      """
 
 
 @app.route('/events')
 def events():
-    global eventList
+    global eventList, complete_Event_list_no_duplicate
 
     
-    return render_template('events.html', eventList=eventList)
+    return render_template('events.html', complete_Event_list_no_duplicate=complete_Event_list_no_duplicate)
 
 
 
