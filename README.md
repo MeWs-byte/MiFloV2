@@ -48,6 +48,7 @@ Clone the repo
 * `sudo pip3 install -r requirements.txt`
 * `pip3 uninstall board`
 * Make sure `.local/bin` is in your path by reloading your profile, with `source ~/.profile`
+* if board error keeps persisting : sudo pip3 install --force-reinstall adafruit-blinka
 
 ### Google calendar access
 
