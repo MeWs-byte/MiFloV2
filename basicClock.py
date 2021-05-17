@@ -128,9 +128,12 @@ def ledAt( x, y ):
         return x * 8 + y;
     else:
         return x * 8 + 7 -y
+    
+def invertedLedAt (x, y):
+    return ledAt(31-x, 7-y)
 
 def drawPixel( x, y, color ):
-    pixels[ ledAt( x, y ) ] = color
+    pixels[ invertedLedAt( x, y ) ] = color
 
 def drawChar(c, x, y, color ): # returns width
     # Convert the character to an index
