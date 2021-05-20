@@ -23,8 +23,8 @@ from eventRender import eventTextRender
 from lightSensor import *
 from timeTimer import tm
 from timeTimer import tiMaster
-
-
+import button2
+from renderip import IpRender
 
 lock = threading.Lock()
 
@@ -39,25 +39,21 @@ alarmTime = datetime.now()  + timedelta( seconds = 100000 )
 
 
 def renderThread():
-    global timer, eventRenderString, brightNess
+    global timer, eventRenderString, brightNess, pushbuttonIP
     timer = 0
     while True:
         global state
         if state == 'klok':
 
             clock_Render()
-        
-            #print(datetime.now())
             print("clockstate")
-            #print(timer)
-            
-            
+               
         if state == 'alarm':
 
             alarm_Render()
             print("alarmstate")
-            alarmSound() # wait till you have a connector for the pi zerow
-        # event state not implemented yet 
+            alarmSound() 
+        
         if state == 'event':
             print('eventstate')
             alarmSound()
@@ -68,8 +64,11 @@ def renderThread():
             print('timerstate')
         
             timeTimer.timer_Render()
-
-
+        if state == 'ip':
+            IpRender()
+            button2.pushbuttonIP == 'off'
+            state = 'klok'
+            
         time.sleep(0.1)
         
     
@@ -77,7 +76,7 @@ def renderThread():
 def updateThread():
     global state, alarmTime, keyPressed, right_event_time, clockStateButton, pushbutton, timer, tm
     global diff
-    global tiMaster
+    global tiMaster, pushbuttonIP
     
     while True:
         now = datetime.now()
@@ -89,7 +88,6 @@ def updateThread():
         
         lock.acquire()
         
-        
         if now > alarmTime: 
             state = "alarm"
 
@@ -97,8 +95,6 @@ def updateThread():
             alarmTime = datetime.now()  + timedelta( seconds = 10 )
             state = "klok"
             keyPressed = False
-        #if right_event_time <= now:            # for the event state
-        #    state = 'event'
         
         if button.pushbutton == 'on':   # if button = high and state = alarm -> change state to clock     # physical button to turn the alarm back to clock state
             noAlarm = 0
@@ -108,18 +104,14 @@ def updateThread():
             print('state change with pushbutton is working!!!!!')
 
             #from getIP import whatsMyIp         # i just put this code here for testing untill i connect a dedicated button for showing the ip on screen
-
             #whatsMyIp()
             #button.pushbutton = 'off'
-
-
         if flaskapp.clockStateButton == 1:         # web button to turn the alarm back to clock state
             state = "klok"
 
         if isinstance(flaskapp.timer, int) == False and state != 'alarm':
             state = 'klok'
-        #if timeTimer.tm > 0 and state != 'alarm':
-        #if flaskapp.timer != 0:
+        
         if isinstance(flaskapp.timer, int) == True:                                                   # going to the timer
             
             flasktimerfunct = flaskapp.timer
@@ -137,41 +129,27 @@ def updateThread():
             if timeTimer.tiMaster < 1:
                 flaskapp.diff = 0
                 
-            #if flaskapp.diff = 0
-            #    state = "klok"    
-        #    print(flaskapp.timer)
-        #    print(type(timer))
-            #state = "timer"
-
             
-            
-        
-
         if flaskapp.alarmTime <= nowcurrent_time and noAlarm != 0:                  # going to the alarm state
             print('state = alarm')
             state = 'alarm'
             
-            
-            #print('this is the current time : ', nowcurrent_time)
-            #print('this is the alarmtime:', flaskapp.alarmTime)
-            #print('this is the type of the alarmtime:')
-            #print(type(flaskapp.alarmTime))
-            #print('this is noAlarm: !!!!!!!!')
-            #print(noAlarm)
-
-
+        if button2.pushbuttonIP == 'on':
+            print('ip button working')
+            state = 'ip'
+            button2.pushbuttonIP = 'off'
         lock.release()
         time.sleep(1) # wait 5 seconds  
 
 
 def taskThread():
     global eventList, toDoInfo, toDoTime, state, eventRenderString, complete_Event_list_no_duplicate, UberList
-    #global todoList
     
     while True:
         
         getGoogle()         # google cal 
         
+        # almost everything below here has become redundant!!!!! investigate what can be deleted!! 
     
         #for x in eventList:
             #print('---------')
@@ -209,7 +187,7 @@ def taskThread():
                     eventRenderString = i.eventContent
                     complete_Event_list_no_duplicate.pop(0)
                     complete_Event_list_no_duplicate.pop(0) 
- # think about this weirdness and realize you're an idiot 
+                    # think about this weirdness and realize you're an idiot 
         
         
         
@@ -237,20 +215,6 @@ def taskThread():
               
         #pprint(new_dict)                        # duplicates are now removed from the list
         
-        
-        
-        #print(str(complete_Event_list_no_duplicate))
-        #heapq.heapify(todoList) no < allowed here
-        #print(eventList[1]['summary'])
-        #print(eventList)
-        #print('this is toDoInfo: ',flaskapp.toDoInfo)    # ok! these work now ! time to put them in your event class!!!!
-        #print('this is toDoTime: ',flaskapp.toDoTime)
-
-        
-      
-
-        #pprint(todo1.eventContent) # this works 
-        #pprint(todo1.startTime)
         time.sleep(10)
     
     
@@ -262,7 +226,7 @@ def keyboardThread():
         lock.acquire()
         #keyPressed = True
         button.waitforpushbutton()
-        
+        button2.waitforpushbuttonIP()
             
         lock.release()
         time.sleep(0.1)

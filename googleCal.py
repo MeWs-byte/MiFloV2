@@ -73,7 +73,7 @@ def getGoogle():
         #print(event['summary'])
         inComingingEvent = Event(event['start']['dateTime'],event['end']['dateTime'],'google',event['summary'],event["id"]) # start is a datetime object and end is a string!!!!
         eventList.append(inComingingEvent)
-    UberList.clear()
+    UberList.clear() # clearing the list here fixed the issue with the order of events in web 
     for i in eventList:
         if i.eventContent not in UberList:
             
