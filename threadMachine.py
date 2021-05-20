@@ -102,6 +102,8 @@ def updateThread():
         
         if button.pushbutton == 'on':   # if button = high and state = alarm -> change state to clock     # physical button to turn the alarm back to clock state
             noAlarm = 0
+            flaskapp.diff = 0   # you changed these last 2 to check if you can turn off the timer anytime
+            timeTimer.tiMaster = 0 # same as above 
             state = "klok"
             print('state change with pushbutton is working!!!!!')
 

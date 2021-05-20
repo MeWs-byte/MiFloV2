@@ -4,6 +4,7 @@
 
 import requests
 import json
+from basicClock import *
 
 
 #IMPORTANT: You should change API keys written below with your own keys, because
@@ -95,6 +96,24 @@ antwerpen = Weather("antwerpen")
 print(antwerpen.temp_feelslike)
 print(antwerpen.wind_speed)
 print(antwerpen.state_wapi)
-print(antwerpen.state_own)
-
+tempy = str(antwerpen.temp_feelslike) 
+tempy = tempy + '.C'
 # https://github.com/kadir014/weather.py
+
+
+def weather_Render():
+    while True:
+        
+        pixels.fill((0, 0, 0))
+        drawString(tempy , 12, 1, (230, 240, 255) )
+        pixels.show()
+        time.sleep(1)
+        pixels.fill((0, 0, 0))
+        drawString( antwerpen.state_wapi, 2, 1, (23, 40, 255) )
+        pixels.show()
+        
+        time.sleep(1)
+    
+    
+
+weather_Render()
