@@ -74,6 +74,7 @@ def renderThread():
 
 def updateThread():
     global state, alarmTime, keyPressed, right_event_time, clockStateButton, pushbutton, timer, tm
+    global diff
     while True:
         now = datetime.now()
         dnow=datetime.now()
@@ -121,7 +122,9 @@ def updateThread():
                 state = "klok"
             if flasktimerint > 0:
                 state = "timer"
-            
+        print('this is difffffffff from threadmachine',flaskapp.diff)
+        if flaskapp.diff > 0:
+            state = "timer"    
         #    print(flaskapp.timer)
         #    print(type(timer))
             #state = "timer"

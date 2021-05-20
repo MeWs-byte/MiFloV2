@@ -20,7 +20,7 @@ toDoInfo = ''
 toDoTime = ''
 toDoEnd = ''
 
-
+diff = 0
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -159,15 +159,26 @@ GREET_HTML = """
      """
 
 
-@app.route('/events', methods=['GET', 'POST'])          # show list of all incoming events, put a button next to all events to start the activity with timeTimer
+@app.route('/events', methods=['GET', 'POST'])          # upcoming event list , you can use the button on the right to remove a completed activity 
 def events():
-    global eventList, UberList
-    if request.method == "POST":
+    global eventList, UberList, diff
+    if request.method == "POST":                        # currently working on starting the timer based on the start and end time of the event 
         if request.form.get('startActivity0'):
             print('startevent0')
             print(UberList[0])
+            print(UberList[1])
+            d1 = datetime.strptime(UberList[0], '%Y-%m-%dT%H:%M:%S%z')
+            d2 = datetime.strptime(UberList[1], '%Y-%m-%dT%H:%M:%S%z')
+            diff = (d2 - d1).total_seconds()
+            print('timediff')
+            print(diff)
+            timeTimer.countdown(int(diff))
+            
+            
         if request.form.get('remActivity0'):
             print('id of event to be removed')
+            
+            
             
             print(UberList[3])
             deleteCal(UberList[3])
