@@ -1,6 +1,8 @@
 {% comment %} alarmTime = {{ alarmTime }}
 
-
+<head>
+    <link rel="stylesheet" href='/static/main.css' />
+  </head>
 <form action="{{ url_for('alarmTime') }}" method="post">
     <input type="time" value="1" name="alarmTime">
     <input type="submit" value="set the alarmTime">
