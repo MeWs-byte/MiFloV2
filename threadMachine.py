@@ -21,6 +21,8 @@ import heapq
 from playSounds import alarmSound
 from eventRender import eventTextRender
 from lightSensor import *
+from timeTimer import tm
+from timeTimer import tiMaster
 
 
 
@@ -75,13 +77,15 @@ def renderThread():
 def updateThread():
     global state, alarmTime, keyPressed, right_event_time, clockStateButton, pushbutton, timer, tm
     global diff
+    global tiMaster
+    
     while True:
         now = datetime.now()
         dnow=datetime.now()
         nowcurrent_time = dnow.strftime("%H:%M")
         noAlarm = len(flaskapp.alarmTime)
         timerValue = flaskapp.timer
-        tm = 0
+        tm = 0 # when you comment this out the timer doesnt run....
         
         lock.acquire()
         
@@ -124,7 +128,13 @@ def updateThread():
                 state = "timer"
         print('this is difffffffff from threadmachine',flaskapp.diff)
         if flaskapp.diff > 0:
+
             state = "timer"
+            print('this is tiMaster')
+            print(timeTimer.tiMaster)   # this works as the countime timer for timeTimer, maybe use this in a more general way for transitions between states
+            if timeTimer.tiMaster < 1:
+                flaskapp.diff = 0
+                
             #if flaskapp.diff = 0
             #    state = "klok"    
         #    print(flaskapp.timer)

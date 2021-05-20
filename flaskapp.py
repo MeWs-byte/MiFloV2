@@ -162,17 +162,17 @@ GREET_HTML = """
 @app.route('/events', methods=['GET', 'POST'])          # upcoming event list , you can use the button on the right to remove a completed activity 
 def events():
     global eventList, UberList, diff
-    if request.method == "POST":                        # you can start a timer based on the start and end time of the event, check for bugs , see if goes back to clock 
+    if request.method == "POST":                        # you can start a timer based on the start and end time of the event, check for bugs , see if goes back to
         if request.form.get('startActivity0'):
             print('startevent0')
             print(UberList[0])
             print(UberList[1])
             d1 = datetime.strptime(UberList[0], '%Y-%m-%dT%H:%M:%S%z')
             d2 = datetime.strptime(UberList[1], '%Y-%m-%dT%H:%M:%S%z')
-            diff = (d2 - d1).total_seconds()
+            diff = (d2 - d1).total_seconds() * 100
             print('timediff')
             print(diff)
-            timeTimer.countdown(int(diff))
+            timeTimer.countdown(int(diff / 100))
             
             
         if request.form.get('remActivity0'):
