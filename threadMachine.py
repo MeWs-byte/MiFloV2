@@ -124,7 +124,9 @@ def updateThread():
                 state = "timer"
         print('this is difffffffff from threadmachine',flaskapp.diff)
         if flaskapp.diff > 0:
-            state = "timer"    
+            state = "timer"
+            #if flaskapp.diff = 0
+            #    state = "klok"    
         #    print(flaskapp.timer)
         #    print(type(timer))
             #state = "timer"
