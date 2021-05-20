@@ -5,6 +5,7 @@ import flask
 
 from basicClock import *
 from googleCal import getGoogle
+#from list_events import getGoogle
 import threading
 import flaskapp
 import button
@@ -19,6 +20,8 @@ import queue
 import heapq
 from playSounds import alarmSound
 from eventRender import eventTextRender
+from lightSensor import *
+
 
 
 lock = threading.Lock()
@@ -34,25 +37,28 @@ alarmTime = datetime.now()  + timedelta( seconds = 100000 )
 
 
 def renderThread():
-    global timer, eventRenderString
+    global timer, eventRenderString, brightNess
     timer = 0
     while True:
         global state
         if state == 'klok':
 
             clock_Render()
+        
             #print(datetime.now())
             print("clockstate")
             #print(timer)
-
+            
+            
         if state == 'alarm':
 
             alarm_Render()
             print("alarmstate")
-            #alarmSound() wait till you have a connector for the pi zerow
+            alarmSound() # wait till you have a connector for the pi zerow
         # event state not implemented yet 
         if state == 'event':
             print('eventstate')
+            alarmSound()
             eventTextRender(eventRenderString)
             state = 'klok'
         
@@ -147,47 +153,19 @@ def taskThread():
     
     while True:
         
-        getGoogle()         # google cal ,
+        getGoogle()         # google cal 
         
-        
+    
         #for x in eventList:
-        #    print('this is google eventlist')
-        #    print(x.startTime)             # this works for eventList 
+            #print('---------')
+            #print(x.startTime, x.eventContent)             # this works for eventList 
         
-           
-        #for z in todoList:          # this works for todoList 
-        #    print('this is todo event list')
-        #    print(z.startTime)
-        #    
-        #    print("this is z.method")
-        #    print(z.eventContent)
-            
-        #pprint("this is printing the todoList from updatethread!!!!!")
-        #pprint(todoList) # now the list items are visible thanks to the __repr__ method in the Event class, pimp it a bit more to return the full picture of the obkect
-        #todoList.sort(key = lambda Event: Event.startTime)#about 9 - 6.1 = 3 secs
-        #pprint(todoList)
-        
-        
-        #print("this is printing the eventList from updatethread!!!!!")
+    
         #eventList.sort(key = lambda Event: Event.startTime)#about 9 - 6.1 = 3 secs
         
-        #pprint(eventList)
-        
-        
         complete_Event_list = eventList # + todoList
+        #complete_Event_list.sort(key = lambda Event: Event.startTime) # no need to sort since everything is pulled in order from google
         
-        #print('printing the complete event list with sorting!!!!!')
-        complete_Event_list.sort(key = lambda Event: Event.startTime)
-        for r in complete_Event_list:
-            
-            nowa = datetime.utcnow()
-            nowahere = nowa + timedelta( hours = 2)
-            if r.startTime < nowahere:
-                complete_Event_list.pop(0)
-        
-        #pprint('this is the complete event list ')
-        #pprint(complete_Event_list)        #this has duplicates from google every time it runs
-        print('this is the for loop that end up becoming  complete_Event_List_no_Dups')
         complete_Event_list_no_duplicate = []
         for i in complete_Event_list:
             if i.startTime not in complete_Event_list_no_duplicate:
@@ -198,25 +176,30 @@ def taskThread():
                 print(i.eventContent)
                 
                 
+                
                 nowy = datetime.utcnow()
                 nowyhere = nowy + timedelta( hours = 2)
-                #print(nowyhere)
+                format = "%Y-%m-%dT%H:%M:%S+02:00"
+                dt_object = datetime.strptime(i.startTime, format)
+                print(nowyhere)
+                print(dt_object)
                 
-                if i.startTime <= nowyhere:
-                    print(f'You have to {i.eventContent}')
-                    
+                dtPlusFive = dt_object + timedelta (seconds = 10)
+                if dt_object <= nowyhere and dtPlusFive >= nowyhere:
+                    print(f'You have to {i.eventContent}')     # this is the switch to even after getting a complete list 
+        #            
                     state = 'event'
                     eventRenderString = i.eventContent
                     complete_Event_list_no_duplicate.pop(0)
-                    complete_Event_list_no_duplicate.pop(0)
-        #print('complete event list')
-        #pprint(complete_Event_list)
+                    complete_Event_list_no_duplicate.pop(0) 
+ # think about this weirdness and realize you're an idiot 
+        
         
         
         print('this is the new shit , check if items are popped from the list ')
         pprint(complete_Event_list_no_duplicate)
         
-        
+        #eventList = complete_Event_list_no_duplicate
         #for v in complete_Event_list_no_duplicate:
         #    print(v)
         #
@@ -262,6 +245,8 @@ def keyboardThread():
         lock.acquire()
         #keyPressed = True
         button.waitforpushbutton()
+        
+            
         lock.release()
         time.sleep(0.1)
         

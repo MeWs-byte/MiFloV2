@@ -4,16 +4,18 @@ from datetime import timedelta
 
 
 class Event:
+    eventList = []
     datetimeNow = datetime.datetime.utcnow()
     now = datetimeNow + timedelta( hours = 2)
     #now = datetime.datetime.fromisoformat()
-    def __init__(self,startTime,endTime,typeOfEvent,eventContent):
+    def __init__(self,startTime,endTime,typeOfEvent,eventContent,eventId):
         
 
         self.startTime = startTime
         self.endTime = endTime
         self.typeOfEvent = typeOfEvent
         self.eventContent = eventContent
+        self.eventId = eventId
    
     #def __str__(self):
         #    myString = ' '.join(str(i) for i in self.event)
@@ -22,20 +24,20 @@ class Event:
     # def __repr__(self):
     #    return self.eventContent     go back to this __repr_ if you are having issues with the one below     
     def __repr__(self):
-        return f"starttime: {self.startTime} endtime: {self.endTime} type: {self.typeOfEvent} description:{self.eventContent} "
+        return f"startTime: {self.startTime} endTime: {self.endTime} typeOfEvent: {self.typeOfEvent} eventContent:{self.eventContent} eventId:{self.eventId}"
         
-    def __str__(self):
+   # def __str__(self):
             
-        return f"starttime: {self.startTime} endtime: {self.endTime} type: {self.typeOfEvent} description:{self.eventContent} "
+    #    return f"starttime: {self.startTime} endtime: {self.endTime} type: {self.typeOfEvent} description:{self.eventContent} "
     
     def __iter__(self):
-        yield 'start', self.startTime
-        yield 'end', self.endTime
-        yield 'type', self.typeOfEvent
-        yield 'descr', self.eventContent
+        yield 'startTime', self.startTime
+        yield 'endTime', self.endTime
+        yield 'typeOfEvent', self.typeOfEvent
+        yield 'eventContent', self.eventContent
         
-    def asdict(self):
-        return {'start': self.startTime, 'end': self.endTime, 'type': self.typeOfEvent, 'descr': self.eventContent}
+    #def asdict(self):
+    #    return {'start': self.startTime, 'end': self.endTime, 'type': self.typeOfEvent, 'descr': self.eventContent}
     
         
     def getTypeOfEvent(self):
@@ -47,13 +49,13 @@ class Event:
         self.typeOfEvent = eventSource
 
      
-eventOne = Event("08:15","09:15","googleCal","do important stuff")
+''' eventOne = Event("08:15","09:15","googleCal","do important stuff")
 
 eventTwo = Event("07:45","12:15","task","brush teeth")
 
 eventThree = Event("06:45","16:15","webinput","do something usefull")
 
-allEvents = [eventOne, eventTwo, eventThree]
+allEvents = [eventOne, eventTwo, eventThree] '''
 #print(eventOne.now, eventOne.startTime)
 
 #print(eventOne)

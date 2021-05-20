@@ -45,6 +45,8 @@ Clone the repo
 
 * `git clone git@github.com:MeWs-byte/MiFloV2.git`
 * `cd MiFloV2`
+
+Requirements
 * `sudo pip3 install -r requirements.txt`
 * `pip3 uninstall board`
 * Make sure `.local/bin` is in your path by reloading your profile, with `source ~/.profile`

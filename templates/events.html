@@ -1,43 +1,40 @@
-Upcoming events = {{ eventList[:][1] }}
+Upcoming events = {{ UberList }}
 <p></p>
 
-{% for each in eventList[0]['start']['dateTime'] %}
-{{ each }}
-{% endfor %}
-<span><span/>&nbsp
-{% for each in eventList[0]['summary'] %}
-{{ each }}
-{% endfor %}
 
 
+
+
+<p>
+
+        Go to the <a href="/index">main menu</a>
+    </p>
 <p></p>
 
-{% for each in eventList[1]['start']['dateTime'] %}
-{{ each }}
-{% endfor %}
-<span><span/>&nbsp
-{% for each in eventList[1]['summary'] %}
-{{ each }}
-{% endfor %}
+{{ UberList[0]}}&nbsp;&nbsp;&nbsp;{{ UberList[1]}} {{ UberList[2]}}
+  <form method="post" >  
+<input type="submit" name="startActivity0" value="Start the activity">
+<input type="submit" name="remActivity0" value="I have finished this activity">
+</form>
 
 
-<p></p>
+{{ UberList[4]}}&nbsp;&nbsp;&nbsp;{{ UberList[5]}}&nbsp;&nbsp;&nbsp;{{ UberList[6]}}
 
-{% for each in eventList[2]['start']['dateTime'] %}
-{{ each }}
-{% endfor %}
-<span><span/>&nbsp
-{% for each in eventList[2]['summary'] %}
-{{ each }}
-{% endfor %}
+ <form method="post" >  
+<input type="submit" name="startActivity" value="Start the activity">
+<input type="submit" name="remActivity" value="I have finished this activity">
+</form>
 
+{{ UberList[8]}}&nbsp;&nbsp;&nbsp;{{ UberList[9]}}&nbsp;&nbsp;&nbsp;{{ UberList[10]}}
 
-<p></p>
+ <form method="post" >  
+<input type="submit" name="startActivity" value="Start the activity">
+<input type="submit" name="remActivity" value="I have finished this activity">
+</form>
 
-{% for each in eventList[3]['start']['dateTime'] %}
-{{ each }}
-{% endfor %}
-<span><span/>&nbsp
-{% for each in eventList[3]['summary'] %}
-{{ each }}
-{% endfor %}
+{{ UberList[12]}}&nbsp;&nbsp;&nbsp;{{ UberList[13]}}&nbsp;&nbsp;&nbsp;{{ UberList[14]}}
+
+ <form method="post" >  
+<input type="submit" name="startActivity" value="Start the activity">
+<input type="submit" name="remActivity" value="I have finished this activity">
+</form>

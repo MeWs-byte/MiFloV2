@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import timeTimer
-from googleCal import eventList
+from googleCal import eventList, UberList
 from eventclass import Event
 from datetime import datetime
-#from threadMachine import getCompleteList
+from create_event import createCal
+from delete_event import deleteCal
+
 
 
 app = Flask(__name__)
@@ -16,13 +18,10 @@ alarmTime = ''
 todo = ''
 toDoInfo = ''
 toDoTime = ''
-#todoList = [] old todList , everything is merged into one list now
+toDoEnd = ''
 
 
-#print('eyes up here brooo!!!!!!!!!!!')
-#getCompleteList()
 
-#print(complete_Event_list_no_duplicate)
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index/', methods=['GET', 'POST'])      # get a mini dash going here to control all the states and see incoming events
@@ -82,7 +81,7 @@ def input():
 
 @app.route('/home')   # for some reason changing every instance of home doesnt work when trying to change the url
 def home():
-    global toDoInfo, toDoTime
+    global toDoInfo, toDoTime, toDoEnd
     return home_HTML
 
 home_HTML = """
@@ -90,19 +89,25 @@ home_HTML = """
         <h2>My ToDo Flow</h2>
         <form action="/greet">
              What's the activity <input type='text' name='toDoInfo'><br>
-             When should you be notified? <input type='datetime-local' name='toDoTime'><br>
+             When does the activity start? <input type='datetime-local' name='toDoTime'><br>
+             When does the activity end? <input type='datetime-local' name='toDoEnd'><br>
              <input type='submit' value='Submit'>
          </form>
+         
+         <p>
+        Go to the <a href="/index">main menu</a>
+    </p>
      </body></html>"""
 
 
 @app.route('/greet')
 def greet():
-    global toDoInfo, toDoTime, eventList
+    global toDoInfo, toDoTime, eventList, toDoEnd
     # global todoList
     
     toDoInfo = request.args.get('toDoInfo', '')
     toDoTime = request.args.get('toDoTime', '')
+    toDoEnd = request.args.get('toDoTime', '')
     #print(toDoInfo,toDoTime)
     
     if toDoInfo == '':
@@ -117,18 +122,28 @@ def greet():
     #print(type(toDoTime)) 
     
     dt_string = toDoTime 
-    format = "%Y-%m-%dT%H:%M"
+    format = "%Y-%m-%dT%H:%M"                       # toDoTime formatting string to dt
     dt_object = datetime.strptime(dt_string, format)
     #print(dt_object)
     #print(type(dt_object))
     toDoTime = dt_object
-    todo1 = Event(toDoTime,None,"todo",toDoInfo)
+    
+    
+    dat_string = toDoEnd 
+    formatt = "%Y-%m-%dT%H:%M"                       # toDoEnd formatting string to dt
+    dat_object = datetime.strptime(dat_string, formatt)
+    #print(dt_object)
+    #print(type(dt_object))
+    toDoEnd = dat_object
+    
+    todo1 = Event(dat_string,toDoEnd,"webToDo",toDoInfo,None) # put everythng in your event class
+    
     #print('this is todo1 as an event class object')
-    print(todo1.startTime,todo1.eventContent) 
+    print(todo1.startTime,todo1.endTime,todo1.eventContent) 
     
     #todoList.append(todo1) # this is the old todoList , everything is merged into one list now
-    eventList.append(todo1)
-
+    #eventList.append(todo1) # ask yourself if there is still a need for this since everything here is pulled by googlecal anyay 
+    createCal(todo1.startTime,todo1.endTime,todo1.eventContent) # create calendar event, end time isnt defined yet 
 
     return GREET_HTML.format(toDoInfo, msg)
 
@@ -144,12 +159,34 @@ GREET_HTML = """
      """
 
 
-@app.route('/events')
+@app.route('/events', methods=['GET', 'POST'])          # show list of all incoming events, put a button next to all events to start the activity with timeTimer
 def events():
-    global eventList
+    global eventList, UberList
+    if request.method == "POST":
+        if request.form.get('startActivity0'):
+            print('startevent0')
+            print(UberList[0])
+        if request.form.get('remActivity0'):
+            print('id of event to be removed')
+            
+            print(UberList[3])
+            deleteCal(UberList[3])
+            print(UberList[0])
+            print(UberList[1])
+            print(UberList[2])
+            print(UberList[3])
+            
+            print(f'{UberList[2]} has been removed from the list')
+            UberList.pop(0)
+            UberList.pop(0)
+            UberList.pop(0)
+            UberList.pop(0)
+            
+            
+
 
     
-    return render_template('events.html', eventList=eventList)
+    return render_template('events.html', UberList=UberList)
 
 
 

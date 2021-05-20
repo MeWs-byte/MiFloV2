@@ -6,20 +6,30 @@ import time
 import board
 import neopixel
 from datetime import datetime
- 
+from lightSensor import getLux
+
+global brightNess
+
 # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
 # NeoPixels must be connected to D10, D12, D18 or D21 to work.
 pixel_pin = board.D18
  
 # The number of NeoPixels
 num_pixels = 256
- 
+brightNess = 0.3
+
+
+
+    
+
+
+
 # The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
 # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
 ORDER = neopixel.GRB
  
 pixels = neopixel.NeoPixel(
-    pixel_pin, num_pixels, brightness=0.2, auto_write=False, pixel_order=ORDER
+    pixel_pin, num_pixels, brightness=brightNess, auto_write=False, pixel_order=ORDER
 )
  
  
@@ -161,6 +171,8 @@ def drawString( s, x, y, color ):
     	x += drawChar( c, x, y, color )
 
 def clock_Render():
+    global brightNess
+    
     # Comment this line out if you have RGBW/GRBW NeoPixels
     pixels.fill((0, 0, 0))
 
@@ -169,12 +181,22 @@ def clock_Render():
     drawString( current_time, 2, 1, (255, 255, 255) )
 
     pixels.show()
-    time.sleep(0.1)
+    time.sleep(0.01)
     #print('current_time :')
     #print(current_time) 
     #print(type(current_time))
-
-
+    #print(brightNess)
+    bob = getLux()
+    print(bob)
+    
+    if bob > 1500:
+        print('this works')
+        pixels.brightness = 1
+        print(brightNess)
+    else:
+        pixels.brightness = 0.1 + bob / 1500 * 0.9
+    	
+    
 def alarm_Render():
     
     # Comment this line out if you have RGBW/GRBW NeoPixels
