@@ -27,4 +27,7 @@ def timer_Render():
     drawString( timer, 12, 1, (230, 240, 255) )
     drawString( '<3', 2, 1, (23, 40, 255) )
     pixels.show()
-    time.sleep(0.1)
+    time.sleep(1)
+    
+    
+    

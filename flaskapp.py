@@ -92,9 +92,9 @@ home_HTML = """
   </head><body>
         <h2>My ToDo Flow</h2>
         <form action="/greet">
-             What's the activity <input type='text' name='toDoInfo'><br>
-             When does the activity start? <input type='datetime-local' name='toDoTime'><br>
-             When does the activity end? <input type='datetime-local' name='toDoEnd'><br>
+             <p>Activity description</p> <input type='text' name='toDoInfo'><br>
+             <p>When does the activity start?</p> <input type='datetime-local' name='toDoTime'><br>
+            <p> When does the activity end?</p> <input type='datetime-local' name='toDoEnd'><br>
              <input type='submit' value='Submit'>
          </form>
          

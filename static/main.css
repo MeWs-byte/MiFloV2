@@ -1,17 +1,66 @@
 body {
-    background: Linen;
+    background: rgb(0, 0, 0);
     margin-top: 50px;
     margin-left: 100px;
+    border: rgb(0, 0, 0);
+    border-radius: 25%;
+    border-style: solid;
     }
   
   p {
-    font-family: Georgia, serif;
+    font-family: monospace, monaco;
     font-size: 2.5em;
-    color: DarkSlateGray;
+    color: rgb(225, 224, 236);
+    padding:1%;
+    border: rgb(14, 24, 114);
+    border-radius: 25%;
+    
     }
   
   h1 {
     font-family: Verdana, Geneva, sans-serif;
     font-size: 3.5em;
-    color: FireBrick;
+    color: rgb(34, 156, 178);
     }
+
+.button {
+  background-color: #254f92; 
+  border:rgb(149, 176, 250);
+  color: rgb(117, 90, 237);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  text-decoration-color: antiquewhite;
+  text-decoration: solid;
+}
+.input {
+  border-radius: 25px;
+  
+  padding: 10px;
+  width: 40%;
+  height: 150px;
+  text-decoration: solid;
+  text-decoration: dashed;
+  text-decoration-color: aqua;
+  font-size: 40px;
+  font-size: max(40px);
+  font-family: inherit;
+  
+  padding: 0.25em 0.5em;
+  background-color: rgb(158, 128, 225);
+  border: 2px solid var(--input-border);
+  
+}
+
+text{
+  text-emphasis-color: white;
+}
+
+:root {
+  --input-border: #8b8a8b;
+  --input-focus-h: 245;
+  --input-focus-s: 100%;
+  --input-focus-l: 42%;
+}
