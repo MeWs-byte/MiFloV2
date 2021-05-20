@@ -67,7 +67,7 @@ def input():
         alarmTime = request.args.get("alarmTime", "")
         #print('this is the alarmTime: ', alarmTime)
         #print('this is the type of alarmTime: ', type(alarmTime))
-    return ("""<head>
+    return ("""<head><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href='/static/main.css' />
   </head><form action="" method="get">
                 <input type="time" name="alarmTime">
@@ -87,7 +87,7 @@ def home():
     return home_HTML
 
 home_HTML = """
-    <html><head>
+    <html><head><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href='/static/main.css' />
   </head><body>
         <h2>My ToDo Flow</h2>
