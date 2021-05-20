@@ -56,7 +56,7 @@ def getGoogle():
                                         maxResults=10, singleEvents=True,
                                         orderBy='startTime').execute()
     events = events_result.get('items', [])
-    #eventList.clear()
+    eventList.clear() # whipe everything ? im gonna do the same for uberlist and see what happens
     if not events:
         print('No upcoming events found.')
     for event in events:
@@ -73,7 +73,7 @@ def getGoogle():
         #print(event['summary'])
         inComingingEvent = Event(event['start']['dateTime'],event['end']['dateTime'],'google',event['summary'],event["id"]) # start is a datetime object and end is a string!!!!
         eventList.append(inComingingEvent)
-    
+    UberList.clear()
     for i in eventList:
         if i.eventContent not in UberList:
             

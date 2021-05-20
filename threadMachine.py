@@ -163,7 +163,7 @@ def updateThread():
 
 
 def taskThread():
-    global eventList, toDoInfo, toDoTime, state, eventRenderString, complete_Event_list_no_duplicate
+    global eventList, toDoInfo, toDoTime, state, eventRenderString, complete_Event_list_no_duplicate, UberList
     #global todoList
     
     while True:

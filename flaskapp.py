@@ -193,7 +193,35 @@ def events():
             UberList.pop(0)
             UberList.pop(0)
             
+        if request.form.get('startActivity1'):              # cool cool, if you get adding buttons like this it looks like this will work 
+            print('startevent0')
+            print(UberList[4])
+            print(UberList[5])
+            d1 = datetime.strptime(UberList[4], '%Y-%m-%dT%H:%M:%S%z')
+            d2 = datetime.strptime(UberList[5], '%Y-%m-%dT%H:%M:%S%z')
+            diff = (d2 - d1).total_seconds() * 100
+            print('timediff')
+            print(diff)
+            timeTimer.countdown(int(diff / 100))
             
+            
+        if request.form.get('remActivity1'):
+            print('id of event to be removed')
+            
+            
+            
+            print(UberList[7])
+            deleteCal(UberList[7])
+            print(UberList[4])
+            print(UberList[5])
+            print(UberList[6])
+            print(UberList[7])
+            
+            print(f'{UberList[6]} has been removed from the list')
+            UberList.pop(4)
+            UberList.pop(4)
+            UberList.pop(4)
+            UberList.pop(4)
 
 
     

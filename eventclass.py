@@ -26,7 +26,7 @@ class Event:
     def __repr__(self):
         return f"startTime: {self.startTime} endTime: {self.endTime} typeOfEvent: {self.typeOfEvent} eventContent:{self.eventContent} eventId:{self.eventId}"
         
-   # def __str__(self):
+    #def __str__(self):
             
     #    return f"starttime: {self.startTime} endtime: {self.endTime} type: {self.typeOfEvent} description:{self.eventContent} "
     

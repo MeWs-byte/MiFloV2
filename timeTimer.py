@@ -14,7 +14,7 @@ def countdown(tm):
         #print(timer, end="\r")
         print("this is timer: ",timer)
         print("this is tm: ",tm)
-        print('this is timaster',tiMaster)
+        print('this is timaster',tiMaster) # this one is available in threadmachine
         time.sleep(1)
         tm -= 1 
     return tiMaster
