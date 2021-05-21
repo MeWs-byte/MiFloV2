@@ -98,6 +98,7 @@ print(antwerpen.wind_speed)
 print(antwerpen.state_wapi)
 tempy = str(antwerpen.temp_feelslike) 
 tempy = tempy + '.C'
+Winfo = str(antwerpen.state_wapi)
 # https://github.com/kadir014/weather.py
 
 
@@ -107,13 +108,12 @@ def weather_Render():
         pixels.fill((0, 0, 0))
         drawString(tempy , 12, 1, (230, 240, 255) )
         pixels.show()
-        time.sleep(1)
+        time.sleep(2)
         pixels.fill((0, 0, 0))
-        drawString( antwerpen.state_wapi, 2, 1, (23, 40, 255) )
+        drawString( Winfo, 2, 1, (23, 40, 255) )
         pixels.show()
         
         time.sleep(1)
     
-    
-
+        
 weather_Render()

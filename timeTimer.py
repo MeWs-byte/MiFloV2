@@ -20,14 +20,16 @@ def countdown(tm):
     return tiMaster
         
         
-
+timer = '00:00'
 def timer_Render():
     
     pixels.fill((1, 7, 13))
     drawString( timer, 12, 1, (230, 240, 255) )
-    drawString( '<3', 2, 1, (23, 40, 255) )
+    drawString( '<>', 2, 1, (23, 40, 255) )
     pixels.show()
     time.sleep(1)
     
     
     
+#while True:
+#    timer_Render()
