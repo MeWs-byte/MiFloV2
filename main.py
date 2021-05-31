@@ -9,7 +9,7 @@ import flaskapp
 from customClass import EventObject
 from playsounds import alarmSound, alarmSound2
 import timeTimer
-from list_events import getGoogle, eventList, ultimateList, todoList, ultimateTodoList, processingList
+from list_events import getGoogle, eventList, ultimateList, processingList
 from pprint import pprint
 from eventRender import eventTextRender, congratsTextRender
 from collections import OrderedDict
@@ -182,7 +182,7 @@ def audioThread():
         time.sleep(0.1)
         
 def taskThread():
-    global ultimateList, todoList, ultimateTodoList, processingList, state
+    global ultimateList, processingList, state
     
    
     

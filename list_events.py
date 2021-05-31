@@ -16,8 +16,7 @@ from collections import OrderedDict
 
 eventList = [] # events come in from google
 ultimateList = [] # constantly updated list of dictionaries , sorted by inique id's
-todoList = [] # 1 minute before event starts , event is added to this list
-ultimateTodoList = [] # list of  dictionaries of all past events , sorted by dateTime
+
 processingList = [] # list where items are stored indefinately 
 
 
