@@ -20,6 +20,8 @@ from update_event import updateCal
 from delete_event import deleteCal
 from colours import rainbowRender
 import button
+import button2
+from renderip import IpRender
 
 
 lock = threading.Lock()
@@ -79,11 +81,13 @@ def renderThread():
             print('timerstate')
         #
             timeTimer.timer_Render() 
+            
+        
             #print(timeTimer.tm)
-        #if state == 'ip':
-        #    IpRender()
-        #    button2.pushbuttonIP == 'off'
-        #    state = 'clock'
+        if state == 'ip':
+            IpRender()
+            button2.pushbuttonIP == 'off'
+            state = 'clock'
         print(state)  
         
         time.sleep(0.1)
@@ -146,6 +150,11 @@ def updateThread():
                 state = 'alarm'
         except:
             ValueError
+            
+        if button2.pushbuttonIP == 'on':
+            print('ip button working')
+            state = 'ip'
+            button2.pushbuttonIP = 'off'
         #if state == 'event':
              
         #    alarmSound()
@@ -239,7 +248,7 @@ def keyboardThread():
         lock.acquire()
         #keyPressed = True
         button.waitforpushbutton()
-        #button2.waitforpushbuttonIP()
+        button2.waitforpushbuttonIP()
         taskbutton.waitfortaskbutton()
         lock.release()
         time.sleep(0.1)
