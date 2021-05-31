@@ -24,19 +24,25 @@ processingList = [] # list where items are stored indefinately
 def getGoogle():
    global eventList, ultimateList
    
-   
-   service = get_calendar_service()
+   try:
+       
+      service = get_calendar_service()
    # Call the Calendar API
-   now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-   print('Getting List of 10 events')
-   events_result = service.events().list(
-       calendarId='primary', timeMin=now,
-       maxResults=10, singleEvents=True,
-       orderBy='startTime').execute()
-   events = events_result.get('items', [])
-
+      now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
+      print('Getting List of 10 events')
+      events_result = service.events().list(
+          calendarId='primary', timeMin=now,
+          maxResults=10, singleEvents=True,
+          orderBy='startTime').execute()
+      events = events_result.get('items', [])
+   except:
+       print('try to catch errors here')
+       
+   #try:
    if not events:
        print('No upcoming events found.')
+   #except UnboundLocalError:
+       #print('UnboundLocalError')       
    for event in events:
        
        try:

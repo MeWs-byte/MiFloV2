@@ -182,8 +182,17 @@ def taskThread():
    
     
     while True:
+        #from socket import gaierror
+        try:
+            
+            eventHub = getGoogle()  # the best most badass self refreshing list of dictionaries ever conceived 
         
-        eventHub = getGoogle()  # the best most badass self refreshing list of dictionaries ever conceived 
+        except UnboundLocalError:
+            print('UnboundLocalError')
+        #except socket.gaierror:
+        #    print('socket gaierror')
+        #except httplib2.error.ServerNotFoundError:
+        #    print('httplib2 error')
         print('------this is the complete updating list of future events---------')
         print('---------------')
         for x in eventHub:
@@ -191,10 +200,7 @@ def taskThread():
             
             nowwa = datetime.now()
             nowwaTz = nowwa.astimezone()
-#            nowPlusMinute = datetime.now() + timedelta(minutes=1)   
-#            nowPlusMinuteTz = nowPlusMinute.astimezone()
-            #lock.acquire()
-            #print(nowPlusMinuteTz)
+
             if x['startDate'] < nowwaTz and x['description'] != 'processing':
                 print('see if something weird is going on ------------------------')             # one before event oject is taken from a list stored by id and  stored into a list sorted by datetime
                 pprint(x['title'])

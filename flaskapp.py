@@ -54,7 +54,7 @@ def input():
     try:
         request.method == "GET"
         alarmTime = request.args.get("alarmTime", "")  # 2021-05-03T00:00 format output 
-        print('alarmTime from flasapp')
+        print('alarmTime from flaskapp')
         print(alarmTime)
         
     except:
