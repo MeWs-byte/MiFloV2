@@ -11,7 +11,7 @@ from playsounds import alarmSound, alarmSound2
 import timeTimer
 from list_events import getGoogle, eventList, ultimateList, todoList, ultimateTodoList, processingList
 from pprint import pprint
-from eventRender import eventTextRender
+from eventRender import eventTextRender, congratsTextRender
 from collections import OrderedDict
 import taskbutton
 from eventTimer import countdownTimer
@@ -29,9 +29,10 @@ sound = 'off'
 state = "clock"
 keyPressed = False
 eventRenderString = ''
+score = 0
 
 def renderThread():
-    global eventRenderString, taskbutton, processingList, sound
+    global eventRenderString, taskbutton, processingList, sound, score
    
     while True:
         global state
@@ -73,9 +74,13 @@ def renderThread():
         if state == 'eventTimer':
             countdownTimer(int(diff))
             processingList.pop(0)
-            state = 'clock'
+            score = score + int(diff)
+            state = 'congrats'
             #deleteCal(item1['eventId'])   create completed tag in descript
-            
+        if state == 'congrats':
+            congratsTextRender('Goed zo! Score = %s ' %score)
+            state = 'clock'
+                
         #
         if state == 'timer':
             print('timerstate')
