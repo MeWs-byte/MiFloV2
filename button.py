@@ -11,12 +11,8 @@ def waitforpushbutton():
     #while True: # Run forever
     if GPIO.input(15) == GPIO.HIGH:
         pushbutton = 'on'
-        print("Button is HIGH!")
-    #if GPIO.input(15) == GPIO.LOW:
-    #    pushbutton = False
-    #    print('button is LOW')
-
-
-
-
+        print("clockButton is HIGH!")
+    if GPIO.input(15) == GPIO.LOW:
+        pushbutton = 'off'
+        #print('button is LOW')
 

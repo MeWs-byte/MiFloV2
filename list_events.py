@@ -2,20 +2,34 @@
 # this page is not being used now but i might replace the googleCal file with this one
 
 
-''' import datetime
+import datetime
 from cal_setup import get_calendar_service
 from pprint import pprint
-from eventclass import Event
 from datetime import timedelta
 import pytz
-eventList = []
+from customClass import EventObject
+import flaskapp
+import time
+from pprint import pprint
+from collections import OrderedDict
 
-#def getGoogle():
-   global eventList
+
+eventList = [] # events come in from google
+ultimateList = [] # constantly updated list of dictionaries , sorted by inique id's
+todoList = [] # 1 minute before event starts , event is added to this list
+ultimateTodoList = [] # list of  dictionaries of all past events , sorted by dateTime
+processingList = [] # list where items are stored indefinately 
+
+
+
+def getGoogle():
+   global eventList, ultimateList
+   
+   
    service = get_calendar_service()
    # Call the Calendar API
    now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-   print('Getting List o 10 events')
+   print('Getting List of 10 events')
    events_result = service.events().list(
        calendarId='primary', timeMin=now,
        maxResults=10, singleEvents=True,
@@ -25,21 +39,40 @@ eventList = []
    if not events:
        print('No upcoming events found.')
    for event in events:
-       start = event['start'].get('dateTime', event['start'].get('date'))
-       print(start, event['summary'])
-       pprint(event)
-       inComingingEvent = Event(event['start']['dateTime'],event['end']['dateTime'],'google',event['summary'])
        
-       
-       nowy = datetime.datetime.utcnow()
-       nowyhere = nowy + timedelta( hours = 2)
-       if inComingingEvent.startTime > nowyhere:
-            
-        
-          eventList.append(inComingingEvent)
-          if inComingingEvent.startTime < nowyhere:
-             eventList.pop(inComingingEvent)
-   print(eventList)
+       try:
+           
+        start = event['start'].get('dateTime', event['start'].get('date'))
 
-if __name__ == '__main__':
-   getGoogle() '''
+        obj = EventObject(event['summary'],event['description'],event['start']['dateTime'],event['end']['dateTime'],'googleCal',event['id'])
+        eventList.append(obj.asdict())
+       except KeyError:
+           
+           start = event['start'].get('dateTime', event['start'].get('date'))
+
+           obj = EventObject(event['summary'],None,event['start']['dateTime'],event['end']['dateTime'],'googleCal',event['id'])
+           eventList.append(obj.asdict())
+           
+
+    
+   #for x in eventList:
+        
+   #     pprint(x['title'])
+    #OrderedDict((v['eventId'],v) for v in eventList.values())
+
+   print('--------------------------------')
+   ultimateList = list(OrderedDict((v['eventId'], v) for v in eventList).values())
+   #print('this is ultimateList')
+   #pprint(ultimateList)
+   eventList.clear()
+   #print(type(ultimateList))
+   #for x in ultimateList:
+   # print(x['title'])
+   # print(x['startDate'])
+   # print(('--------------------------------'))
+   return ultimateList
+            
+            
+#while  True:
+#    getGoogle()
+#    time.sleep(5)

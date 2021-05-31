@@ -1,21 +1,18 @@
 
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href='/static/main.css' />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    
   </head>
-
-clockStateButton = {{ clockStateButton }}
-
-<h1>
-<h2>MiFloV2<h2>
-<form action="{{ url_for('index') }}" method="post">
-    <input type="button" value="1" name="clockStateButton">
-    <input type="submit" value="switch off the alarm!!!">
+<form>
+  <input type="submit" name="alarmOff" value="Alarm off">
 </form>
-</h1>
+
+<form>
+    <input type="submit" name="timerOff" value="Timer off">
+  </form>
+
 <p>
-        <a href="/alarm">alarm</a>
+        <a href="/alarm">Alarm</a>
     </p>
     <p>
         <a href="/timer">TimeTimer</a>
@@ -26,7 +23,7 @@ clockStateButton = {{ clockStateButton }}
     </p>
 
         <p>
-         <a href="/events">events</a>
+         <a href="/events">Events</a>
     </p>
 {% with messages = get_flashed_messages() %}
 {% if messages %}

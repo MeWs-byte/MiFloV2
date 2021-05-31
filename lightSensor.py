@@ -18,9 +18,9 @@
 #---------------------------------------------------------------------
 import smbus
 import time
-from basicClock import *
-global lightLevel
-global brightNess
+from clockRender import *
+
+
 # Define some constants from the datasheet
 
 DEVICE     = 0x23 # Default device I2C address
@@ -57,18 +57,18 @@ def convertToNumber(data):
 
 def readLight(addr=DEVICE):
   # Read data from I2C interface
-  data = bus.read_i2c_block_data(addr,ONE_TIME_HIGH_RES_MODE_1)
+  data = bus.read_i2c_block_data(addr,ONE_TIME_LOW_RES_MODE)
   return convertToNumber(data)
 
 def getLux():
-  global lightLevel, brightNess
+  
       
   while True:
 
   
     lightLevel=readLight()
     #print("Light Level : " + format(lightLevel,'.2f') + " lx")
-    time.sleep(0.5)
+    
    
     #print('this is bob')
     #print(lightLevel)
