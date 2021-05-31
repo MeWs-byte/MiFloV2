@@ -116,6 +116,13 @@ Run `renderip.py` to render the ip
 
 
 ### Troubleshooting 
+disable wifi power save mode 
+
+'''sudo nano /etc/rc.local'''
+
+
+add this line before "exit 0"
+/sbin/iwconfig wlan0 power off
 
 #### Google Api 
 
