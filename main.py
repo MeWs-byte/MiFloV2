@@ -13,14 +13,12 @@ from list_events import getGoogle, eventList, ultimateList, processingList
 from pprint import pprint
 from eventRender import eventTextRender, congratsTextRender
 from collections import OrderedDict
-import taskbutton
 from eventTimer import countdownTimer
 from create_event import createCal
 from update_event import updateCal
 from delete_event import deleteCal
 from colours import rainbowRender
 import button
-import button2
 from renderip import IpRender
 
 
@@ -63,10 +61,10 @@ def renderThread():
                     diff = int(diff)
                     rainbowRender()
                     eventTextRender(eventRenderString + ' || ' + str(diff) + ' ' + 'min')
-                    if taskbutton.taskButton == 'on':
+                    if button.taskButton == 'on':
                     
                         sound = 'off'
-                        taskbutton.taskButton = 'off'
+                        button.taskButton = 'off'
                         state = 'eventTimer'
             except IndexError:
                 pass
@@ -91,7 +89,7 @@ def renderThread():
             #print(timeTimer.tm)
         if state == 'ip':
             IpRender()
-            button2.pushbuttonIP == 'off'
+            button.pushbuttonIP == 'off'
             state = 'clock'
         #print(state)  
         
@@ -132,7 +130,7 @@ def updateThread():
         elif timeTimer.tiMaster == 0 and state != 'alarm' and state != 'event': # timer = 0 so clockmode is back on 
             state = 'clock'
         
-        if taskbutton.taskButton == 'on':
+        if button.taskButton == 'on':
             print('taskbutton is working') 
                
         try:
@@ -156,10 +154,10 @@ def updateThread():
         except:
             ValueError
             
-        if button2.pushbuttonIP == 'on':
+        if button.pushbuttonIP == 'on':
             print('ip button working')
             state = 'ip'
-            button2.pushbuttonIP = 'off'
+            button.pushbuttonIP = 'off'
        
         lock.release()
         time.sleep(1)  
@@ -224,8 +222,8 @@ def keyboardThread():
         lock.acquire()
         #keyPressed = True
         button.waitforpushbutton()
-        button2.waitforpushbuttonIP()
-        taskbutton.waitfortaskbutton()
+        button.waitforpushbuttonIP()
+        button.waitfortaskbutton()
         lock.release()
         time.sleep(0.1)
         
