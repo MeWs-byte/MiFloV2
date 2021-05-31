@@ -9,14 +9,11 @@ import flaskapp
 from customClass import EventObject
 from playsounds import alarmSound, alarmSound2
 import timeTimer
-from list_events import getGoogle, eventList, ultimateList, processingList
+from googlie import getGoogle, eventList, ultimateList, processingList, createCal,updateCal,deleteCal
 from pprint import pprint
 from eventRender import eventTextRender, congratsTextRender
 from collections import OrderedDict
 from eventTimer import countdownTimer
-from create_event import createCal
-from update_event import updateCal
-from delete_event import deleteCal
 from colours import rainbowRender
 import button
 from renderip import IpRender
