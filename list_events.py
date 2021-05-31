@@ -55,21 +55,12 @@ def getGoogle():
            
       
     
-   #for x in eventList:
-        
-   #     pprint(x['title'])
-    #OrderedDict((v['eventId'],v) for v in eventList.values())
 
    print('--------------------------------')
    ultimateList = list(OrderedDict((v['eventId'], v) for v in eventList).values())
-   #print('this is ultimateList')
-   #pprint(ultimateList)
+
    eventList.clear()
-   #print(type(ultimateList))
-   #for x in ultimateList:
-   # print(x['title'])
-   # print(x['startDate'])
-   # print(('--------------------------------'))
+
    return ultimateList
             
             

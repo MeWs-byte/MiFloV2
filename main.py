@@ -93,7 +93,7 @@ def renderThread():
             IpRender()
             button2.pushbuttonIP == 'off'
             state = 'clock'
-        print(state)  
+        #print(state)  
         
         time.sleep(0.1)
         
@@ -160,11 +160,9 @@ def updateThread():
             print('ip button working')
             state = 'ip'
             button2.pushbuttonIP = 'off'
-        #if state == 'event':
-             
-        #    alarmSound()
+       
         lock.release()
-        time.sleep(1) # wait 5 seconds  
+        time.sleep(1)  
 
 def audioThread():
     global state, sound
@@ -195,7 +193,7 @@ def taskThread():
         print('---------------')
         for x in eventHub:
             pprint(x)
-            #print(x['startDate'])
+            
             nowwa = datetime.now()
             nowwaTz = nowwa.astimezone()
 #            nowPlusMinute = datetime.now() + timedelta(minutes=1)   
@@ -213,35 +211,7 @@ def taskThread():
                 processingList.sort(key = lambda EventObject: EventObject['startDate'], reverse=False)
                 print('-----------processingList aka the queue')
                 pprint(processingList)
-                #lock.release()
-#                todoList.append(x)          # todoList ->description == None 
-#                ultimateTodoList = list(OrderedDict((v['startDate'], v) for v in todoList).values())
-#            
-#        todoList.clear() # clear the list to save resources
-#        print('-----------ultimatetodolist')
-#        now = datetime.now()
-#        nowTz = now.astimezone()                    # ultimate todoList -> description == 'completed' , you could post this back to  cal so parents can see which tasks are completed
-#        for y in ultimateTodoList:
-#            #print(y)
-#            if y['startDate'] < nowTz and y['description'] != 'processing':
-#                print('event triggered')
-#                # start the timer here 
-#                print(y['startDate'])
-#                print(y['title'])
-#                y['description'] = 'processing'
-#                if y['title'] not in processingList:
-#                    processingList.append(y['title'])
-#                    processingList.append(y['description'])
-#                    processingList.append(y['startDate'])
-#                    processingList.append(y['endDate'])
-#                    processingList.append(y['eventType'])
-#                    processingList.append(y['eventId'])     
-#            pprint(y)
-#        
-#        
-#        print('-----processingList-----')     # processingList is the list that holds all past events and never deletes
-#        for e in processingList:
-#            pprint(e)
+               
         print(datetime.now().strftime("%d.%b %Y %H:%M:%S"))
         time.sleep(20)
     
@@ -263,11 +233,10 @@ def keyboardThread():
 def flaskThread():
     global state
     while True:
-        #lock.acquire()
         print("flaskThread running")
         
         flaskapp.flaskRunner()
-        #lock.release()
+        
         time.sleep(0.1)
     
 t = time.time()
