@@ -242,6 +242,7 @@ def taskThread():
 #        print('-----processingList-----')     # processingList is the list that holds all past events and never deletes
 #        for e in processingList:
 #            pprint(e)
+        print(datetime.now().strftime("%d.%b %Y %H:%M:%S"))
         time.sleep(20)
     
     

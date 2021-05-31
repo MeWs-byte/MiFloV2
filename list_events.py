@@ -53,7 +53,7 @@ def getGoogle():
            obj = EventObject(event['summary'],None,event['start']['dateTime'],event['end']['dateTime'],'googleCal',event['id'])
            eventList.append(obj.asdict())
            
-
+      
     
    #for x in eventList:
         
