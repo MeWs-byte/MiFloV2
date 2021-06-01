@@ -143,13 +143,22 @@ def updateThread():
             date_time_str = flaskapp.alarmTime + ':00'
             alarmTimeDt = datetime.strptime(date_time_str, '%Y-%m-%dT%H:%M:%S')
             nu = datetime.now()
+            #nuPlus5 = nu + datetime.timedelta(minutes = 5)
             print(type(flaskapp.alarmTime)) # format 2021-05-30T12:17
             print(alarmTimeDt)
             print(nu)
+            
+            #if alarmTimeDt < nuPlus5:
+            #    print('wake uuuuuuuuuuup slowllyyyyyyyyyyykflflzjf')
+            #    button.nightMode = 'off'
+                #pixels.brightness = 0.1
             if alarmTimeDt < nu:
                 state = 'alarm'
+                button.nightMode = 'off'
+                
         except:
             ValueError
+            print('something went wrong with the alarm')
             
         if button.pushbuttonIP == 'on':
             print('ip button working')
