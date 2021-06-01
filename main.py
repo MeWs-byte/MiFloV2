@@ -227,6 +227,8 @@ def keyboardThread():
         button.waitforpushbutton()
         button.waitforpushbuttonIP()
         button.waitfortaskbutton()
+        
+        
         lock.release()
         time.sleep(0.1)
         

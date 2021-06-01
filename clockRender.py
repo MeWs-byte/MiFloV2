@@ -8,7 +8,7 @@ import board
 import neopixel
 from datetime import datetime
 from lightSensor import getLux
-
+import button
 
  
 # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
@@ -193,6 +193,9 @@ def clock_Render():
         
     else:
         pixels.brightness = 0.1 + bob / 1500 * 0.9
+        
+    if button.nightMode == 'on':
+        pixels.brightness = 0
         
     	
     
