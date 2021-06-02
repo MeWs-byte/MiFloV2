@@ -187,20 +187,26 @@ def clock_Render():
     bob = getLux()
     #print('Light Level: ',bob)
     
+
+     
     if bob > 1500:
         print('this works')
         pixels.brightness = 1
-        
+    
+
+             
     else:
         pixels.brightness = 0.1 + bob / 1500 * 0.9
         
     if button.nightMode == 'on':
-        pixels.brightness = 0
+    	pixels.brightness = 0
+        
+
         
     	
     
 def alarm_Render():
-    
+    pixels.brightness = 0.3
     # Comment this line out if you have RGBW/GRBW NeoPixels
     pixels.fill((255, 0, 0))
 

@@ -51,10 +51,10 @@ def waitforpushbuttonIP():
                       
                     PRESSTIME = PRESSTIME + 1	# add something to J
                     
-                    if ( PRESSTIME > 1 and PRESSTIME < 3) and (GPIO.input(14) == True):	#if it is still being pressed
+                    #if ( PRESSTIME > 1 and PRESSTIME < 3) and (GPIO.input(14) == True):	#if it is still being pressed
                         
-                        pushbuttonIP = 'on'
-                        print("ButtonIP is HIGH!")                      
+                    #    pushbuttonIP = 'on'
+                    #    print("ButtonIP is HIGH!")                      
 
                                                 
                     if ( PRESSTIME >= 10 ) and (nightMode == 'off') and (GPIO.input(14) == True):								# if you have been pressing for 28*0.1=2.8 seconds then

@@ -25,6 +25,7 @@ state = "clock"
 keyPressed = False
 eventRenderString = ''
 score = 0
+eventHub = []
 
 def renderThread():
     global eventRenderString, taskbutton, processingList, sound, score
@@ -37,10 +38,10 @@ def renderThread():
             #print("clockstate")
                
         while state == 'alarm':
-            
+            button.nightMode == 'off'
             alarm_Render()
             print("alarmstate")
-            button.nightMode == 'off'
+            
             
             if button.pushbutton == 'on' and state == 'alarm':
                 
@@ -52,6 +53,7 @@ def renderThread():
                     flaskapp.alarmTime = ''
                     button.pushbutton = 'off'
                     print('removing current alarm lalalalaalala')
+                    button.nightMode = 'off'
                     state = 'clock' 
                     
                 except:
@@ -162,7 +164,7 @@ def updateThread():
             pass # index error when the list is empty, tip add an event 100 years from now 
         
         try:
-            date_time_str = flaskapp.alarmTime + ':00'
+            date_time_str = flaskapp.alarmTime + ':00'                                  # this is the alarm from flask , nightMode works here ...
             alarmTimeDt = datetime.strptime(date_time_str, '%Y-%m-%dT%H:%M:%S')
             nu = datetime.now()
             #nuPlus5 = nu + datetime.timedelta(minutes = 5)
@@ -193,7 +195,7 @@ def updateThread():
         time.sleep(0.1)  
 
 def audioThread():
-    global state, sound
+    global state, sound, eventHub,processingList
     while True:
     
     
@@ -206,30 +208,10 @@ def audioThread():
         if state == 'alarm':
             alarmSound2()
             
-        #lock.release()
-        time.sleep(0.1)
-        
-def taskThread():
-    global ultimateList, processingList, state
-    
-   
-    
-    while True:
-        #from socket import gaierror
-        try:
-            
-            eventHub = getGoogle()  # the best most badass self refreshing list of dictionaries ever conceived 
-        
-        except UnboundLocalError:
-            print('UnboundLocalError')
-        #except socket.gaierror:
-        #    print('socket gaierror')
-        #except httplib2.error.ServerNotFoundError:
-        #    print('httplib2 error')
-        print('------this is the complete updating list of future events---------')
-        print('---------------')
+        #print('------this is the complete updating list of future events---------')
+        #print('---------------')
         for x in eventHub:
-            pprint(x)
+            #pprint(x)
             
             nowwa = datetime.now()
             nowwaTz = nowwa.astimezone()
@@ -247,6 +229,28 @@ def taskThread():
                 pprint(processingList)
                
         print(datetime.now().strftime("%d.%b %Y %H:%M:%S"))
+            
+        #lock.release()
+        time.sleep(0.1)
+        
+def taskThread():
+    global ultimateList, processingList, state, eventHub
+    
+   
+    
+    while True:
+        #from socket import gaierror
+        try:
+            
+            eventHub = getGoogle()  # the best most badass self refreshing list of dictionaries ever conceived 
+        
+        except UnboundLocalError:
+            print('UnboundLocalError')
+        #except socket.gaierror:
+        #    print('socket gaierror')
+        #except httplib2.error.ServerNotFoundError:
+        #    print('httplib2 error')
+
         time.sleep(20)
     
     
