@@ -17,11 +17,12 @@ from eventTimer import countdownTimer
 from colours import rainbowRender
 import button
 from renderip import IpRender
+from ani import intro
 
 
 lock = threading.Lock()
 sound = 'off'
-state = "clock"
+state = "intro"
 keyPressed = False
 eventRenderString = ''
 score = 0
@@ -32,6 +33,10 @@ def renderThread():
    
     while True:
         global state
+        
+        if state == 'intro':
+            intro()
+            state = 'clock'
         if state == 'clock':
 
             clock_Render()
@@ -274,6 +279,7 @@ def keyboardThread():
 def flaskThread():
     global state
     while True:
+        
         print("flaskThread running")
         
         flaskapp.flaskRunner()
