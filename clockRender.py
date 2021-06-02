@@ -186,6 +186,13 @@ def clock_Render():
     drawString( day, 20, 1, (5, 85, 215) )
     drawString( '|', 18, 1, (15, 145, 55) )
     drawString( current_time, 0, 1, (255, 255, 255) )	
+    if button.taskButton == 'on':
+        
+    	drawPixel(0,0,90000)
+    if button.pushbutton == 'on':
+        drawPixel(2,0,20000)
+    if button.pushbuttonIP == 'on':
+        drawPixel(4,0,10000)
     pixels.show()
     time.sleep(0.01)
 
