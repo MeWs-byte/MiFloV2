@@ -15,5 +15,5 @@ def alarmSound():
 def alarmSound2():
     
     call(["aplay", "/home/pi/FlipDotWorker/newFlo/newestFlo/sounds/var.wav"]) 
-
-    call(["aplay", "/home/pi/FlipDotWorker/newFlo/newestFlo/sounds/flint.wav"])
+    print('alaaarm sounds')
+    #call(["aplay", "/home/pi/FlipDotWorker/newFlo/newestFlo/sounds/flint.wav"])

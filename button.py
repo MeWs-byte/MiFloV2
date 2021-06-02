@@ -16,6 +16,8 @@ taskButton = 'off'
 
 nightMode = 'off'
 
+
+
 def waitforpushbutton():
     global pushbutton
     #while True: # Run forever
@@ -38,31 +40,42 @@ def waitforpushbuttonIP():
                 pushbuttonIP = 'off'
                 print("ButtonIP is LOW!")
                 for j in range(50):							#start counting
+
+                    if ( GPIO.input(14) == False ):
+                        PRESSTIME = 0                    
+
+                    
                     if ( GPIO.input(14) == True ):	#if it is still being pressed
-                        print("pressed the stop button")
+                        print("pressed the button")
+                        
+                      
+                    PRESSTIME = PRESSTIME + 1	# add something to J
+                    
+                    if ( PRESSTIME > 1 and PRESSTIME < 3) and (GPIO.input(14) == True):	#if it is still being pressed
+                        
                         pushbuttonIP = 'on'
-                        print("ButtonIP is HIGH!")
-                                        
-                        PRESSTIME = PRESSTIME + 1							# add something to J
-                    if ( PRESSTIME >= 25 ) and nightMode == 'off':								# if you have been pressing for 28*0.1=2.8 seconds then
+                        print("ButtonIP is HIGH!")                      
+
+                                                
+                    if ( PRESSTIME >= 10 ) and (nightMode == 'off') and (GPIO.input(14) == True):								# if you have been pressing for 28*0.1=2.8 seconds then
                                         
                         
                     
                         print("NIGHTMODE ACTIVATED") 
                         nightMode = 'on'
                         PRESSTIME = 0
-                        time.sleep(10)	# this pauses the script, so it doesn't go back into the loop, while the RPi shuts down.
+                        time.sleep(3)	# this pauses the script, so it doesn't go back into the loop, while the RPi shuts down.
                     
-                    if ( PRESSTIME >= 25 ) and nightMode == 'on':								# if you have been pressing for 28*0.1=2.8 seconds then
+                    if ( PRESSTIME >= 10) and (nightMode == 'on') and (GPIO.input(14) == True):								# if you have been pressing for 28*0.1=2.8 seconds then
                                         
                         
                     
                         print("NIGHTMODE DEACTIVATED") 
                         nightMode = 'off'
                         PRESSTIME = 0
-                        time.sleep(10)	# this pauses the script, so it doesn't go back into the loop, while the RPi shuts down.
+                        time.sleep(3)	# this pauses the script, so it doesn't go back into the loop, while the RPi shuts down.
                     
-                    
+                  
                                         
                     
                     time.sleep(0.1)	 # wait 0.1sec, then loop again to see if you are holding the PLAYBUTTON still			

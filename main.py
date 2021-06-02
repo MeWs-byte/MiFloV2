@@ -36,17 +36,36 @@ def renderThread():
             clock_Render()
             #print("clockstate")
                
-        if state == 'alarm':
-
+        while state == 'alarm':
+            
             alarm_Render()
             print("alarmstate")
+            button.nightMode == 'off'
+            
+            if button.pushbutton == 'on' and state == 'alarm':
+                
+                try:
+                    
+                    processingList.pop(0)
+                                            # pushbutton for alarm
+                    flaskapp.alarmButton = 'notSet'
+                    flaskapp.alarmTime = ''
+                    button.pushbutton = 'off'
+                    print('removing current alarm lalalalaalala')
+                    state = 'clock' 
+                    
+                except:
+                    IndexError
+           # if button.pushbutton == 'on':
+           #     button.pushbutton = 'off'
+           #     state = 'clock'
              
         
         while state == 'event':
             print('eventstate')
             try:
         
-                if processingList[0]['description'] == 'processing':
+                if (processingList[0]['description'] == 'processing') and (processingList[0]['title'] != 'alarm'):
                     processingList[0]['description'] = 'contract'
                     sound = 'on'
                     #alarmSound()
@@ -63,6 +82,10 @@ def renderThread():
                         sound = 'off'
                         button.taskButton = 'off'
                         state = 'eventTimer'
+                #if processingList[0]['title'] == 'alarm':   # lol , idiot... move this shit somewhere else
+                #    sound = 'on'
+                #    state = 'alarm'
+                    
             except IndexError:
                 pass
                 
@@ -103,10 +126,7 @@ def updateThread():
 
         lock.acquire()
         
-        if button.pushbutton == 'on':
-            state = 'clock'                         # pushbutton for alarm
-            flaskapp.alarmButton = 'notSet'
-            flaskapp.alarmTime = ''
+
             
             
         if flaskapp.alarmButton == 'Alarm off':    # web button for going back to clockmode from alarm
@@ -133,8 +153,10 @@ def updateThread():
         try:
             print('-----processingList---------from updateThread----')
             print(processingList[0]['title'])
-            if processingList[0]['eventType'] == 'googleCal':
+            if processingList[0]['eventType'] == 'googleCal' and processingList[0]['title'] != 'alarm':
                 state = 'event'
+            elif processingList[0]['title'] == 'alarm':
+                state = 'alarm'
 
         except:
             pass # index error when the list is empty, tip add an event 100 years from now 
@@ -164,9 +186,11 @@ def updateThread():
             print('ip button working')
             state = 'ip'
             button.pushbuttonIP = 'off'
-       
+
         lock.release()
-        time.sleep(1)  
+        print('flaskapp alarmTime, write this to a file')
+        print(flaskapp.alarmTime) # write this to a file 
+        time.sleep(0.1)  
 
 def audioThread():
     global state, sound
