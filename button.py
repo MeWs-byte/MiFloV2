@@ -92,6 +92,7 @@ def waitfortaskbutton():
     if GPIO.input(23) == GPIO.HIGH:
         taskButton = 'on'
         print("taskButton is HIGH!")
-    #if GPIO.input(15) == GPIO.LOW:
-    #    pushbutton = False
-    #    print('button is LOW')
+    if GPIO.input(23) == GPIO.LOW:
+        taskButton = 'off'
+        print('button is LOW')
+

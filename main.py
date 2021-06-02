@@ -82,8 +82,9 @@ def renderThread():
                     if button.taskButton == 'on':
                     
                         sound = 'off'
-                        button.taskButton = 'off'
+                        
                         state = 'eventTimer'
+                        button.taskButton = 'off'
                 #if processingList[0]['title'] == 'alarm':   # lol , idiot... move this shit somewhere else
                 #    sound = 'on'
                 #    state = 'alarm'
@@ -114,7 +115,7 @@ def renderThread():
             button.pushbuttonIP == 'off'
             state = 'clock'
         #print(state)  
-        
+        print(button.taskButton)
         time.sleep(0.1)
         
     
