@@ -179,11 +179,16 @@ def clock_Render():
     pixels.fill((0, 0, 0))
 
     now = datetime.now()
-    current_time = now.strftime("%H:%M:%S")
-    drawString( current_time, 2, 1, (255, 255, 255) )
-
+    #current_time = now.strftime("%H:%M:%S")
+    current_time = now.strftime("%H:%M")
+    #day = now.strftime('%d|%-d')
+    day = now.strftime('%a')
+    drawString( day, 20, 1, (5, 85, 215) )
+    drawString( '|', 18, 1, (15, 145, 55) )
+    drawString( current_time, 0, 1, (255, 255, 255) )	
     pixels.show()
     time.sleep(0.01)
+
     bob = getLux()
     #print('Light Level: ',bob)
     
@@ -215,12 +220,12 @@ def alarm_Render():
     drawString( current_time, 2, 1, (255, 255, 255) )
 
     pixels.show()
-    time.sleep(1)
+    time.sleep(0.1)
     pixels.fill((255, 255, 255))
     drawString( current_time, 2, 1, (255, 0, 0) )
 
     pixels.show()
 	
-    time.sleep(1)
+    time.sleep(0.1)
 
 
