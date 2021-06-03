@@ -235,12 +235,18 @@ def alarm_Render():
 	
     time.sleep(0.1)
 
-def intro():
+def scoreRender(score):
 
-    
-    
-    
-        
+    pixels.brightness = 0.3
+
+    pixels.fill((5, 5, 85))
+    drawString( "Score", 0, 1, (255, 255, 255) )
+    drawString( score, 20, 1, (55, 255, 55) )
+    pixels.show()
+    time.sleep(2)
+
+def intro():
+  
 
     pixels.brightness = 0.3
     # Comment this line out if you have RGBW/GRBW NeoPixels

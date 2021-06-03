@@ -17,8 +17,9 @@ from eventTimer import countdownTimer
 from colours import rainbowRender, rainbow_cycle2
 import button
 from renderip import IpRender
-from ani import intro
+from ani import intro, scoreRender
 import json
+import random
 
 
 lock = threading.Lock()
@@ -29,8 +30,10 @@ eventRenderString = ''
 score = 0
 eventHub = []
 
+congratsList = ['Goed zo!', 'Mathematisch!', 'Uitstekend!', 'Jij bent de personificatie van God op aarde', 'Bravo!','Ongelooflijk!','Super!','Formitastisch!']
+
 def renderThread():
-    global eventRenderString, taskbutton, processingList, sound, score
+    global eventRenderString, taskbutton, processingList, sound, score, congratsList
    
     while True:
         global state
@@ -105,7 +108,7 @@ def renderThread():
 
             processingList.pop(0)
             score = score + int(diff)
-            state = 'congrats'
+            
             #deleteCal(item1['eventId'])   create completed tag in descript
             with open('score.json', 'r') as fp:
                 score = json.load(fp)
@@ -113,9 +116,14 @@ def renderThread():
             with open('score.json', 'w') as fp:
                 json.dump(score, fp)
 
-        if state == 'congrats':
+            state = 'congrats'
 
-            congratsTextRender('Goed zo! Score = %s ' %score)
+        if state == 'congrats':
+            scoreRender(str(score))
+            bravo = random.choice(congratsList)
+            #congratsTextRender('Goed zo! Score = %s ' %score)
+            congratsTextRender(bravo)
+            
             state = 'clock'
                 
         #
@@ -301,7 +309,7 @@ def flaskThread():
         
         print("flaskThread running")
         
-        #flaskapp.flaskRunner()
+        flaskapp.flaskRunner()
         
         time.sleep(2)
     
