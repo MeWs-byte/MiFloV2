@@ -100,7 +100,7 @@ def renderThread():
                 
         if state == 'eventTimer':
             countdownTimer(int(diff))
-            updateCal(processingList[0]['title'],'completed',processingList[0]['startDate'],processingList[0]['endDate'],processingList[0]['eventId'])
+            updateCal(processingList[0]['title'],'completed',processingList[0]['startDate'],processingList[0]['endDate'],processingList[0]['eventId'],2)
 
             processingList.pop(0)
             score = score + int(diff)
@@ -255,7 +255,7 @@ def taskThread():
                 pprint(x['title'])
                 pprint(x['description'])
                 x['description'] = 'processing'
-                updateCal(x['title'],'processing',x['startDate'],x['endDate'],x['eventId'])
+                updateCal(x['title'],'processing',x['startDate'],x['endDate'],x['eventId'],5)
                 
                 processingList.append(x)
                 processingList.sort(key = lambda EventObject: EventObject['startDate'], reverse=False)

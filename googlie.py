@@ -109,7 +109,7 @@ def deleteCal(eventIds):
 
     print("Event deleted")
 
-def updateCal(title,description,startDate,endDate,eventIds):
+def updateCal(title,description,startDate,endDate,eventIds,colorId):
     service = get_calendar_service()
         # update the event to tomorrow 9 AM IST
     StartTime = startDate.strftime("%Y-%m-%dT%H:%M:%S") #formatting for posting to google, must have seconds
@@ -124,7 +124,7 @@ def updateCal(title,description,startDate,endDate,eventIds):
         "description": description,
         "start": {"dateTime": StartTime, "timeZone": 'Europe/Brussels'},
         "end": {"dateTime": EndTime, "timeZone": 'Europe/Brussels'},
-        "colorId": 2
+        "colorId": colorId
         },
     ).execute()
 
