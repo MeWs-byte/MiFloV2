@@ -95,6 +95,30 @@ def timer():
               + timerTime
               )
 
+
+@app.route("/info")                    # alarm set
+def inputty():
+    
+    try:
+        request.method == "GET"
+        name = request.args.get("name", "")  # 2021-05-03T00:00 format output 
+        print('name from flaskapp')
+        print(name)
+        
+    except:
+        ValueError    
+
+    return ("""<form action="" method="get">
+                <input type="text" name="name">
+                <input type="submit" value="submit">
+              </form>
+              <p>
+        Go to the <a href="index">main menu</a>
+    </p>"""
+              + name
+              )
+
+
 def flaskRunner():          #  who runs the world?
 
     app.run(host="0.0.0.0",threaded=True)

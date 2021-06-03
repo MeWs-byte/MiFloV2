@@ -142,6 +142,11 @@ def renderThread():
             state = 'clock'
         #print(state)  
         print(button.taskButton)
+        try:
+            print('name from')
+            print(flaskapp.name)
+        except:
+            pass
         time.sleep(1) # previous 0.1
         
     
