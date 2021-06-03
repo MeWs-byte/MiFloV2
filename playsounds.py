@@ -19,8 +19,8 @@ def alarmSound2():
     #call(["aplay", "/home/pi/FlipDotWorker/newFlo/newestFlo/sounds/flint.wav"])
 
 def introSound():
-    
-    call(["aplay", "/home/pi/FINAL/MiFloV2/sounds/transP.wav"]) 
+
+    call(["aplay", "/home/pi/FINAL/MiFloV2/sounds/corny2.wav"]) 
     print('------transp')
     #call(["aplay", "/home/pi/FlipDotWorker/newFlo/newestFlo/sounds/flint.wav"])
 

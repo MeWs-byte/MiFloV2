@@ -32,10 +32,11 @@ score = 0
 eventHub = []
 celcTemp = ''
 
-congratsList = ['Goed zo!', 'Mathematisch!', 'Uitstekend!', 'Jij bent de personificatie van God op aarde', 'Bravo!','Ongelooflijk!','Super!','Formitastisch!']
+congratsList = ['Goed zo', 'Mathematisch', 'Uitstekend', 'Jij bent de grootste nerd', 'Bravo','Ongelooflijk','Super','Formitastisch', 'Live long and prosper']
 
 def renderThread():
     global eventRenderString, taskbutton, processingList, sound, score, congratsList
+    global userInfo, state
    
     while True:
         global state
@@ -121,12 +122,16 @@ def renderThread():
             state = 'congrats'
 
         if state == 'congrats':
-            scoreRender(str(score))
-            bravo = random.choice(congratsList)
-            #congratsTextRender('Goed zo! Score = %s ' %score)
-            congratsTextRender(bravo)
             
-            state = 'clock'
+            try:
+
+                scoreRender(str(score))
+                bravo = random.choice(congratsList)
+                #congratsTextRender('Goed zo! Score = %s ' %score)
+                congratsTextRender(bravo + ' '+ str(flaskapp.userInfo) + '!')
+            finally:
+
+                state = 'clock' 
                 
         #
         if state == 'timer':
@@ -143,8 +148,9 @@ def renderThread():
         #print(state)  
         print(button.taskButton)
         try:
-            print('name from')
-            print(flaskapp.name)
+            namio = flaskapp.userInfo
+            print('----flaskapp userinfo--------------')
+            print(str(namio))
         except:
             pass
         time.sleep(1) # previous 0.1
@@ -159,10 +165,7 @@ def updateThread():
         
 
         lock.acquire()
-        
-
-            
-            
+         
         if flaskapp.alarmButton == 'Alarm off':    # web button for going back to clockmode from alarm
             state = 'clock'
             flaskapp.alarmButton = 'notSet'
@@ -230,18 +233,18 @@ def audioThread():
     global state, sound, eventHub,processingList
     while True:
     
-        if state == 'intro':  # this doesnt work yet , try to figure out why 
+        if state == 'intro' and sound == 'on':  # this doesnt work yet , try to figure out why 
             introSound() 
             print('this worked lalalalalalal')    
 
         
         if state == 'event' and sound == 'on':
              
-            #alarmSound()
+            alarmSound()
             print('eventSound')
             
         if state == 'alarm':
-            #alarmSound2()
+            alarmSound2()
             print('alarmSound')
 
            
@@ -249,7 +252,7 @@ def audioThread():
 
             
         #lock.release()
-        time.sleep(0.5) # this was 0.1
+        time.sleep(0.01) # this was 0.1
         
 def taskThread():
     global ultimateList, processingList, state, eventHub, celcTemp
@@ -316,7 +319,7 @@ def flaskThread():
     while True:
         
         print("flaskThread running")
-        
+        introSound()
         flaskapp.flaskRunner()
         
         time.sleep(2)

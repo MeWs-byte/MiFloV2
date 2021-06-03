@@ -7,7 +7,7 @@ import timeTimer
 
 
 
-
+userInfo = ''
 
 alarmButton = 'notSet'
 alarmTime = ''
@@ -96,26 +96,28 @@ def timer():
               )
 
 
-@app.route("/info")                    # alarm set
-def inputty():
+@app.route("/userInfo")                    # alarm set
+def userInfo():
+    global userInfo
     
     try:
         request.method == "GET"
-        name = request.args.get("name", "")  # 2021-05-03T00:00 format output 
-        print('name from flaskapp')
-        print(name)
+        userInfo = request.args.get("userInfo", "")  # 2021-05-03T00:00 format output 
+        print('userInfo from flaskapp')
+        print(userInfo)
+        
         
     except:
         ValueError    
 
     return ("""<form action="" method="get">
-                <input type="text" name="name">
+                <input type="text" name="userInfo">
                 <input type="submit" value="submit">
               </form>
               <p>
         Go to the <a href="index">main menu</a>
     </p>"""
-              + name
+              + userInfo
               )
 
 

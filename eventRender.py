@@ -99,8 +99,8 @@ def congratsTextRender(a):
     display_width = 32
     display_height = 8
     matrixbrightness = 0.2
-    scrollSpeed = 0.1 #adjust the scrolling speed here-> smaller number=faster scroll
-    TextColor = (205,55,255) #set the color of your text here in RGB, default is white
+    scrollSpeed = 0.09 #adjust the scrolling speed here-> smaller number=faster scroll
+    TextColor = (55,255,255) #set the color of your text here in RGB, default is white
 
     ORDER = neopixel.GRB
     pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=matrixbrightness, auto_write=False, pixel_order=ORDER)
