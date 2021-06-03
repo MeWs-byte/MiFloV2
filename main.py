@@ -7,7 +7,7 @@ import flask
 import threading
 import flaskapp
 from customClass import EventObject
-from playsounds import alarmSound, alarmSound2
+from playsounds import alarmSound, alarmSound2, introSound
 import timeTimer
 from googlie import getGoogle, eventList, ultimateList, processingList, createCal,updateCal,deleteCal
 from pprint import pprint
@@ -35,6 +35,8 @@ def renderThread():
         global state
         
         if state == 'intro':
+            sound = 'on'
+            
             intro()
             state = 'clock'
         if state == 'clock':
@@ -204,17 +206,42 @@ def audioThread():
     global state, sound, eventHub,processingList
     while True:
     
-    
+        if state == 'intro':  # this doesnt work yet , try to figure out why 
+            introSound() 
+            print('this worked lalalalalalal')    
 
-        #lock.acquire()
+        
         if state == 'event' and sound == 'on':
              
-            alarmSound()
+            #alarmSound()
+            print('eventSound')
             
         if state == 'alarm':
-            alarmSound2()
+            #alarmSound2()
+            print('alarmSound')
+
+           
             
-        #print('------this is the complete updating list of future events---------')
+
+            
+        #lock.release()
+        time.sleep(0.1)
+        
+def taskThread():
+    global ultimateList, processingList, state, eventHub
+    
+   
+    
+    while True:
+        #from socket import gaierror
+        try:
+            
+            eventHub = getGoogle()  # the best most badass self refreshing list of dictionaries ever conceived 
+        
+        except UnboundLocalError:
+            print('UnboundLocalError')
+
+                #print('------this is the complete updating list of future events---------')
         #print('---------------')
         for x in eventHub:
             #pprint(x)
@@ -235,23 +262,6 @@ def audioThread():
                 pprint(processingList)
                
         print(datetime.now().strftime("%d.%b %Y %H:%M:%S"))
-            
-        #lock.release()
-        time.sleep(0.1)
-        
-def taskThread():
-    global ultimateList, processingList, state, eventHub
-    
-   
-    
-    while True:
-        #from socket import gaierror
-        try:
-            
-            eventHub = getGoogle()  # the best most badass self refreshing list of dictionaries ever conceived 
-        
-        except UnboundLocalError:
-            print('UnboundLocalError')
         #except socket.gaierror:
         #    print('socket gaierror')
         #except httplib2.error.ServerNotFoundError:
