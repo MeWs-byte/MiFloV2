@@ -20,6 +20,7 @@ from renderip import IpRender
 from ani import intro, scoreRender
 import json
 import random
+from weather import getCelcius
 
 
 lock = threading.Lock()
@@ -29,6 +30,7 @@ keyPressed = False
 eventRenderString = ''
 score = 0
 eventHub = []
+celcTemp = ''
 
 congratsList = ['Goed zo!', 'Mathematisch!', 'Uitstekend!', 'Jij bent de personificatie van God op aarde', 'Bravo!','Ongelooflijk!','Super!','Formitastisch!']
 
@@ -140,7 +142,7 @@ def renderThread():
             state = 'clock'
         #print(state)  
         print(button.taskButton)
-        time.sleep(0.1)
+        time.sleep(1) # previous 0.1
         
     
 
@@ -245,7 +247,7 @@ def audioThread():
         time.sleep(0.5) # this was 0.1
         
 def taskThread():
-    global ultimateList, processingList, state, eventHub
+    global ultimateList, processingList, state, eventHub, celcTemp
     
    
     
@@ -283,7 +285,8 @@ def taskThread():
         #    print('socket gaierror')
         #except httplib2.error.ServerNotFoundError:
         #    print('httplib2 error')
-
+        celcTemp = getCelcius()
+        print(celcTemp)
         time.sleep(20)
     
     
