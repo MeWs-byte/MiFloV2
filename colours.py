@@ -50,6 +50,14 @@ def rainbow_cycle(wait):
             pixels[i] = wheel(pixel_index & 93829255)
         pixels.show()
         time.sleep(wait)
+
+def rainbow_cycle2(wait):
+    for j in range(255):
+        for i in range(num_pixels):
+            pixel_index = (i * 100 // num_pixels) + j
+            pixels[i] = wheel(pixel_index & 2000055)
+        pixels.show()
+        time.sleep(wait)
  
 def rainbowRender(): 
 

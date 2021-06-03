@@ -124,6 +124,7 @@ def updateCal(title,description,startDate,endDate,eventIds):
         "description": description,
         "start": {"dateTime": StartTime, "timeZone": 'Europe/Brussels'},
         "end": {"dateTime": EndTime, "timeZone": 'Europe/Brussels'},
+        "colorId": 2
         },
     ).execute()
 

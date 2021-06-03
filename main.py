@@ -14,7 +14,7 @@ from pprint import pprint
 from eventRender import eventTextRender, congratsTextRender
 from collections import OrderedDict
 from eventTimer import countdownTimer
-from colours import rainbowRender
+from colours import rainbowRender, rainbow_cycle2
 import button
 from renderip import IpRender
 from ani import intro
@@ -53,7 +53,6 @@ def renderThread():
             if button.pushbutton == 'on' and state == 'alarm':
                 
                 try:
-                    
                     processingList.pop(0)
                                             # pushbutton for alarm
                     flaskapp.alarmButton = 'notSet'
@@ -84,7 +83,7 @@ def renderThread():
                     timeDiff = item1['endDate'] - item1['startDate']
                     diff = timeDiff.seconds/60                                      # from here add some kind of flag , post completed to cal or whatever
                     diff = int(diff)
-                    rainbowRender()
+                    rainbow_cycle2(0.001)
                     eventTextRender(eventRenderString + ' || ' + str(diff) + ' ' + 'min')
                     if button.taskButton == 'on':
                     
@@ -101,6 +100,8 @@ def renderThread():
                 
         if state == 'eventTimer':
             countdownTimer(int(diff))
+            updateCal(processingList[0]['title'],'completed',processingList[0]['startDate'],processingList[0]['endDate'],processingList[0]['eventId'])
+
             processingList.pop(0)
             score = score + int(diff)
             state = 'congrats'
@@ -200,7 +201,7 @@ def updateThread():
         lock.release()
         print('flaskapp alarmTime, write this to a file')
         print(flaskapp.alarmTime) # write this to a file 
-        time.sleep(0.1)  
+        time.sleep(1) # last value 0.1  
 
 def audioThread():
     global state, sound, eventHub,processingList
@@ -225,7 +226,7 @@ def audioThread():
 
             
         #lock.release()
-        time.sleep(0.1)
+        time.sleep(0.5) # this was 0.1
         
 def taskThread():
     global ultimateList, processingList, state, eventHub
@@ -292,9 +293,9 @@ def flaskThread():
         
         print("flaskThread running")
         
-        flaskapp.flaskRunner()
+        #flaskapp.flaskRunner()
         
-        time.sleep(0.1)
+        time.sleep(2)
     
 t = time.time()
 
