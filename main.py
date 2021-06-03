@@ -18,6 +18,7 @@ from colours import rainbowRender, rainbow_cycle2
 import button
 from renderip import IpRender
 from ani import intro
+import json
 
 
 lock = threading.Lock()
@@ -106,7 +107,14 @@ def renderThread():
             score = score + int(diff)
             state = 'congrats'
             #deleteCal(item1['eventId'])   create completed tag in descript
+            with open('score.json', 'r') as fp:
+                score = json.load(fp)
+            score = score + int(diff)
+            with open('score.json', 'w') as fp:
+                json.dump(score, fp)
+
         if state == 'congrats':
+
             congratsTextRender('Goed zo! Score = %s ' %score)
             state = 'clock'
                 
