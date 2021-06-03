@@ -21,12 +21,13 @@ nightMode = 'off'
 def waitforpushbutton():
     global pushbutton
     #while True: # Run forever
-    if GPIO.input(15) == GPIO.HIGH:
+    if GPIO.input(15) == True:
         pushbutton = 'on'
         print("clockButton is HIGH!")
-    if GPIO.input(15) == GPIO.LOW:
+    if GPIO.input(15) == False:
         pushbutton = 'off'
         #print('button is LOW')
+    time.sleep(0.1)
 
 def waitforpushbuttonIP():
     global pushbuttonIP, nightMode
@@ -89,10 +90,11 @@ def waitforpushbuttonIP():
 def waitfortaskbutton():
     global taskButton
     #while True: # Run forever
-    if GPIO.input(23) == GPIO.HIGH:
+    if GPIO.input(23) == True:
         taskButton = 'on'
         print("taskButton is HIGH!")
-    if GPIO.input(23) == GPIO.LOW:
+    if GPIO.input(23) == False:
         taskButton = 'off'
         print('button is LOW')
+    time.sleep(0.1)
 
