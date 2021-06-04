@@ -23,6 +23,7 @@ processingList = [] # list where items are stored indefinately
 
 def getGoogle():
    global eventList, ultimateList
+
    
    try:
        

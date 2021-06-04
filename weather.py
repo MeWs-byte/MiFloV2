@@ -4,8 +4,8 @@
 
 import requests
 import json
-
-
+import time
+toggle = True
 #IMPORTANT: You should change API keys written below with your own keys, because
 #           these keys will hit the request limit so easily once I publish this
 #           project on GitHub and people will use these keys by default.
@@ -92,11 +92,14 @@ class Weather:
         
 
 def getCelcius():
-
+    global toggle
+    toggle = not toggle
+    time.sleep(5)
+    print(toggle, 'from googlie')
     antwerpen = Weather("antwerpen")
 
     print(antwerpen.temp_feelslike)
-    return antwerpen.temp_feelslike
+    return antwerpen.temp_feelslike, toggle
 
 # https://github.com/kadir014/weather.py
 

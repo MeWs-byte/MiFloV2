@@ -9,6 +9,7 @@ import neopixel
 from datetime import datetime
 from lightSensor import getLux
 import button
+from weather import getCelcius
 
  
 # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
@@ -177,15 +178,26 @@ def clock_Render():
     
     # Comment this line out if you have RGBW/GRBW NeoPixels
     pixels.fill((0, 0, 0))
-
+    tempTuple = getCelcius()
+    print('temp in clock render')
+    print(tempTuple[0])
+    print(tempTuple[1])
+    celcInt = int(tempTuple[0])
     now = datetime.now()
     #current_time = now.strftime("%H:%M:%S")
     current_time = now.strftime("%H:%M")
     #day = now.strftime('%d|%-d')
     day = now.strftime('%a')
-    drawString( day, 20, 1, (5, 85, 215) )
-    drawString( '|', 18, 1, (15, 145, 55) )
-    drawString( current_time, 0, 1, (255, 255, 255) )	
+
+    if tempTuple[1] == False:
+    	drawString( day, 20, 1, (5, 85, 215) )
+    	drawString( '|', 18, 1, (15, 145, 55) )
+    	drawString( current_time, 0, 1, (255, 255, 255) )
+    if tempTuple[1] == True:
+    	drawString( str(celcInt) + 'c', 20, 1, (5, 85, 215) )
+    	drawString( '|', 18, 1, (15, 145, 55) )
+    	drawString( current_time, 0, 1, (255, 255, 255) )
+   
     if button.taskButton == 'on':
         
     	drawPixel(0,0,90000)
