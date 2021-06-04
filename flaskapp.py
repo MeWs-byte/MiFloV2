@@ -4,7 +4,7 @@ import csv
 from customClass import EventObject
 import timeTimer
 
-
+import json
 
 
 userInfo = ''
@@ -104,7 +104,11 @@ def userInfo():
         request.method == "GET"
         userInfo = request.args.get("userInfo", "")  # 2021-05-03T00:00 format output 
         print('userInfo from flaskapp')
-        print(userInfo)
+        print(type(userInfo))
+
+        with open('info.json', 'w+') as f:
+   
+            json.dump(userInfo, f)
         
         
     except:

@@ -36,7 +36,7 @@ congratsList = ['Goed zo', 'Mathematisch', 'Uitstekend', 'Jij bent de grootste n
 
 def renderThread():
     global eventRenderString, taskbutton, processingList, sound, score, congratsList
-    global userInfo, state
+    global state
    
     while True:
         global state
@@ -118,17 +118,21 @@ def renderThread():
             score = score + int(diff)
             with open('score.json', 'w') as fp:
                 json.dump(score, fp)
+            
 
             state = 'congrats'
 
         if state == 'congrats':
             
             try:
-
+                with open('info.json', 'r') as readName:
+                    UsrName = json.load(readName)
                 scoreRender(str(score))
                 bravo = random.choice(congratsList)
-                #congratsTextRender('Goed zo! Score = %s ' %score)
-                congratsTextRender(bravo + ' '+ str(flaskapp.userInfo) + '!')
+                congratsTextRender(bravo + ' '+ str(UsrName) + '!')
+                
+                
+                
             finally:
 
                 state = 'clock' 
@@ -146,13 +150,6 @@ def renderThread():
             button.pushbuttonIP == 'off'
             state = 'clock'
         #print(state)  
-        print(button.taskButton)
-        try:
-            namio = flaskapp.userInfo
-            print('----flaskapp userinfo--------------')
-            print(str(namio))
-        except:
-            pass
         time.sleep(1) # previous 0.1
         
     
