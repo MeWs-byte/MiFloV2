@@ -99,7 +99,7 @@ def timer():
                 <input type="submit" value="submit">
               </form>
               <p>
-        Go to the <a href="/index">main menu</a>
+        Go to the <a href="/index" class="w3-bar-item w3-button" >main menu</a>
     </p></body>"""
               + timerTime
               )
@@ -132,7 +132,7 @@ def userInfo():
                 <input type="submit" value="submit">
               </form>
               <p>
-        Go to the <a href="index">main menu</a>
+        Go to the <a href="index" class="w3-bar-item w3-button" >main menu</a>
     </p>"""
               + userInfo
               )
