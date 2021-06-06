@@ -98,3 +98,8 @@ def waitfortaskbutton():
         print('button is LOW')
     time.sleep(0.1)
 
+
+#while 1:
+#    waitforpushbutton()
+#    waitforpushbuttonIP()
+#    waitfortaskbutton()

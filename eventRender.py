@@ -6,13 +6,13 @@ import neopixel
 from colorsys import hsv_to_rgb
 from PIL import Image, ImageDraw, ImageFont
 from getIP import whatsMyIp
-import button
+import testbutton
 
 
 def eventTextRender(a):
     global taskButton
     
-    while button.taskButton == 'off':
+    while testbutton.taskButton == 'off':
         
         #text = "Hello!"
         pixel_pin = board.D18

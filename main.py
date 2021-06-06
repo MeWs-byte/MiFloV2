@@ -15,13 +15,13 @@ from eventRender import eventTextRender, congratsTextRender
 from collections import OrderedDict
 from eventTimer import countdownTimer
 from colours import rainbowRender, rainbow_cycle2
-import button
+
 from renderip import IpRender
 from ani import intro, scoreRender
 import json
 import random
 from weather import getCelcius
-
+import testbutton
 
 lock = threading.Lock()
 sound = 'off'
@@ -52,21 +52,21 @@ def renderThread():
             #print("clockstate")
                
         while state == 'alarm':
-            button.nightMode == 'off'
+            testbutton.nightMode == 'off'
             alarm_Render()
             print("alarmstate")
             
             
-            if button.pushbutton == 'on' and state == 'alarm':
+            if testbutton.pushbutton == 'on' and state == 'alarm':
                 
                 try:
                     processingList.pop(0)
                                             # pushbutton for alarm
                     flaskapp.alarmButton = 'notSet'
                     flaskapp.alarmTime = ''
-                    button.pushbutton = 'off'
+                    testbutton.pushbutton = 'off'
                     print('removing current alarm lalalalaalala')
-                    button.nightMode = 'off'
+                    testbutton.nightMode = 'off'
                     state = 'clock' 
                     
                 except:
@@ -92,12 +92,15 @@ def renderThread():
                     diff = int(diff)
                     rainbow_cycle2(0.001)
                     eventTextRender(eventRenderString + ' || ' + str(diff) + ' ' + 'min')
-                    if button.taskButton == 'on':
+                    if testbutton.taskButton == 'on' and state == 'event':
                     
                         sound = 'off'
-                        
+                        testbutton.taskButton = 'off'
                         state = 'eventTimer'
-                        button.taskButton = 'off'
+                        print('testbutton.taskbutton from main')
+                        print(testbutton.taskButton)
+                        print(testbutton.pushbutton)
+                        #testbutton.taskButton = 'off'
                 #if processingList[0]['title'] == 'alarm':   # lol , idiot... move this shit somewhere else
                 #    sound = 'on'
                 #    state = 'alarm'
@@ -145,12 +148,14 @@ def renderThread():
             
         
             #print(timeTimer.tm)
-        if state == 'ip':
-            IpRender()
-            button.pushbuttonIP == 'off'
-            state = 'clock'
-        #print(state)  
-        time.sleep(1) # previous 0.1
+        #if state == 'ip':
+        #    IpRender()
+            #button.pushbuttonIP == 'off'
+        #    state = 'clock'
+        print(state)  
+        time.sleep(0.1) # previous 0.1
+        print('pushbutton from main')
+        print(testbutton.pushbutton)
         
     
 
@@ -181,7 +186,7 @@ def updateThread():
         elif timeTimer.tiMaster == 0 and state != 'alarm' and state != 'event': # timer = 0 so clockmode is back on 
             state = 'clock'
         
-        if button.taskButton == 'on':
+        if testbutton.taskButton == 'on':
             print('taskbutton is working') 
                
         try:
@@ -210,17 +215,13 @@ def updateThread():
                 #pixels.brightness = 0.1
             if alarmTimeDt < nu:
                 state = 'alarm'
-                button.nightMode = 'off'
+                testbutton.nightMode = 'off'
                 
         except:
             ValueError
             print('something went wrong with the alarm')
             
-        if button.pushbuttonIP == 'on':
-            print('ip button working')
-            state = 'ip'
-            button.pushbuttonIP = 'off'
-
+       
         lock.release()
         print('flaskapp alarmTime, write this to a file')
         print(flaskapp.alarmTime) # write this to a file 
@@ -296,15 +297,14 @@ def taskThread():
     
     
 def keyboardThread():
-    global state, keyPressed
+    global state, keyPressed, taskButton, pushbutton
     while True:
         
         #input()
         lock.acquire()
         #keyPressed = True
-        button.waitforpushbutton()
-        button.waitforpushbuttonIP()
-        button.waitfortaskbutton()
+        testbutton.waitforpushbutton()
+        
         
         
         lock.release()

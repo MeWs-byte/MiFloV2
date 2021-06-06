@@ -8,7 +8,7 @@ import board
 import neopixel
 from datetime import datetime
 
-import button
+import testbutton
 import colours
  
 # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
@@ -186,12 +186,12 @@ def clock_Render():
     drawString( day, 20, 1, (5, 85, 215) )
     drawString( '|', 18, 1, (15, 145, 55) )
     drawString( current_time, 0, 1, (255, 255, 255) )	
-    if button.taskButton == 'on':
+    if testbutton.taskButton == 'on':
         
     	drawPixel(0,0,90000)
-    if button.pushbutton == 'on':
+    if testbutton.pushbutton == 'on':
         drawPixel(2,0,20000)
-    if button.pushbuttonIP == 'on':
+    if testbutton.pushbuttonIP == 'on':
         drawPixel(4,0,10000)
     pixels.show()
     time.sleep(0.01)
@@ -210,7 +210,7 @@ def clock_Render():
     else:
         pixels.brightness = 0.1 + bob / 1500 * 0.9
         
-    if button.nightMode == 'on':
+    if testbutton.nightMode == 'on':
     	pixels.brightness = 0
         
 
