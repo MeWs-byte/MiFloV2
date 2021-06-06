@@ -7,7 +7,7 @@ import flask
 import threading
 import flaskapp
 from customClass import EventObject
-from playsounds import alarmSound, alarmSound2, introSound
+from playsounds import alarmSound, alarmSound2, introSound, pingSound
 import timeTimer
 from googlie import getGoogle, eventList, ultimateList, processingList, createCal,updateCal,deleteCal
 from pprint import pprint
@@ -52,7 +52,9 @@ def renderThread():
             #print("clockstate")
                
         while state == 'alarm':
-            testbutton.nightMode == 'off'
+            testbutton.pushbutton = 'off'
+            testbutton.taskButton = 'off' 
+            testbutton.nightMode = 'off'
             alarm_Render()
             print("alarmstate")
             
@@ -65,6 +67,7 @@ def renderThread():
                     flaskapp.alarmButton = 'notSet'
                     flaskapp.alarmTime = ''
                     testbutton.pushbutton = 'off'
+                    testbutton.taskButton = 'off'
                     print('removing current alarm lalalalaalala')
                     testbutton.nightMode = 'off'
                     state = 'clock' 
@@ -79,7 +82,8 @@ def renderThread():
         while state == 'event':
             print('eventstate')
             try:
-        
+                testbutton.taskButton = 'off'
+                testbutton.pushbutton = 'off'
                 if (processingList[0]['description'] == 'processing') and (processingList[0]['title'] != 'alarm'):
                     processingList[0]['description'] = 'contract'
                     sound = 'on'
@@ -96,6 +100,7 @@ def renderThread():
                     
                         sound = 'off'
                         testbutton.taskButton = 'off'
+                        testbutton.pushbutton = 'off'
                         state = 'eventTimer'
                         print('testbutton.taskbutton from main')
                         print(testbutton.taskButton)
@@ -245,7 +250,9 @@ def audioThread():
             alarmSound2()
             print('alarmSound')
 
-           
+        if state == 'congrats':
+            pingSound() 
+            print('pingSound worked')  
             
 
             

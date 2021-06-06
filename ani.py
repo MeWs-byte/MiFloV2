@@ -251,7 +251,7 @@ def intro():
     pixels.brightness = 0.3
     # Comment this line out if you have RGBW/GRBW NeoPixels
     #pixels.fill((55, 195, 205))
-    pixels.fill((5, 5, 105))
+    #pixels.fill((5, 5, 105))
     colours.rainbow_cycle(0.000000000000000000000000001) 
     drawPixel(2,-8,60000)
     drawPixel(29,0,60000)
@@ -368,8 +368,13 @@ def intro():
     drawPixel(2,0,60000)
     time.sleep(0.05)
     pixels.show()
+    pixels.fill((5, 5, 105))
     #pixels.fill((55, 195, 205))
-    drawString( "MifloV2", 3, 1, (215, 215, 195) )
+    drawString( "MiFlo-V2", 2, 1, (215, 215, 195) )
+    drawString( ".................", 1, 3, (15, 215, 195) ) 
+    drawString( ".................", 2, 3, (15, 215, 95) )    
+    drawString( ".................", 1, -5, (15, 215, 125) ) 
+    drawString( ".................", 2, -5, (15, 215, 95) )   
     time.sleep(0.4)
     pixels.show()
     time.sleep(1)

@@ -47,7 +47,7 @@ def rainbow_cycle(wait):
     for j in range(255):
         for i in range(num_pixels):
             pixel_index = (i * 256 // num_pixels) + j
-            pixels[i] = wheel(pixel_index & 93829255)
+            pixels[i] = wheel(pixel_index & 110059) #93829255 is purple and green # cool rainbow 120059
         pixels.show()
         time.sleep(wait)
 

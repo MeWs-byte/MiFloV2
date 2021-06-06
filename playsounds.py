@@ -24,3 +24,9 @@ def introSound():
     print('------transp')
     #call(["aplay", "/home/pi/FlipDotWorker/newFlo/newestFlo/sounds/flint.wav"])
 
+def pingSound():
+
+    call(["aplay", "/home/pi/FINAL/MiFloV2/sounds/poeng.wav"]) 
+    print('------transp')
+    #call(["aplay", "/home/pi/FlipDotWorker/newFlo/newestFlo/sounds/flint.wav"])
+
