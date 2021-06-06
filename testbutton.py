@@ -37,9 +37,9 @@ def waitforpushbutton():
             pushbutton = 'on'
             print('pushbutton and taskkbutton are high from testbutton')
             taskButton = 'on'
-            time.sleep(3)
-            pushbutton = 'off'
-            taskButton = 'off'
+            time.sleep(1)
+            #pushbutton = 'off'
+            #taskButton = 'off'
     bBtn.when_pressed = buTest
 
 

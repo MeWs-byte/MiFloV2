@@ -12,7 +12,7 @@ import testbutton
 def eventTextRender(a):
     global taskButton
     
-    while testbutton.taskButton == 'off':
+    while testbutton.taskButton != 'on':
         
         #text = "Hello!"
         pixel_pin = board.D18
@@ -84,7 +84,7 @@ def eventTextRender(a):
                 offset_x = 0
 
             pixels.show()
-            time.sleep(scrollSpeed) #scrolling text speed
+            time.sleep(0.1) #scrolling text speed
         
         
         
