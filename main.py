@@ -225,7 +225,7 @@ def updateThread():
         lock.release()
         print('flaskapp alarmTime, write this to a file')
         print(flaskapp.alarmTime) # write this to a file 
-        time.sleep(1) # last value 0.1  
+        time.sleep(0.1) # last value 0.1  
 
 def audioThread():
     global state, sound, eventHub,processingList

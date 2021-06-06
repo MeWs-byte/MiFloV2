@@ -1,16 +1,24 @@
 
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  
   </head>
-<form>
-  <input type="submit" name="alarmOff" value="Alarm off">
+
+<div class="w3-container w3-monospace">
+<h2>MiFloV2</h2> 
+<form class="w3-container w3-blue">
+<input class="w3-input w3-border" type="submit" name="alarmOff" value="Alarm off">
 </form>
 
-<form>
-    <input type="submit" name="timerOff" value="Timer off">
+<form class="w3-container w3-blue">
+    <input class="w3-input w3-border" type="submit" name="timerOff" value="Timer off">
   </form>
-
+<div class="w3-sidebar w3-bar-block" style="width:25%">
+  <a href="/alarm" class="w3-bar-item w3-button">alarm</a>
+  <a href="/timer" class="w3-bar-item w3-button">timer</a>
+  <a href="/userInfo" class="w3-bar-item w3-button">userinfo</a>
+</div>
 <p>
         <a href="/alarm">Alarm</a>
     </p>
@@ -23,7 +31,7 @@
     </p>
 
         <p>
-         <a href="/events">Events</a>
+         <a href="/userInfo">User</a>
     </p>
 {% with messages = get_flashed_messages() %}
 {% if messages %}

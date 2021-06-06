@@ -60,13 +60,18 @@ def input():
     except:
         ValueError    
 
-    return ("""<form action="" method="get">
-                <input type="datetime-local" name="alarmTime">
+    return ("""<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  
+  </head><form class="w3-container w3-blue" action="" method="get">
+                <div class="w3-container w3-monospace">
+                <input class="w3-input w3-border" type="datetime-local" name="alarmTime">
                 <input type="submit" value="submit">
-              </form>
-              <p>
-        Go to the <a href="index">main menu</a>
-    </p>"""
+              </form> </div>
+            <div class="w3-sidebar w3-bar-block" style="width:25%">  <p> 
+        Go to the <a href="index" class="w3-bar-item w3-button">main menu</a>
+    </p></div>"""
               + alarmTime
               )
     
@@ -85,7 +90,11 @@ def timer():
             NameError
             
 
-    return ("""<body><form action="" method="get">
+    return ("""<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  
+  </head><body><form class="w3-input w3-border" action="" method="get">
                 <input type="number" name="timerTime">
                 <input type="submit" value="submit">
               </form>
@@ -114,7 +123,11 @@ def userInfo():
     except:
         ValueError    
 
-    return ("""<form action="" method="get">
+    return ("""<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  
+  </head><form class="w3-input w3-border" action="" method="get">
                 <input type="text" name="userInfo">
                 <input type="submit" value="submit">
               </form>
