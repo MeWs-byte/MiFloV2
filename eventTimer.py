@@ -21,10 +21,25 @@ def countdownTimer(tm):
         pixels.fill((1, 7, 13))
         drawString( timer, 12, 1, (230, 240, 255) )
         drawString( '<>', 2, 1, (23, 40, 255) )
-        timerPixelstr = '...............'
-        drawString( timerPixelstr, 1, -4, (23, 140, 255) )
+
+        minsTm = tm / 60
+
+        for pix in range (0,30):
+            if pix < minsTm / 2:
+                drawPixel(pix + 1, 0,500000)
+                drawPixel(pix + 1, 7,500000)
+                drawPixel(pix + 1, 6,500000)
+                
+            else:
+                drawPixel(pix + 1, 0,12345)
+                drawPixel(pix + 1, 7,12345)
+                drawPixel(pix + 1, 6,12345)
+
         
-        drawString( '...............', 1, 3, (23, 140, 255) )
+        #timerPixelstr = '...............'
+        #drawString( timerPixelstr, 1, -4, (23, 140, 255) )
+        
+        #drawString( '...............', 1, 3, (23, 140, 255) )
         #if tm >= 3600 :
         #    drawString( '...............', 1, -4, (23, 140, 255) )
         #    drawString( '...............', 2, -4, (23, 110, 225) )
@@ -43,8 +58,8 @@ def countdownTimer(tm):
 
     
         time.sleep(1)
-        size = len(timerPixelstr)
-        timerPixelstr = timerPixelstr[:size - 1]
+        #size = len(timerPixelstr)
+        #timerPixelstr = timerPixelstr[:size - 1]
         tm -= 1 
     return tm
         
