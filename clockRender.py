@@ -10,7 +10,7 @@ from datetime import datetime
 from lightSensor import getLux
 import testbutton
 from weather import getCelcius
-
+import ledforButton
  
 # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
 # NeoPixels must be connected to D10, D12, D18 or D21 to work.
@@ -284,6 +284,7 @@ def alarm_Render():
     drawString( current_time, 2, 1, (255, 0, 0) )
 
     pixels.show()
+    
 	
     time.sleep(0.1)
 

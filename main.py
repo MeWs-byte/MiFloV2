@@ -15,7 +15,7 @@ from eventRender import eventTextRender, congratsTextRender
 from collections import OrderedDict
 from eventTimer import countdownTimer
 from colours import rainbowRender, rainbow_cycle2
-
+from ledforButton import ledBlinker
 from renderip import IpRender
 from ani import intro, scoreRender
 import json
@@ -311,7 +311,8 @@ def keyboardThread():
         lock.acquire()
         #keyPressed = True
         testbutton.waitforpushbutton()
-        
+        if state == 'alarm' or state == 'event':
+            ledBlinker()
         
         
         lock.release()
