@@ -223,7 +223,7 @@ def clock_Render():
 
              
     else:
-        pixels.brightness = 0.1 + bob / 1500 * 0.9
+        pixels.brightness = 0.1 + bob / 1400 * 0.9 # 1500
         
     if testbutton.nightMode == 'on':
     	pixels.brightness = 0

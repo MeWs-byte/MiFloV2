@@ -3,7 +3,8 @@ import time
 
 def alarmSound():
     
-    call(["aplay", "sounds/pling.wav"]) 
+    call(["aplay", "sounds/pling.wav"])
+    call(["aplay", "sounds/twinkee1.wav"])
 
     call(["aplay", "sounds/islandComp.wav"])
 
@@ -21,8 +22,8 @@ def alarmSound2():
 def introSound():
     #call(["aplay", "sounds/chilly.wav"])
     #call(["aplay", "sounds/chill.wav"])
-    call(["aplay", "sounds/arpy.wav"])
-    call(["aplay", "sounds/arpy.wav"])
+    #call(["aplay", "sounds/arpy.wav"])
+    #call(["aplay", "sounds/arpy.wav"])
     call(["aplay", "sounds/twinkee1.wav"])
     call(["aplay", "sounds/twinkee2.wav"])
     #call(["aplay", "sounds/corny2loud.wav"])

@@ -17,7 +17,7 @@ from eventTimer import countdownTimer
 from colours import rainbowRender, rainbow_cycle2
 from ledforButton import ledBlinker
 from renderip import IpRender
-from ani import intro, scoreRender
+from ani import intro, scoreRender, intro2, intro3
 import json
 import random
 from weather import getCelcius
@@ -26,6 +26,7 @@ import testbutton
 lock = threading.Lock()
 sound = 'off'
 state = "intro"
+#state = 'clock'
 keyPressed = False
 eventRenderString = ''
 score = 0
@@ -44,7 +45,7 @@ def renderThread():
         if state == 'intro':
             sound = 'on'
             
-            intro()
+            intro2()
             state = 'clock'
         if state == 'clock':
 
@@ -311,8 +312,9 @@ def keyboardThread():
         lock.acquire()
         #keyPressed = True
         testbutton.waitforpushbutton()
-        if state == 'alarm' or state == 'event':
+        if state == 'alarm' or state == 'event' and state != 'eventTimer':
             ledBlinker()
+        
         
         
         lock.release()
