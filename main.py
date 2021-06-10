@@ -32,12 +32,13 @@ eventRenderString = ''
 score = 0
 eventHub = []
 celcTemp = ''
+light = 'off'
 
 congratsList = ['Goed zo', 'Mathematisch', 'Uitstekend', 'Jij bent de grootste nerd', 'Bravo','Ongelooflijk','Super','Formitastisch', 'Live long and prosper']
 
 def renderThread():
     global eventRenderString, taskbutton, processingList, sound, score, congratsList
-    global state
+    global state, light
    
     while True:
         global state
@@ -83,6 +84,7 @@ def renderThread():
         while state == 'event':
             print('eventstate')
             try:
+                light = 'on'
                 testbutton.taskButton = 'off'
                 testbutton.pushbutton = 'off'
                 if (processingList[0]['description'] == 'processing') and (processingList[0]['title'] != 'alarm'):
@@ -100,6 +102,7 @@ def renderThread():
                     if testbutton.taskButton == 'on' and state == 'event':
                     
                         sound = 'off'
+                        light = 'off'
                         testbutton.taskButton = 'off'
                         testbutton.pushbutton = 'off'
                         state = 'eventTimer'
@@ -136,7 +139,10 @@ def renderThread():
             try:
                 with open('info.json', 'r') as readName:
                     UsrName = json.load(readName)
-                scoreRender(str(score))
+                while testbutton.taskButton != 'on':
+                    light = 'on'
+                    scoreRender(str(score))
+                light = 'off'
                 bravo = random.choice(congratsList)
                 congratsTextRender(bravo + ' '+ str(UsrName) + '!')
                 
@@ -252,11 +258,12 @@ def audioThread():
             print('alarmSound')
 
         if state == 'congrats':
-            pingSound() 
+            pingSound()
+            ledBlinker() 
             print('pingSound worked')  
             
 
-            
+        print(state)    
         #lock.release()
         time.sleep(0.01) # this was 0.1
         
@@ -305,7 +312,7 @@ def taskThread():
     
     
 def keyboardThread():
-    global state, keyPressed, taskButton, pushbutton
+    global state, keyPressed, taskButton, pushbutton, light
     while True:
         
         #input()
@@ -315,15 +322,21 @@ def keyboardThread():
         while state == 'alarm':
             ledBlinker()
         
-        while state == 'event':
+        #while state == 'event':
+        #    ledBlinker()
+            
+        #if state == 'eventTimer':
+        #    ledOff()
+            
+        #while state == 'congrats':
+        #    ledBlinker()
+        if light == 'on':
             ledBlinker()
             
-        while state == 'eventTimer':
-            ledOff()
             
             
-            
-        
+        print('statatatatatatatata')    
+        print(state)
         lock.release()
         time.sleep(0.1)
         
@@ -333,7 +346,7 @@ def flaskThread():
     while True:
         
         print("flaskThread running")
-        introSound()
+        #introSound()
         flaskapp.flaskRunner()
         
         time.sleep(2)

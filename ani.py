@@ -7,7 +7,7 @@ import time
 import board
 import neopixel
 from datetime import datetime
-
+from ledforButton import ledBlinker
 import testbutton
 import colours
  
@@ -236,14 +236,15 @@ def alarm_Render():
     time.sleep(0.1)
 
 def scoreRender(score):
-
+    
     pixels.brightness = 0.3
 
     pixels.fill((5, 5, 85))
     drawString( "Score", 0, 1, (255, 255, 255) )
     drawString( score, 20, 1, (55, 255, 55) )
     pixels.show()
-    time.sleep(2)
+    
+    
 
 def intro():
   
