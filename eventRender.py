@@ -84,7 +84,7 @@ def eventTextRender(a):
                 offset_x = 0
 
             pixels.show()
-            time.sleep(0.07) #scrolling text speed
+            time.sleep(0.04) #scrolling text speed
         
         
         
@@ -99,7 +99,7 @@ def congratsTextRender(a):
     display_width = 32
     display_height = 8
     matrixbrightness = 0.2
-    scrollSpeed = 0.09 #adjust the scrolling speed here-> smaller number=faster scroll
+    scrollSpeed = 0.04 #adjust the scrolling speed here-> smaller number=faster scroll
     TextColor = (55,255,255) #set the color of your text here in RGB, default is white
 
     ORDER = neopixel.GRB
