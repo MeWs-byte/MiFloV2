@@ -15,7 +15,7 @@ from eventRender import eventTextRender, congratsTextRender
 from collections import OrderedDict
 from eventTimer import countdownTimer
 from colours import rainbowRender, rainbow_cycle2
-from ledforButton import ledBlinker
+from ledforButton import ledBlinker, ledOff
 from renderip import IpRender
 from ani import intro, scoreRender, intro2, intro3
 import json
@@ -196,7 +196,7 @@ def updateThread():
             print('taskbutton is working') 
                
         try:
-            print('-----processingList---------from updateThread----')
+            #print('-----processingList---------from updateThread----')
             print(processingList[0]['title'])
             if processingList[0]['eventType'] == 'googleCal' and processingList[0]['title'] != 'alarm':
                 state = 'event'
@@ -225,12 +225,12 @@ def updateThread():
                 
         except:
             ValueError
-            print('something went wrong with the alarm')
+            #print('something went wrong with the alarm')
             
        
         lock.release()
-        print('flaskapp alarmTime, write this to a file')
-        print(flaskapp.alarmTime) # write this to a file 
+        #print('flaskapp alarmTime, write this to a file')
+        #print(flaskapp.alarmTime) # write this to a file 
         time.sleep(0.1) # last value 0.1  
 
 def audioThread():
@@ -317,6 +317,12 @@ def keyboardThread():
         
         while state == 'event':
             ledBlinker()
+            
+        while state == 'eventTimer':
+            ledOff()
+            
+            
+            
         
         lock.release()
         time.sleep(0.1)

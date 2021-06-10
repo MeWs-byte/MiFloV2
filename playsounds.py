@@ -4,9 +4,11 @@ import time
 def alarmSound():
     
     call(["aplay", "sounds/pling.wav"])
-    call(["aplay", "sounds/twinkee1.wav"])
+    #call(["aplay", "sounds/twinkee1.wav"])
+    call(["aplay", "sounds/chilly.wav"])
+    call(["aplay", "sounds/chill.wav"])
 
-    call(["aplay", "sounds/islandComp.wav"])
+    #call(["aplay", "sounds/islandComp.wav"])
 
 # "/home/pi/project/sou/sou1.wav"
 # /home/pi/project/sou/startrek.wav  
