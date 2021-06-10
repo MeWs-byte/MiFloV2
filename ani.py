@@ -419,14 +419,42 @@ def intro2():
         drawString( "MiFlo", 2, 1, (255, 215, 225) )
         
         pixels.show()
-    drawString( "MiFlo-V2", 2, 1, (255, 215, 225) )
+    drawString( "MiFlo", 2, 1, (255, 215, 225) )
     drawString( ".................", 1, 3, (15, 215, 195) ) 
     drawString( ".................", 2, 3, (15, 215, 95) )    
     #drawString( ".................", 1, -5, (15, 215, 125) ) 
     #drawString( ".................", 2, -5, (15, 215, 95) )  
     pixels.show()
-    time.sleep(2)
+    time.sleep(0.2)
+    drawString( "MiFlo-", 2, 1, (255, 215, 225) )
+    pixels.show()
+    time.sleep(0.2)
+    drawString( "MiFlo-V", 2, 1, (255, 215, 225) )
+    pixels.show()
+    time.sleep(0.2)    
+    drawString( "MiFlo-V2", 2, 1, (255, 215, 225) )
+    pixels.show()
+    time.sleep(0.2)  
+    for bla in range(0,6):
+        for sma in range(-1,31):
+            drawPixel(sma + 1,bla +1,11112345)
+            
+            
+            pixels.show()
+            time.sleep(0.001)
+  
+                    
+    drawString( "             +       ", 2, 1, (0, 0, 0) )
+    pixels.show()
+    time.sleep(0.1)      
+            #drawPixel(1,bla +1,11112345)
+            
+            
         
+    
+      
+          
+            
 def intro3():
     #for xip in range(0,8):
     #    drawPixel(0,xip + 1,12345) 

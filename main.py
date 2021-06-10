@@ -95,7 +95,7 @@ def renderThread():
                     timeDiff = item1['endDate'] - item1['startDate']
                     diff = timeDiff.seconds/60                                      # from here add some kind of flag , post completed to cal or whatever
                     diff = int(diff)
-                    rainbow_cycle2(0.001)
+                    #rainbow_cycle2(0.001)
                     eventTextRender(eventRenderString + ' || ' + str(diff) + ' ' + 'min')
                     if testbutton.taskButton == 'on' and state == 'event':
                     
@@ -272,7 +272,7 @@ def taskThread():
             eventHub = getGoogle()  # the best most badass self refreshing list of dictionaries ever conceived 
         
         except UnboundLocalError:
-            print('UnboundLocalError')
+            print('UnboundLocalError, you should probably get a new token')
 
                 #print('------this is the complete updating list of future events---------')
         #print('---------------')
@@ -312,10 +312,11 @@ def keyboardThread():
         lock.acquire()
         #keyPressed = True
         testbutton.waitforpushbutton()
-        if state == 'alarm' or state == 'event' and state != 'eventTimer':
+        while state == 'alarm':
             ledBlinker()
         
-        
+        while state == 'event':
+            ledBlinker()
         
         lock.release()
         time.sleep(0.1)

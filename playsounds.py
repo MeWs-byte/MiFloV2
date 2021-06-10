@@ -24,6 +24,8 @@ def introSound():
     #call(["aplay", "sounds/chill.wav"])
     #call(["aplay", "sounds/arpy.wav"])
     #call(["aplay", "sounds/arpy.wav"])
+    #call(["aplay", "sounds/twi1.wav"])
+    #call(["aplay", "sounds/twi2.wav"])
     call(["aplay", "sounds/twinkee1.wav"])
     call(["aplay", "sounds/twinkee2.wav"])
     #call(["aplay", "sounds/corny2loud.wav"])
@@ -35,6 +37,8 @@ def pingSound():
 
     call(["aplay", "/home/pi/FINAL/MiFloV2/sounds/poeng.wav"])
     call(["aplay", "sounds/chilly.wav"]) 
+    call(["aplay", "sounds/twi1.wav"])
+    call(["aplay", "sounds/twi2.wav"])
     print('------transp')
     #call(["aplay", "/home/pi/FlipDotWorker/newFlo/newestFlo/sounds/flint.wav"])
 

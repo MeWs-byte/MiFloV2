@@ -84,7 +84,7 @@ def eventTextRender(a):
                 offset_x = 0
 
             pixels.show()
-            time.sleep(0.1) #scrolling text speed
+            time.sleep(0.07) #scrolling text speed
         
         
         
