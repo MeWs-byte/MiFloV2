@@ -26,9 +26,9 @@ def countdownTimer(tm):
 
         for pix in range (0,30):
             if pix < minsTm / 2:
-                drawPixel(pix + 1, 0,500000)
-                drawPixel(pix + 1, 7,500000)
-                drawPixel(pix + 1, 6,500000)
+                drawPixel(pix + 1, 0,16711680)
+                drawPixel(pix + 1, 7,16711680) # 500000 i preferred this colour
+                drawPixel(pix + 1, 6,16711680)
                 
             else:
                 drawPixel(pix + 1, 0,12345)
