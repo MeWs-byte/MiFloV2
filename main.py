@@ -346,7 +346,7 @@ def flaskThread():
     while True:
         
         print("flaskThread running")
-        #introSound()
+        introSound()
         flaskapp.flaskRunner()
         
         time.sleep(2)
