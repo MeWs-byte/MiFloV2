@@ -20,8 +20,24 @@ def countdownTimer(tm):
         
         pixels.fill((1, 7, 13))
         drawString( timer, 12, 1, (230, 240, 255) )
-        drawString( '<>', 2, 1, (23, 40, 255) )
-
+        #drawString( '<>', 2, 1, (23, 40, 255) )
+        drawPixel(3,5,16776960)
+        drawPixel(4,4,16776960)
+        drawPixel(5,3,16776960)
+        drawPixel(6,4,16776960)
+        drawPixel(7,5,16776960)
+        drawPixel(6,5,16776960)
+        drawPixel(5,5,16776960)
+        drawPixel(4,5,16776960)
+        drawPixel(5,4,16776960)
+        drawPixel(4,2,16776960)
+        drawPixel(3,1,16776960)
+        drawPixel(4,1,16776960)
+        drawPixel(5,1,16776960)
+        drawPixel(6,1,16776960)
+        drawPixel(7,1,16776960)
+        drawPixel(6,2,16776960)
+        drawPixel(5,2,16776960)
         minsTm = tm / 60
 
         for pix in range (0,30):
