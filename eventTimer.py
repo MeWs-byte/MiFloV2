@@ -18,7 +18,7 @@ def countdownTimer(tm):
         #print("this is tm from timeTimer: ",tm)
         #print('this is timaster from timeTimer',tiMaster) # this one is available in threadmachine
         
-        pixels.fill((1, 7, 13))
+        pixels.fill((1, 7, 13))         # navy blue pixels.fill((1, 1, 13)) purple pixels.fill((50, 0, 250))
         drawString( timer, 12, 1, (230, 240, 255) )
         #drawString( '<>', 2, 1, (23, 40, 255) )
         drawPixel(3,5,16776960)
@@ -42,8 +42,8 @@ def countdownTimer(tm):
 
         for pix in range (0,30):
             if pix < minsTm / 2:
-                drawPixel(pix + 1, 0,16711680)
-                drawPixel(pix + 1, 7,16711680) # 500000 i preferred this colour
+                drawPixel(pix + 1, 0,16711600)
+                drawPixel(pix + 1, 7,16711640) # 500000 i preferred this colour
                 drawPixel(pix + 1, 6,16711680)
                 
             else:

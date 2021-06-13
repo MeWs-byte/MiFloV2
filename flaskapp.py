@@ -115,7 +115,7 @@ def userInfo():
         print('userInfo from flaskapp')
         print(type(userInfo))
 
-        with open('info.json', 'w+') as f:
+        with open('/home/pi/MiFloV2/info.json', 'w+') as f:
    
             json.dump(userInfo, f)
         

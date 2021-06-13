@@ -81,7 +81,7 @@ def renderThread():
            #     state = 'clock'
              
         
-        while state == 'event':
+        while state == 'event': # this was a while loop ! changed back to while without testing because you had another idea
             print('eventstate')
             try:
                 light = 'on'
@@ -98,21 +98,31 @@ def renderThread():
                     diff = timeDiff.seconds/60                                      # from here add some kind of flag , post completed to cal or whatever
                     diff = int(diff)
                     #rainbow_cycle2(0.001)
-                    eventTextRender(eventRenderString + ' || ' + str(diff) + ' ' + 'min')
-                    if testbutton.taskButton == 'on' and state == 'event':
-                    
-                        sound = 'off'
-                        light = 'off'
-                        testbutton.taskButton = 'off'
-                        testbutton.pushbutton = 'off'
-                        state = 'eventTimer'
-                        print('testbutton.taskbutton from main')
-                        print(testbutton.taskButton)
-                        print(testbutton.pushbutton)
+                    while testbutton.taskButton != 'on':
+                        
+                        eventTextRender(eventRenderString + ' || ' + str(diff) + ' ' + 'min')
+                    #if testbutton.taskButton == 'on' and state == 'event': # and state == 'event'
+            
+                    sound = 'off'
+                    light = 'off'
+                    testbutton.taskButton = 'off'
+                    testbutton.pushbutton = 'off'
+                    state = 'eventTimer'
+                    print('testbutton.taskbutton from main')
+                    print(testbutton.taskButton)
+                    print(testbutton.pushbutton)
                         #testbutton.taskButton = 'off'
                 #if processingList[0]['title'] == 'alarm':   # lol , idiot... move this shit somewhere else
                 #    sound = 'on'
                 #    state = 'alarm'
+                
+                if processingList[0]['description'] == 'remind':
+                    state = 'remind'# reminder
+                    eventTextRender(processingList[0]['title'])
+                    processingList.pop(0)
+                    state = 'clock'
+                    
+                    
                     
             except IndexError:
                 pass
@@ -125,10 +135,10 @@ def renderThread():
             score = score + int(diff)
             
             #deleteCal(item1['eventId'])   create completed tag in descript
-            with open('score.json', 'r') as fp:
+            with open('/home/pi/MiFloV2/score.json', 'r') as fp:
                 score = json.load(fp)
             score = score + int(diff)
-            with open('score.json', 'w') as fp:
+            with open('/home/pi/MiFloV2/score.json', 'w') as fp:
                 json.dump(score, fp)
             
 
@@ -137,7 +147,7 @@ def renderThread():
         if state == 'congrats':
             
             try:
-                with open('info.json', 'r') as readName:
+                with open('/home/pi/MiFloV2/info.json', 'r') as readName:
                     UsrName = json.load(readName)
                 while testbutton.taskButton != 'on':
                     light = 'on'
@@ -149,7 +159,8 @@ def renderThread():
                 
                 
             finally:
-
+                testbutton.taskButton = 'off'
+                testbutton.pushbutton = 'off'    
                 state = 'clock' 
                 
         #
@@ -265,7 +276,7 @@ def audioThread():
 
         print(state)    
         #lock.release()
-        time.sleep(0.01) # this was 0.1
+        time.sleep(0.1) # this was 0.01
         
 def taskThread():
     global ultimateList, processingList, state, eventHub, celcTemp
@@ -289,7 +300,7 @@ def taskThread():
             nowwa = datetime.now()
             nowwaTz = nowwa.astimezone()
 
-            if x['startDate'] < nowwaTz and x['description'] != 'processing':
+            if (x['startDate'] < nowwaTz and x['description'] != 'processing') and (x['startDate'] < nowwaTz and x['description'] != 'remind'):
                 print('see if something weird is going on ------------------------')             # one before event oject is taken from a list stored by id and  stored into a list sorted by datetime
                 pprint(x['title'])
                 pprint(x['description'])
@@ -300,6 +311,11 @@ def taskThread():
                 processingList.sort(key = lambda EventObject: EventObject['startDate'], reverse=False)
                 print('-----------processingList aka the queue')
                 pprint(processingList)
+            if x['startDate'] < nowwaTz and x['description'] == 'remind':
+                processingList.append(x)
+                processingList.sort(key = lambda EventObject: EventObject['startDate'], reverse=False)
+                
+                
                
         print(datetime.now().strftime("%d.%b %Y %H:%M:%S"))
         #except socket.gaierror:
