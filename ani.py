@@ -244,6 +244,15 @@ def scoreRender(score):
     drawString( score, 20, 1, (55, 255, 55) )
     pixels.show()
     
+def evRender():
+    
+    pixels.brightness = 0.3
+
+    pixels.fill((5, 5, 85))
+
+    drawString( "Focus on", 0, 1, (55, 255, 55) )
+    pixels.show()
+    
     
 
 def intro():
@@ -594,6 +603,7 @@ def intro3():
     time.sleep(1)
     
 def intro4():
+    pixels.fill((5, 5, 105))
     drawPixel(0,7,9000)  
     pixels.show()
 #while True:

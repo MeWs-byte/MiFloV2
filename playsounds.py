@@ -53,3 +53,5 @@ def pingSound():
     print('------pingsound')
     #call(["aplay", "/home/pi/FlipDotWorker/newFlo/newestFlo/sounds/flint.wav"])
 
+def alerty():
+    call(["aplay", "/home/pi/MiFloV2/sounds/chiparpN.wav"])

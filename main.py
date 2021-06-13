@@ -17,7 +17,7 @@ from eventTimer import countdownTimer
 from colours import rainbowRender, rainbow_cycle2
 from ledforButton import ledBlinker, ledOff
 from renderip import IpRender
-from ani import intro, scoreRender, intro2, intro3
+from ani import intro, scoreRender, intro2, intro3, evRender
 import json
 import random
 from weather import getCelcius
@@ -83,9 +83,10 @@ def renderThread():
         
         while state == 'event': # this was a while loop ! changed back to while without testing because you had another idea
             print('eventstate')
+            
             try:
-                light = 'on'
-                testbutton.taskButton = 'off'
+                light = 'off'
+                testbutton.taskButton = 'off'   
                 testbutton.pushbutton = 'off'
                 if (processingList[0]['description'] == 'processing') and (processingList[0]['title'] != 'alarm'):
                     processingList[0]['description'] = 'contract'
@@ -98,19 +99,23 @@ def renderThread():
                     diff = timeDiff.seconds/60                                      # from here add some kind of flag , post completed to cal or whatever
                     diff = int(diff)
                     #rainbow_cycle2(0.001)
+                    #sound = 'off'
+                    eventTextRender(eventRenderString + ' || ' + str(diff) + ' ' + 'min')
                     while testbutton.taskButton != 'on':
-                        
-                        eventTextRender(eventRenderString + ' || ' + str(diff) + ' ' + 'min')
-                    #if testbutton.taskButton == 'on' and state == 'event': # and state == 'event'
-            
-                    sound = 'off'
-                    light = 'off'
-                    testbutton.taskButton = 'off'
-                    testbutton.pushbutton = 'off'
-                    state = 'eventTimer'
-                    print('testbutton.taskbutton from main')
-                    print(testbutton.taskButton)
-                    print(testbutton.pushbutton)
+                        sound = "off"
+                        light = 'on'
+                        evRender()
+                        #eventTextRender(eventRenderString + ' || ' + str(diff) + ' ' + 'min') this is the problem, rendering it differently fixes the problem
+                    if testbutton.taskButton == 'on' and state == 'event':
+                        state = 'eventTimer'
+                        sound = 'off'
+                        light = 'off'
+                        testbutton.taskButton = 'off'
+                        testbutton.pushbutton = 'off'
+                        #state = 'eventTimer'
+                        print('testbutton.taskbutton from main')
+                        print(testbutton.taskButton)
+                        print(testbutton.pushbutton)
                         #testbutton.taskButton = 'off'
                 #if processingList[0]['title'] == 'alarm':   # lol , idiot... move this shit somewhere else
                 #    sound = 'on'
@@ -324,7 +329,7 @@ def taskThread():
         #    print('httplib2 error')
         celcTemp = getCelcius()
         print(celcTemp)
-        time.sleep(20)
+        time.sleep(20) 
     
     
 def keyboardThread():
