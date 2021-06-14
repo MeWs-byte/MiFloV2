@@ -124,9 +124,9 @@ def renderThread():
                 
                 if processingList[0]['description'] == 'remind':
                     state = 'remind'# reminder
-                    eventTextRender(processingList[0]['title'])
-                    processingList.pop(0)
-                    state = 'clock'
+                    #eventTextRendery(processingList[0]['title'])
+                    #processingList.pop(0)
+                    #state = 'clock'
                     
                     
                     
@@ -174,6 +174,16 @@ def renderThread():
             print('timerstate')
         #
             timeTimer.timer_Render() 
+            
+        if state == 'remind':
+                light = 'on'
+                eventTextRendery(processingList[0]['title'])
+                light = 'off'
+                updateCal(processingList[0]['title'],'completed',processingList[0]['startDate'],processingList[0]['endDate'],processingList[0]['eventId'],2)
+                testbutton.taskButton = 'off'
+                testbutton.pushbutton = 'off'
+                processingList.pop(0)
+                state = 'clock'        
             
         
             #print(timeTimer.tm)
@@ -306,7 +316,7 @@ def taskThread():
             nowwa = datetime.now()
             nowwaTz = nowwa.astimezone()
 
-            if (x['startDate'] < nowwaTz and x['description'] != 'processing') and (x['startDate'] < nowwaTz and x['description'] != 'remind'):
+            if (x['startDate'] < nowwaTz and x['description'] != 'processing') and (x['startDate'] < nowwaTz and x['description'] != 'remind') and (x['startDate'] < nowwaTz and x['description'] != 'completed') :
                 print('see if something weird is going on ------------------------')             # one before event oject is taken from a list stored by id and  stored into a list sorted by datetime
                 pprint(x['title'])
                 pprint(x['description'])
