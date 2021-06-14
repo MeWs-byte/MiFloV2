@@ -9,7 +9,7 @@ from getIP import whatsMyIp
 import testbutton
 
 
-def eventTextRender(a):
+def eventTextRendery(a):
     global taskButton, pushbutton
     
     #while testbutton.pushbutton == 'off': this was not a comment , indent everything again if this doesnt work
@@ -32,7 +32,7 @@ def eventTextRender(a):
 #5x7.ttf font is easier to read and available for download for personal use from the Internet
 #font = ImageFont.truetype("5x7.ttf", 8)
     
-     
+   
     text = a
     #text = input("Enter your text: ")
     print(text)
@@ -70,9 +70,11 @@ def eventTextRender(a):
     image.save("img.png", "PNG")
     offset_x = 0 
     t_end = time.time() + 10
-    while time.time() < t_end:   
+    
+    while time.time() < t_end and testbutton.taskButton == 'off':  
         for x in range(display_width):
-            for y in range(display_height):			
+            for y in range(display_height):
+                #print(testbutton.taskButton)			
                 if image.getpixel((x + offset_x, y)) == 255:
                     pixels[getIndex2(x,y)] = TextColor
                 

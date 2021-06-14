@@ -7,7 +7,7 @@ import flask
 import threading
 import flaskapp
 from customClass import EventObject
-from playsounds import alarmSound, alarmSound2, introSound, pingSound
+from playsounds import alarmSound, alarmSound2, introSound, pingSound, remindSound
 import timeTimer
 from googlie import getGoogle, eventList, ultimateList, processingList, createCal,updateCal,deleteCal
 from pprint import pprint
@@ -22,6 +22,7 @@ import json
 import random
 from weather import getCelcius
 import testbutton
+from scrollytest import eventTextRendery
 
 lock = threading.Lock()
 sound = 'off'
@@ -100,7 +101,8 @@ def renderThread():
                     diff = int(diff)
                     #rainbow_cycle2(0.001)
                     #sound = 'off'
-                    eventTextRender(eventRenderString + ' || ' + str(diff) + ' ' + 'min')
+                    light = 'on'
+                    eventTextRendery(eventRenderString + ' || ' + str(diff) + ' ' + 'min')
                     sound = 'off'
                     while testbutton.taskButton != 'on':
                         sound = "off"
@@ -175,10 +177,12 @@ def renderThread():
         #
             timeTimer.timer_Render() 
             
-        if state == 'remind':
+        if state == 'remind' and processingList[0]['description'] == 'remind':
                 light = 'on'
+                sound = 'on'
                 eventTextRendery(processingList[0]['title'])
                 light = 'off'
+                sound = 'off'
                 updateCal(processingList[0]['title'],'completed',processingList[0]['startDate'],processingList[0]['endDate'],processingList[0]['eventId'],2)
                 testbutton.taskButton = 'off'
                 testbutton.pushbutton = 'off'
@@ -287,7 +291,10 @@ def audioThread():
         if state == 'congrats':
             pingSound()
             ledBlinker() 
-            print('pingSound worked')  
+            print('pingSound worked') 
+            
+        if state == 'remind':
+            remindSound()
             
 
         print(state)    
@@ -367,7 +374,7 @@ def keyboardThread():
             
             
             
-        print('statatatatatatatata')    
+            
         print(state)
         lock.release()
         time.sleep(0.1)

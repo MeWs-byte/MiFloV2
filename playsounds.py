@@ -2,8 +2,8 @@ from subprocess import call
 import time
 
 def alarmSound():
-    #call(["aplay", "/home/pi/MiFloV2/sounds/ntss.wav"])
-    call(["aplay", "/home/pi/MiFloV2/sounds/chiparp1.wav"])
+    call(["aplay", "/home/pi/MiFloV2/sounds/ntss.wav"])
+    #call(["aplay", "/home/pi/MiFloV2/sounds/chiparp1.wav"])
     #call(["aplay", "/home/pi/MiFloV2/sounds/pling.wav"])
     #call(["aplay", "sounds/twinkee1.wav"])
     #call(["aplay", "/home/pi/MiFloV2/sounds/chilly.wav"])
@@ -58,3 +58,8 @@ def pingSound():
 
 def alerty():
     call(["aplay", "/home/pi/MiFloV2/sounds/chiparpN.wav"])
+    
+def remindSound():
+    call(["aplay", "/home/pi/MiFloV2/sounds/chiparp1.wav"])
+    call(["aplay", "/home/pi/MiFloV2/sounds/chiparp2.wav"])
+    
