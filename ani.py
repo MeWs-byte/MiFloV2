@@ -525,13 +525,13 @@ def intro2():
         
         drawString( "MiFlo-", 2, 1, (255, 215, 225) )
     pixels.show()
-    time.sleep(0.2)
+    time.sleep(0.1)
     drawString( "MiFlo-V", 2, 1, (255, 215, 225) )
     pixels.show()
-    time.sleep(0.2)    
+    time.sleep(0.1)    
     drawString( "MiFlo-V2", 2, 1, (255, 215, 225) )
     pixels.show()
-    time.sleep(0.2) 
+    time.sleep(0.1) 
     
    
 

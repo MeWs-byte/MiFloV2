@@ -40,7 +40,7 @@ def introSound():
     #call(["aplay", "/home/pi/MiFloV2/sounds/chip3.wav"])
     call(["aplay", "/home/pi/MiFloV2/sounds/fullTune.wav"])
     call(["aplay", "/home/pi/MiFloV2/sounds/chiparp1.wav"])
-    #call(["aplay", "/home/pi/MiFloV2/sounds/chiparp2.wav"])
+    call(["aplay", "/home/pi/MiFloV2/sounds/chiparp2.wav"])
       
     call(["aplay", "/home/pi/MiFloV2/sounds/pingG3.wav"]) 
     print('------introsound')
