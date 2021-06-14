@@ -128,3 +128,27 @@ add this line before "exit 0"
 
 Token revoked error: go to https://console.cloud.google.com/ , click on the hamburger menu ( left) , choose Api & Services -> Credentials tab -> choose the client you were using and click on "reset secret". Download the JSON again and rename it credentials.json. 
 When you run quickstart.py again (on your desktop) you should be able to receive a new token. Copy said token to the project folder on the Pi
+
+### systemd service
+save configuration as 
+'''/etc/systemd/system/miflo2.service'''
+
+contents of file 
+'''[Unit]
+Description=Some python script
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 script.py
+WorkingDirectory=/home/pi/MiFloV2
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target'''
+
+'''sudo systemctl daemon-reload'''
+'''sudo systemctl enable miflo2.service'''
+

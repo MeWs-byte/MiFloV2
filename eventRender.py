@@ -32,7 +32,7 @@ def eventTextRender(a):
 #5x7.ttf font is easier to read and available for download for personal use from the Internet
 #font = ImageFont.truetype("5x7.ttf", 8)
     
-    
+     
     text = a
     #text = input("Enter your text: ")
     print(text)
@@ -69,7 +69,7 @@ def eventTextRender(a):
     draw.text((display_width, -1), text, font=font, fill=255)
     image.save("img.png", "PNG")
     offset_x = 0 
-    t_end = time.time() + 10
+    t_end = time.time() + 8
     while time.time() < t_end:   
         for x in range(display_width):
             for y in range(display_height):			

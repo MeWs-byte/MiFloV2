@@ -101,6 +101,7 @@ def renderThread():
                     #rainbow_cycle2(0.001)
                     #sound = 'off'
                     eventTextRender(eventRenderString + ' || ' + str(diff) + ' ' + 'min')
+                    sound = 'off'
                     while testbutton.taskButton != 'on':
                         sound = "off"
                         light = 'on'
