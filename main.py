@@ -101,8 +101,10 @@ def renderThread():
                     diff = int(diff)
                     #rainbow_cycle2(0.001)
                     #sound = 'off'
-                    light = 'on'
-                    eventTextRendery(eventRenderString + ' || ' + str(diff) + ' ' + 'min')
+                    
+                    while testbutton.taskButton != 'on':
+                        light = 'on'
+                        eventTextRendery(eventRenderString + ' || ' + str(diff) + ' ' + 'min')
                     sound = 'off'
                     while testbutton.taskButton != 'on':
                         sound = "off"
@@ -275,29 +277,29 @@ def audioThread():
     while True:
     
         if state == 'intro' and sound == 'on':  # this doesnt work yet , try to figure out why 
-            introSound() 
+            #introSound() 
             print('this worked lalalalalalal')    
 
         
         if state == 'event' and sound == 'on':
              
-            alarmSound()
+            #alarmSound()
             print('eventSound')
             
         if state == 'alarm':
-            alarmSound2()
+            #alarmSound2()
             print('alarmSound')
 
         if state == 'congrats':
-            pingSound()
+            #pingSound()
             ledBlinker() 
             print('pingSound worked') 
             
         if state == 'remind':
-            remindSound()
+            #remindSound()
             
 
-        print(state)    
+            print(state)    
         #lock.release()
         time.sleep(0.1) # this was 0.01
         
@@ -385,7 +387,7 @@ def flaskThread():
     while True:
         
         print("flaskThread running")
-        introSound()
+        #introSound()
         flaskapp.flaskRunner()
         
         time.sleep(2)
