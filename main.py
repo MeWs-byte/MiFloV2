@@ -157,6 +157,8 @@ def renderThread():
         if state == 'congrats':
             
             try:
+                testbutton.taskButton = 'off'
+                testbutton.pushbutton = 'off'
                 with open('/home/pi/MiFloV2/info.json', 'r') as readName:
                     UsrName = json.load(readName)
                 while testbutton.taskButton != 'on':
