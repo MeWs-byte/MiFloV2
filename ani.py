@@ -244,6 +244,16 @@ def scoreRender(score):
     drawString( score, 20, 1, (55, 255, 55) )
     pixels.show()
     
+def nightModeRender(texty):
+    
+    pixels.brightness = 0.3
+
+    pixels.fill((5, 5, 85))
+    drawString( texty, 0, 1, (255, 255, 255) )
+    
+    pixels.show()
+    time.sleep(1)
+    
 def evRender():
     
     pixels.brightness = 0.3

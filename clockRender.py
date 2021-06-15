@@ -11,6 +11,7 @@ from lightSensor import getLux
 import testbutton
 from weather import getCelcius
 import ledforButton
+from ani import nightModeRender
  
 # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
 # NeoPixels must be connected to D10, D12, D18 or D21 to work.
@@ -198,15 +199,15 @@ def clock_Render():
     	drawString( '|', 18, 1, (15, 145, 55) )
     	drawString( current_time, 0, 1, (255, 255, 255) )
    
-    if testbutton.taskButton == 'on':
+    #if testbutton.taskButton == 'on':
         
-    	drawPixel(0,0,90000)
+    #	drawPixel(0,0,90000)
 
-    if testbutton.pushbutton == 'on':
-        drawPixel(2,0,100000)
+    #if testbutton.pushbutton == 'on':
+    #    drawPixel(2,0,100000)
 
-    if testbutton.pushbuttonIP == 'on':
-        drawPixel(4,0,10000)
+    #if testbutton.pushbuttonIP == 'on':
+    #    drawPixel(4,0,10000)
 		
     pixels.show()
     
@@ -226,7 +227,8 @@ def clock_Render():
         pixels.brightness = 0.1 + bob / 1400 * 0.9 # 1500
         
     if testbutton.nightMode == 'on':
-    	pixels.brightness = 0
+        #nightModeRender("Sleep")
+        pixels.brightness = 0
         
     time.sleep(0.1)
         

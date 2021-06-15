@@ -53,6 +53,14 @@ def renderThread():
 
             clock_Render()
             #print("clockstate")
+        if state == 'clock' and testbutton.taskButton =='on':
+            with open('/home/pi/MiFloV2/score.json', 'r') as fp:
+                score = json.load(fp)
+                scoreRender(str(score))
+                time.sleep(2)
+                testbutton.taskButton = 'off'
+                testbutton.pushbutton = 'off'
+                
                
         while state == 'alarm':
             testbutton.pushbutton = 'off'
