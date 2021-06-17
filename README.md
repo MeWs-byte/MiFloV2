@@ -32,7 +32,7 @@ network={
 * `sudo apt-get update`
 * `sudo apt-get install git python3-pip libopenjp2-7-dev libtiff5`
 * Set the correct timezone with `sudo raspi-config`
-* Enable I2C with 'sudo raspi-config' -> interface options -> enable i2C
+* Enable I2C with `sudo raspi-config` -> interface options -> enable i2C
 #### Git repo
 
 Set up github access
@@ -71,40 +71,16 @@ https://developers.google.com/workspace/guides/create-project
 
 - run quickstart.py 
 
-- copy token.json to project folder on Pi 
+- copy token.pickle to project folder on Pi 
 
 ##### On Pi
 
-- sudo pip3 install -r requirements.txt
-- sudo python3 threadMachine.py
+- `sudo pip3 install -r requirements.txt`
+- to test : `sudo python3 main.py` 
 
 
-### Hardware
-current setup and connections:
-
-I used BCM pin numbering instead of BOARD pins
 
 
-Peripherals -> Rasberry Pi
-
-LED matrix -> Pi
-
-- 5v -> 5v
-- GND -> GND
-- DIN -> 18
-
-Push button -> Pi
-
-- Leg1 -> - 3.3V
-- Leg2 -> - 15
-       <br />leg2-> - 10k resistor -> GND
-
-## Run
-
-
-When running, go to `localhost:5000/timer` to set the timer, `/alarm` to set the alarm, `/events` for incoming events, `/home` to enter todos. Press the submit button or input 1 to go back to clockstate.
-
-In alarm mode, press the pushbutton to return back to clockstate.
 
 ## External Soundcard 
 
@@ -118,11 +94,11 @@ Run `renderip.py` to render the ip
 ### Troubleshooting 
 disable wifi power save mode 
 
-'''sudo nano /etc/rc.local'''
+`sudo nano /etc/rc.local`
 
 
 add this line before "exit 0"
-/sbin/iwconfig wlan0 power off
+`/sbin/iwconfig wlan0 power off`
 
 #### Google Api 
 
@@ -131,15 +107,15 @@ When you run quickstart.py again (on your desktop) you should be able to receive
 
 ### systemd service
 save configuration as 
-'''/etc/systemd/system/miflo2.service'''
+`sudo nano /lib/systemd/system/miflo.service`
 
 contents of file 
-'''[Unit]
-Description=Some python script
+`[Unit]
+Description=MiFlo
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 script.py
+ExecStart=/usr/bin/python3 main.py
 WorkingDirectory=/home/pi/MiFloV2
 StandardOutput=inherit
 StandardError=inherit
@@ -147,8 +123,56 @@ Restart=always
 User=root
 
 [Install]
-WantedBy=multi-user.target'''
+WantedBy=multi-user.target`
+`sudo chmod 777 /lib/systemd/system/miflo.service`
+`sudo systemctl daemon-reload`
+`sudo systemctl enable miflo.service`
 
-'''sudo systemctl daemon-reload'''
-'''sudo systemctl enable miflo2.service'''
+/etc/systemd/system/bootAnimation.service 
+early intro ? 
+
+[Unit]
+Description=bootAnimation
+Before=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 booty.py
+WorkingDirectory=/home/pi/MiFloV2
+StandardOutput=inherit
+StandardError=inherit
+
+User=root
+
+[Install]
+WantedBy=multi-user.target
+
+###User instructions:
+Op http://<IP>:5000 kan je de webapp terugvinden. Deze is intussen quasi overbodig geworden en is gestripped van de features die er initieel aanwezig waren.
+Wat wel leuk kan zijn is de naam van de user invoeren onder de tab "userinfo". Het is aan te raden om dit eerst te doen voor je events inplanned .
+
+Om op je telefoon de google calendar app te gebruiken kan je best even deze testaccount toevoegen. 
+Vanuit google app op android kan je geen nieuwe account toevoegen.
+Op android moet je even naar de settings van je telefoon en onder ''accounts'' deze google account toevoegen. 
+Daarna kan je in de calendar app wel de account selecteren. Let op dat events kunnen blenden met je huidige kalender. Dit kan voor verwarring zorgen dus het kan ook een aanrader te zijn om de filte rin te stellen zodat enkel de juiste kalender zichtbaar is in de app.
+
+
+-google calendar heeft events, tasks en reminders. Kies de optie 'event' om een timer in te plannen. De starttijd en eindtijd bepalen de duur van de timer. 
+
+-Geef de events altijd een titel, het zou kunnen dat er een error optreedt als je geen titel hebt ingevoerd. (work in progress) 
+
+-Om een alarm in te plannen maak je een nieuw evenement aan met als titel 'alarm' (geen hoofletters) 
+
+-Om een reminder in te plannen maak je een nieuw evenement aan met de titel van je reminder. onder "description" moet je "remind" ingeven. Dit zal een alert op de MifLo aanmaken zonder timer 
+
+De arcade button licht op als er een actie vereist is. (er zou af en toe nog een kleine lag kunnen opzitten, wacht een secondje of 2 en de timer zal wel opstarten).
+Op google calendar kan je zien aan de kleuren van de events of ze afgewerkt zijn of niet .
+
+Blauw = onafgewerkt
+Geel = processing in event queue of onderbroken voor de timer is beeindigd.
+Groen = Timer volledig afgewerkt.
+
+
+Als het licht van de leds te sterk is voor de kamer is het aan te raden om de SLEEP MODE in te schakelen . Hou de knop een tweetal seconden in en laat los. Na enkele seconden zou het scherm uit moeten gaan. Weer aanzetten gebeurd  op dezelfde wijze. 
+Als het alarm in de ochtend geactiveerd word zal de SLEEP MODE automatisch uitgezet worden.
 
