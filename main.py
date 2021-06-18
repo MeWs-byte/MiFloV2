@@ -293,20 +293,20 @@ def audioThread():
         
         if state == 'event' and sound == 'on':
              
-            #alarmSound()
+            alarmSound()
             print('eventSound')
             
         if state == 'alarm':
-            #alarmSound2()
+            alarmSound2()
             print('alarmSound')
 
         if state == 'congrats':
-            #pingSound()
+            pingSound()
             ledBlinker() 
             print('pingSound worked') 
             
         if state == 'remind':
-            #remindSound()
+            remindSound()
             
 
             print(state)    
