@@ -58,7 +58,7 @@ Requirements
 
 ##### On Desktop
 
-- get credentials 
+- get credentials from google developer cloud, follow the tutorial below:
 
 https://developers.google.com/workspace/guides/create-project
 
@@ -145,6 +145,7 @@ User=root
 
 [Install]
 WantedBy=multi-user.target```
+
 
 ###User instructions:
 Op http://<IP>:5000 kan je de webapp terugvinden. Deze is intussen quasi overbodig geworden en is gestripped van de features die er initieel aanwezig waren.
