@@ -54,12 +54,7 @@ Requirements
 
 ### Google calendar access
 
-#### Quickstart.py
 
-grab quickstart.py from here
-https://developers.google.com/calendar/quickstart/python
-
-current setup 
 
 ##### On Desktop
 
@@ -69,7 +64,10 @@ https://developers.google.com/workspace/guides/create-project
 
 - download .json creds as described and rename credentials.json
 
-- run quickstart.py 
+- copy the scripts cal_setup.py and list_events.py to your local computer.  (they are in the calendarSetup folder)
+    put the credentials.json in the same folder
+    run list_events.py `sudo python3 list_events.py`
+- if everything went right you should have received a file called token.pickle in the same folder
 
 - copy token.pickle to project folder on Pi 
 
@@ -110,7 +108,7 @@ save configuration as
 `sudo nano /lib/systemd/system/miflo.service`
 
 contents of file 
-`[Unit]
+```[Unit]
 Description=MiFlo
 After=network.target
 
@@ -123,7 +121,8 @@ Restart=always
 User=root
 
 [Install]
-WantedBy=multi-user.target`
+WantedBy=multi-user.target```
+
 `sudo chmod 777 /lib/systemd/system/miflo.service`
 `sudo systemctl daemon-reload`
 `sudo systemctl enable miflo.service`
@@ -131,7 +130,7 @@ WantedBy=multi-user.target`
 /etc/systemd/system/bootAnimation.service 
 early intro ? 
 
-[Unit]
+```[Unit]
 Description=bootAnimation
 Before=local-fs.target
 
@@ -145,7 +144,7 @@ StandardError=inherit
 User=root
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.target```
 
 ###User instructions:
 Op http://<IP>:5000 kan je de webapp terugvinden. Deze is intussen quasi overbodig geworden en is gestripped van de features die er initieel aanwezig waren.
