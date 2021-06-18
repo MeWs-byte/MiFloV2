@@ -30,6 +30,7 @@ network={
 #### Essentials
 
 * `sudo apt-get update`
+* * `sudo apt-get upgrade`
 * `sudo apt-get install git python3-pip libopenjp2-7-dev libtiff5`
 * Set the correct timezone with `sudo raspi-config`
 * Enable I2C with `sudo raspi-config` -> interface options -> enable i2C
