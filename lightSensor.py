@@ -69,21 +69,6 @@ def getLux():
     lightLevel=readLight()
     #print("Light Level : " + format(lightLevel,'.2f') + " lx")
     
-   
-    #print('this is bob')
-    #print(lightLevel)
-    #bob = lightLevel
-    #if lightLevel > 1500.0:
-    #    print('this works')
-    #    brightNess = 0.3
-    #    print(brightNess)
-    #elif bob < 80:
-    #	print('this also works')
-    #	brightNess = 0.1
-    #	print(brightNess)
-    
-    #print(lightLevel)
-    #print(basicClock.brightNess)
     return lightLevel
 #if __name__=="__main__":
 #   getLux()

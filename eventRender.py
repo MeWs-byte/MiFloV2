@@ -12,9 +12,7 @@ import testbutton
 def eventTextRender(a):
     global taskButton, pushbutton
     
-    #while testbutton.pushbutton == 'off': this was not a comment , indent everything again if this doesnt work
-        
-    #text = "Hello!"
+   
     pixel_pin = board.D18
     num_pixels = 256
     display_width = 32
@@ -29,8 +27,7 @@ def eventTextRender(a):
 
 #load your font
     font = ImageFont.truetype("5x7.ttf", 8)
-#5x7.ttf font is easier to read and available for download for personal use from the Internet
-#font = ImageFont.truetype("5x7.ttf", 8)
+
     
      
     text = a
@@ -92,11 +89,7 @@ def eventTextRender(a):
         
 def congratsTextRender(a):
     
-    #global taskButton
 
-    #while testbutton.taskButton != 'on':
-            
-        #text = "Hello!"
         pixel_pin = board.D18
         num_pixels = 256
         display_width = 32
@@ -111,8 +104,7 @@ def congratsTextRender(a):
 
     #load your font
         font = ImageFont.truetype("5x7.ttf", 8)
-    #5x7.ttf font is easier to read and available for download for personal use from the Internet
-    #font = ImageFont.truetype("5x7.ttf", 8)
+  
         
         text = a
         #text = input("Enter your text: ")
@@ -165,5 +157,3 @@ def congratsTextRender(a):
 
             pixels.show()
             time.sleep(0) #scrolling text speed
-#while True:
-#    eventTextRender('eyoo')

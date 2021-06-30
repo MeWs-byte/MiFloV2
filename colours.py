@@ -61,32 +61,10 @@ def rainbow_cycle2(wait):
  
 def rainbowRender(): 
 
-    # Comment this line out if you have RGBW/GRBW NeoPixels
-    #pixels.fill((255, 0, 0))
-    #print ('fill red')
-    # Uncomment this line if you have RGBW/GRBW NeoPixels
-    # pixels.fill((255, 0, 0, 0))
-    #pixels.show()
-    #time.sleep(1)
- 
-    # Comment this line out if you have RGBW/GRBW NeoPixels
-    #pixels.fill((0, 255, 0))
-    #print('fill green')
-    # Uncomment this line if you have RGBW/GRBW NeoPixels
-    # pixels.fill((0, 255, 0, 0))
-    #pixels.show()
-    #time.sleep(1)
- 
-    # Comment this line out if you have RGBW/GRBW NeoPixels
-    #pixels.fill((0, 0, 255))
-    #print('fill blue')
-    # Uncomment this line if you have RGBW/GRBW NeoPixels
-    # pixels.fill((0, 0, 255, 0))
+  
     pixels.show()
     time.sleep(0.1)
     #call(["aplay", "/home/pi/FlipDotWorker/newFlo/sounds/pressure.mp3"])
     print('rainbow time!')
     rainbow_cycle(0.0000000001)  # rainbow cycle with 1ms delay per step
-    #call(["aplay", "/home/pi/FlipDotWorker/newFlo/sounds/pling.wav"])
-    #call(["aplay", "/home/pi/FlipDotWorker/newFlo/newestFlo/sounds/island.wav"])
-    
+   

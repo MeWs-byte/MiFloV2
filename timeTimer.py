@@ -12,10 +12,7 @@ def countdown(tm):
         tiMaster = tm
         mins, secs = divmod(tm, 60)
         timer = '{:02d}:{:02d}'.format(mins, secs)
-        #print(timer, end="\r")
-        #print("this is timer: ",timer)
-        #print("this is tm from timeTimer: ",tm)
-        #print('this is timaster from timeTimer',tiMaster) # this one is available in threadmachine
+        
         time.sleep(1)
         tm -= 1 
     return tiMaster, tm
