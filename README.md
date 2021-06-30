@@ -87,7 +87,12 @@ https://learn.adafruit.com/usb-audio-cards-with-a-raspberry-pi/updating-alsa-con
 
 ### Extras
 
-Run `renderip.py` to render the ip
+- Run `renderip.py` to render the ip
+- If you have a dht sensor , use dht.py as a starting point 
+- If you have a HC-SR04 ultrasonic sensor , use ultrasonic.py as a starting point (for example to use it to turn off the alarm)
+
+
+
 
 
 ### Troubleshooting 
