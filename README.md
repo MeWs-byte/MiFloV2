@@ -1,6 +1,11 @@
 # MiFloV2
 a KISS implementation of the MiFlo Smart Clock
 
+With the MiFlo you can set alerts, alarms and timers in google calendar to plan tasks and create a dedicated point of attention.
+For each completed task point are earned and random encouragements are displayed.
+
+[a relative link](/hardware)
+
 ## Setup instructions
 
 ### Fresh raspberry pi:
