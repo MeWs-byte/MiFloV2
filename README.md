@@ -1,10 +1,13 @@
 # MiFloV2
 a KISS implementation of the MiFlo Smart Clock
 
-With the MiFlo you can set alerts, alarms and timers in google calendar to plan tasks and create a dedicated point of attention.
+With the MiFlo parents can set alerts, alarms and visual timers in google calendar to plan tasks and create a dedicated point of attention.
 For each completed task point are earned and random encouragements are displayed.
 
-[a relative link](/hardware)
+Buid your own connected clock for kids with ADHD and ASD or anybody else for that matter.
+
+
+[Hardware Components, Schematics, Lasercut SVG's ](/hardware)
 
 ## Setup instructions
 
