@@ -1,7 +1,8 @@
 from gpiozero import Button
 from time import sleep
 import time
-
+from ani import goodMorningRender, goodNightRender
+from ledforButton import ledBlinker
 bBtn = Button(4, pull_up=False)
 pushbutton = 'off'
 pushbuttonIP = 'off'
@@ -21,14 +22,19 @@ def waitforpushbutton():
             # long press action here , try to make this sleep a bit shorter
             print('Button {} long press'.format(str(but.pin)))
             print("NIGHTMODE ACTIVATED") 
+            ledBlinker()
             nightMode = 'on'
+            
+            goodNightRender()
             time.sleep(3)
         elif act and nightMode == 'on':
             
             # long press action here
             print('Button {} long press'.format(str(but.pin)))
+            ledBlinker()
             print("NIGHTMODE DEACTIVATED") 
-            nightMode = 'off' 
+            nightMode = 'off'
+            goodMorningRender() 
             time.sleep(3)           
         else:
             global pushbutton, taskButton

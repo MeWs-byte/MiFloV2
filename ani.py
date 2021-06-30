@@ -254,6 +254,30 @@ def nightModeRender(texty):
     pixels.show()
     time.sleep(1)
     
+def goodNightRender():
+    
+    pixels.brightness = 0.3
+
+    pixels.fill((5, 5, 85))
+
+    drawString( "byebye", 0, 1, (155, 155, 55) )
+
+    pixels.show()
+    time.sleep(1)
+    
+    
+def goodMorningRender():
+    
+    pixels.brightness = 0.3
+
+    pixels.fill((5, 5, 85))
+
+    drawString( "Hello", 0, 1, (155, 155, 55) )
+    
+    pixels.show()
+    time.sleep(1)
+    
+    
 def evRender():
     
     pixels.brightness = 0.3
