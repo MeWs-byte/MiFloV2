@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-
+import sys
+# insert at 1, 0 is the script path (or '' in REPL)
+sys.path.insert(1, '/home/pi/MiFloV2/32x8matrix')
 import time
 from datetime import datetime, timedelta
 from clockRender import *
