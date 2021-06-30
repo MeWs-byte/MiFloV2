@@ -18,7 +18,7 @@ def waitforpushbutton():
         act = but.is_active
         if act and nightMode == 'off':
             
-            # long press action here
+            # long press action here , try to make this sleep a bit shorter
             print('Button {} long press'.format(str(but.pin)))
             print("NIGHTMODE ACTIVATED") 
             nightMode = 'on'
