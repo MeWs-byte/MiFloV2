@@ -5,7 +5,7 @@ import board
 import neopixel
 from colorsys import hsv_to_rgb
 from PIL import Image, ImageDraw, ImageFont
-from getIP import whatsMyIp
+#from getIP import whatsMyIp
 import testbutton
 
 

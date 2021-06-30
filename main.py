@@ -16,7 +16,7 @@ from collections import OrderedDict
 from eventTimer import countdownTimer
 from colours import rainbowRender, rainbow_cycle2
 from ledforButton import ledBlinker, ledOff
-from renderip import IpRender
+#from renderip import IpRender
 from ani import intro, scoreRender, intro2, intro3, evRender
 import json
 import random
