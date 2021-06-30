@@ -85,12 +85,10 @@ def renderThread():
                     
                 except:
                     IndexError
-           # if button.pushbutton == 'on':
-           #     button.pushbutton = 'off'
-           #     state = 'clock'
+    
              
         
-        while state == 'event': # this was a while loop ! changed back to while without testing because you had another idea
+        while state == 'event': 
             print('eventstate')
             
             try:
@@ -105,10 +103,9 @@ def renderThread():
                 
                     eventRenderString = item1['title']
                     timeDiff = item1['endDate'] - item1['startDate']
-                    diff = timeDiff.seconds/60                                      # from here add some kind of flag , post completed to cal or whatever
+                    diff = timeDiff.seconds/60                                     
                     diff = int(diff)
-                    #rainbow_cycle2(0.001)
-                    #sound = 'off'
+               
                     
                     while testbutton.taskButton != 'on':
                         light = 'on'
@@ -118,27 +115,22 @@ def renderThread():
                         sound = "off"
                         light = 'on'
                         evRender()
-                        #eventTextRender(eventRenderString + ' || ' + str(diff) + ' ' + 'min') this is the problem, rendering it differently fixes the problem
+                         
                     if testbutton.taskButton == 'on' and state == 'event':
                         state = 'eventTimer'
                         sound = 'off'
                         light = 'off'
                         testbutton.taskButton = 'off'
                         testbutton.pushbutton = 'off'
-                        #state = 'eventTimer'
+                        
                         print('testbutton.taskbutton from main')
                         print(testbutton.taskButton)
                         print(testbutton.pushbutton)
-                        #testbutton.taskButton = 'off'
-                #if processingList[0]['title'] == 'alarm':   # lol , idiot... move this shit somewhere else
-                #    sound = 'on'
-                #    state = 'alarm'
+                        
                 
                 if processingList[0]['description'] == 'remind':
                     state = 'remind'# reminder
-                    #eventTextRendery(processingList[0]['title'])
-                    #processingList.pop(0)
-                    #state = 'clock'
+           
                     
                     
                     
@@ -152,7 +144,6 @@ def renderThread():
             processingList.pop(0)
             score = score + int(diff)
             
-            #deleteCal(item1['eventId'])   create completed tag in descript
             with open('/home/pi/MiFloV2/score.json', 'r') as fp:
                 score = json.load(fp)
             score = score + int(diff)
@@ -183,10 +174,10 @@ def renderThread():
                 testbutton.pushbutton = 'off'    
                 state = 'clock' 
                 
-        #
+        
         if state == 'timer':
             print('timerstate')
-        #
+        
             timeTimer.timer_Render() 
             
         if state == 'remind' and processingList[0]['description'] == 'remind':
@@ -202,13 +193,10 @@ def renderThread():
                 state = 'clock'        
             
         
-            #print(timeTimer.tm)
-        #if state == 'ip':
-        #    IpRender()
-            #button.pushbuttonIP == 'off'
-        #    state = 'clock'
+           
+     
         print(state)  
-        time.sleep(0.1) # previous 0.1
+        time.sleep(0.1) 
         print('pushbutton from main')
         print(testbutton.pushbutton)
         
@@ -259,15 +247,12 @@ def updateThread():
             date_time_str = flaskapp.alarmTime + ':00'                                  # this is the alarm from flask , nightMode works here ...
             alarmTimeDt = datetime.strptime(date_time_str, '%Y-%m-%dT%H:%M:%S')
             nu = datetime.now()
-            #nuPlus5 = nu + datetime.timedelta(minutes = 5)
+            
             print(type(flaskapp.alarmTime)) # format 2021-05-30T12:17
             print(alarmTimeDt)
             print(nu)
             
-            #if alarmTimeDt < nuPlus5:
-            #    print('wake uuuuuuuuuuup slowllyyyyyyyyyyykflflzjf')
-            #    button.nightMode = 'off'
-                #pixels.brightness = 0.1
+         
             if alarmTimeDt < nu:
                 state = 'alarm'
                 testbutton.nightMode = 'off'
@@ -278,8 +263,7 @@ def updateThread():
             
        
         lock.release()
-        #print('flaskapp alarmTime, write this to a file')
-        #print(flaskapp.alarmTime) # write this to a file 
+    
         time.sleep(0.1) # last value 0.1  
 
 def audioThread():
@@ -310,8 +294,8 @@ def audioThread():
             
 
             print(state)    
-        #lock.release()
-        time.sleep(0.1) # this was 0.01
+        
+        time.sleep(0.1) 
         
 def taskThread():
     global ultimateList, processingList, state, eventHub, celcTemp
@@ -319,18 +303,17 @@ def taskThread():
    
     
     while True:
-        #from socket import gaierror
+        
         try:
             
-            eventHub = getGoogle()  # the best most badass self refreshing list of dictionaries ever conceived 
+            eventHub = getGoogle()  
         
         except UnboundLocalError:
             print('UnboundLocalError, you should probably get a new token')
 
-                #print('------this is the complete updating list of future events---------')
-        #print('---------------')
+       
         for x in eventHub:
-            #pprint(x)
+            
             
             nowwa = datetime.now()
             nowwaTz = nowwa.astimezone()
@@ -353,10 +336,7 @@ def taskThread():
                 
                
         print(datetime.now().strftime("%d.%b %Y %H:%M:%S"))
-        #except socket.gaierror:
-        #    print('socket gaierror')
-        #except httplib2.error.ServerNotFoundError:
-        #    print('httplib2 error')
+   
         celcTemp = getCelcius()
         print(celcTemp)
         time.sleep(20) 
@@ -366,9 +346,9 @@ def keyboardThread():
     global state, keyPressed, taskButton, pushbutton, light
     while True:
         
-        #input()
+        
         lock.acquire()
-        #keyPressed = True
+        
         testbutton.waitforpushbutton()
         while state == 'alarm':
             ledBlinker()
@@ -416,7 +396,7 @@ t3.start()
 t4.start()
 t5.start()
 t6.start()
-#Joined the threads
+
 t1.join()
 t2.join()
 t3.join()

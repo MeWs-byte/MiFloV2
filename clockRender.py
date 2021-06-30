@@ -199,15 +199,7 @@ def clock_Render():
     	drawString( '|', 18, 1, (15, 145, 55) )
     	drawString( current_time, 0, 1, (255, 255, 255) )
    
-    #if testbutton.taskButton == 'on':
-        
-    #	drawPixel(0,0,90000)
 
-    #if testbutton.pushbutton == 'on':
-    #    drawPixel(2,0,100000)
-
-    #if testbutton.pushbuttonIP == 'on':
-    #    drawPixel(4,0,10000)
 		
     pixels.show()
     
@@ -232,44 +224,6 @@ def clock_Render():
         
     time.sleep(0.1)
         
-"""     # Comment this line out if you have RGBW/GRBW NeoPixels
-    pixels.fill((0, 0, 0))
-
-    now = datetime.now()
-    #current_time = now.strftime("%H:%M:%S")
-    current_time = now.strftime("%H:%M")
-    #day = now.strftime('%d|%-d')
-    day = now.strftime('%d%m')
-    drawString( "25c", 20, 1, (5, 85, 215) )
-    drawString( '|', 18, 1, (15, 145, 55) )
-    drawString( current_time, 0, 1, (255, 255, 255) )	
-    if button.taskButton == 'on':
-        
-    	drawPixel(0,0,90000)
-    if button.pushbutton == 'on':
-        drawPixel(2,0,20000)
-    if button.pushbuttonIP == 'on':
-        drawPixel(4,0,10000)
-    pixels.show()
-    
-
-    bob = getLux()
-    #print('Light Level: ',bob)
-    
-
-     
-    if bob > 1500:
-        print('this works')
-        pixels.brightness = 1
-    
-
-             
-    else:
-        pixels.brightness = 0.1 + bob / 1500 * 0.9
-        
-    if button.nightMode == 'on':
-    	pixels.brightness = 0   
-    time.sleep(15)  """	
     
 def alarm_Render():
     pixels.brightness = 0.3
