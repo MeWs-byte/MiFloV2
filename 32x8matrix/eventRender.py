@@ -6,7 +6,7 @@ import neopixel
 from colorsys import hsv_to_rgb
 from PIL import Image, ImageDraw, ImageFont
 #from getIP import whatsMyIp
-import testbutton
+import arcadebutton
 
 
 def eventTextRender(a):

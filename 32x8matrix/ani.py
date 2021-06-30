@@ -8,7 +8,7 @@ import board
 import neopixel
 from datetime import datetime
 from ledforButton import ledBlinker
-import testbutton
+import arcadebutton
 import colours
  
 # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
@@ -186,12 +186,12 @@ def clock_Render():
     drawString( day, 20, 1, (5, 85, 215) )
     drawString( '|', 18, 1, (15, 145, 55) )
     drawString( current_time, 0, 1, (255, 255, 255) )	
-    if testbutton.taskButton == 'on':
+    if arcadebutton.taskButton == 'on':
         
     	drawPixel(0,0,90000)
-    if testbutton.pushbutton == 'on':
+    if arcadebutton.pushbutton == 'on':
         drawPixel(2,0,20000)
-    if testbutton.pushbuttonIP == 'on':
+    if arcadebutton.pushbuttonIP == 'on':
         drawPixel(4,0,10000)
     pixels.show()
     time.sleep(0.01)
@@ -210,7 +210,7 @@ def clock_Render():
     else:
         pixels.brightness = 0.1 + bob / 1500 * 0.9
         
-    if testbutton.nightMode == 'on':
+    if arcadebutton.nightMode == 'on':
     	pixels.brightness = 0
         
 

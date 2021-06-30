@@ -8,7 +8,7 @@ import board
 import neopixel
 from datetime import datetime
 from ledforButton import ledBlinker
-import testbutton
+import arcadebutton
 import colours
  
 # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18

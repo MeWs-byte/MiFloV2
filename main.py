@@ -22,7 +22,7 @@ from ani import intro, scoreRender, intro2, intro3, evRender
 import json
 import random
 from weather import getCelcius
-import testbutton
+import arcadebutton
 from scrollytest import eventTextRendery
 
 lock = threading.Lock()
@@ -54,34 +54,34 @@ def renderThread():
 
             clock_Render()
             #print("clockstate")
-        if state == 'clock' and testbutton.taskButton =='on':
+        if state == 'clock' and arcadebutton.taskButton =='on':
             with open('/home/pi/MiFloV2/score.json', 'r') as fp:
                 score = json.load(fp)
                 scoreRender(str(score))
                 time.sleep(2)
-                testbutton.taskButton = 'off'
-                testbutton.pushbutton = 'off'
+                arcadebutton.taskButton = 'off'
+                arcadebutton.pushbutton = 'off'
                 
                
         while state == 'alarm':
-            testbutton.pushbutton = 'off'
-            testbutton.taskButton = 'off' 
-            testbutton.nightMode = 'off'
+            arcadebutton.pushbutton = 'off'
+            arcadebutton.taskButton = 'off' 
+            arcadebutton.nightMode = 'off'
             alarm_Render()
             print("alarmstate")
             
             
-            if testbutton.pushbutton == 'on' and state == 'alarm':
+            if arcadebutton.pushbutton == 'on' and state == 'alarm':
                 
                 try:
                     processingList.pop(0)
                                             # pushbutton for alarm
                     flaskapp.alarmButton = 'notSet'
                     flaskapp.alarmTime = ''
-                    testbutton.pushbutton = 'off'
-                    testbutton.taskButton = 'off'
+                    arcadebutton.pushbutton = 'off'
+                    arcadebutton.taskButton = 'off'
                     print('removing current alarm lalalalaalala')
-                    testbutton.nightMode = 'off'
+                    arcadebutton.nightMode = 'off'
                     state = 'clock' 
                     
                 except:
@@ -94,8 +94,8 @@ def renderThread():
             
             try:
                 light = 'off'
-                testbutton.taskButton = 'off'   
-                testbutton.pushbutton = 'off'
+                arcadebutton.taskButton = 'off'   
+                arcadebutton.pushbutton = 'off'
                 if (processingList[0]['description'] == 'processing') and (processingList[0]['title'] != 'alarm'):
                     processingList[0]['description'] = 'contract'
                     sound = 'on'
@@ -108,25 +108,25 @@ def renderThread():
                     diff = int(diff)
                
                     
-                    while testbutton.taskButton != 'on':
+                    while arcadebutton.taskButton != 'on':
                         light = 'on'
                         eventTextRendery(eventRenderString + ' || ' + str(diff) + ' ' + 'min')
                     sound = 'off'
-                    while testbutton.taskButton != 'on':
+                    while arcadebutton.taskButton != 'on':
                         sound = "off"
                         light = 'on'
                         evRender()
                          
-                    if testbutton.taskButton == 'on' and state == 'event':
+                    if arcadebutton.taskButton == 'on' and state == 'event':
                         state = 'eventTimer'
                         sound = 'off'
                         light = 'off'
-                        testbutton.taskButton = 'off'
-                        testbutton.pushbutton = 'off'
+                        arcadebutton.taskButton = 'off'
+                        arcadebutton.pushbutton = 'off'
                         
-                        print('testbutton.taskbutton from main')
-                        print(testbutton.taskButton)
-                        print(testbutton.pushbutton)
+                        print('arcadebutton.taskbutton from main')
+                        print(arcadebutton.taskButton)
+                        print(arcadebutton.pushbutton)
                         
                 
                 if processingList[0]['description'] == 'remind':
@@ -157,11 +157,11 @@ def renderThread():
         if state == 'congrats':
             
             try:
-                testbutton.taskButton = 'off'
-                testbutton.pushbutton = 'off'
+                arcadebutton.taskButton = 'off'
+                arcadebutton.pushbutton = 'off'
                 with open('/home/pi/MiFloV2/info.json', 'r') as readName:
                     UsrName = json.load(readName)
-                while testbutton.taskButton != 'on':
+                while arcadebutton.taskButton != 'on':
                     light = 'on'
                     scoreRender(str(score))
                 light = 'off'
@@ -171,8 +171,8 @@ def renderThread():
                 
                 
             finally:
-                testbutton.taskButton = 'off'
-                testbutton.pushbutton = 'off'    
+                arcadebutton.taskButton = 'off'
+                arcadebutton.pushbutton = 'off'    
                 state = 'clock' 
                 
         
@@ -185,8 +185,8 @@ def renderThread():
                 light = 'off'
                 sound = 'off'
                 updateCal(processingList[0]['title'],'completed',processingList[0]['startDate'],processingList[0]['endDate'],processingList[0]['eventId'],2)
-                testbutton.taskButton = 'off'
-                testbutton.pushbutton = 'off'
+                arcadebutton.taskButton = 'off'
+                arcadebutton.pushbutton = 'off'
                 processingList.pop(0)
                 state = 'clock'        
             
@@ -196,7 +196,7 @@ def renderThread():
         print(state)  
         time.sleep(0.1) 
         print('pushbutton from main')
-        print(testbutton.pushbutton)
+        print(arcadebutton.pushbutton)
         
     
 
@@ -210,7 +210,7 @@ def updateThread():
         lock.acquire()
          
 
-        if testbutton.taskButton == 'on':
+        if arcadebutton.taskButton == 'on':
             print('taskbutton is working') 
                
         try:
@@ -236,7 +236,7 @@ def updateThread():
          
             if alarmTimeDt < nu:
                 state = 'alarm'
-                testbutton.nightMode = 'off'
+                arcadebutton.nightMode = 'off'
                 
         except:
             ValueError
@@ -330,7 +330,7 @@ def keyboardThread():
         
         lock.acquire()
         
-        testbutton.waitforpushbutton()
+        arcadebutton.waitforpushbutton()
         while state == 'alarm':
             ledBlinker()
         

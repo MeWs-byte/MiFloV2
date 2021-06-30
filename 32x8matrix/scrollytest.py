@@ -6,13 +6,13 @@ import neopixel
 from colorsys import hsv_to_rgb
 from PIL import Image, ImageDraw, ImageFont
 #from getIP import whatsMyIp
-import testbutton
+import arcadebutton
 
 
 def eventTextRendery(a):
     global taskButton, pushbutton
     
-    #while testbutton.pushbutton == 'off': this was not a comment , indent everything again if this doesnt work
+    #while arcadebutton.pushbutton == 'off': this was not a comment , indent everything again if this doesnt work
         
     #text = "Hello!"
     pixel_pin = board.D18
@@ -71,10 +71,10 @@ def eventTextRendery(a):
     offset_x = 0 
     t_end = time.time() + 10
     
-    while time.time() < t_end and testbutton.taskButton == 'off':  
+    while time.time() < t_end and arcadebutton.taskButton == 'off':  
         for x in range(display_width):
             for y in range(display_height):
-                #print(testbutton.taskButton)			
+                #print(arcadebutton.taskButton)			
                 if image.getpixel((x + offset_x, y)) == 255:
                     pixels[getIndex2(x,y)] = TextColor
                 

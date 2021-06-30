@@ -8,7 +8,7 @@ import board
 import neopixel
 from datetime import datetime
 from lightSensor import getLux
-import testbutton
+import arcadebutton
 from weather import getCelcius
 import ledforButton
 from ani import nightModeRender
@@ -218,7 +218,7 @@ def clock_Render():
     else:
         pixels.brightness = 0.1 + bob / 1400 * 0.9 # 1500
         
-    if testbutton.nightMode == 'on':
+    if arcadebutton.nightMode == 'on':
         #nightModeRender("Sleep")
         pixels.brightness = 0
         
