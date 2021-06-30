@@ -108,8 +108,9 @@ When you run quickstart.py again (on your desktop) you should be able to receive
 save configuration as 
 `sudo nano /lib/systemd/system/miflo.service`
 
-contents of file 
-```[Unit]
+contents of file:
+```
+[Unit]
 Description=MiFlo
 After=network.target
 
@@ -122,14 +123,18 @@ Restart=always
 User=root
 
 [Install]
-WantedBy=multi-user.target```
+WantedBy=multi-user.target
+```
+
 
 `sudo chmod 777 /lib/systemd/system/miflo.service`
 `sudo systemctl daemon-reload`
 `sudo systemctl enable miflo.service`
 
-/etc/systemd/system/bootAnimation.service 
-early intro ? 
+Because everything starts up kinda slowly , here's another service that starts up 30 seconds faster:
+
+sudo nano /etc/systemd/system/bootAnimation.service 
+ 
 
 ```[Unit]
 Description=bootAnimation
@@ -145,7 +150,8 @@ StandardError=inherit
 User=root
 
 [Install]
-WantedBy=multi-user.target```
+WantedBy=multi-user.target
+```
 
 
 ###User instructions:
