@@ -7,7 +7,7 @@ from cal_setup import get_calendar_service
 from pprint import pprint
 from datetime import timedelta
 import pytz
-from customClass import EventObject
+from eventClass import EventObject
 import flaskapp
 import time
 from pprint import pprint

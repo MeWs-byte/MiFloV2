@@ -1,5 +1,4 @@
 from datetime import datetime
-# Custom object to hold article date and time
 
 class EventObject:
     

@@ -8,7 +8,7 @@ from clockRender import *
 import flask
 import threading
 import flaskapp
-from customClass import EventObject
+from eventClass import EventObject
 from playsounds import alarmSound, alarmSound2, introSound, pingSound, remindSound
 from googlie import getGoogle, eventList, ultimateList, processingList, createCal,updateCal,deleteCal
 from pprint import pprint
