@@ -8,7 +8,6 @@ import threading
 import flaskapp
 from customClass import EventObject
 from playsounds import alarmSound, alarmSound2, introSound, pingSound, remindSound
-import timeTimer
 from googlie import getGoogle, eventList, ultimateList, processingList, createCal,updateCal,deleteCal
 from pprint import pprint
 from eventRender import eventTextRender, congratsTextRender
@@ -175,10 +174,7 @@ def renderThread():
                 state = 'clock' 
                 
         
-        if state == 'timer':
-            print('timerstate')
-        
-            timeTimer.timer_Render() 
+       
             
         if state == 'remind' and processingList[0]['description'] == 'remind':
                 light = 'on'
@@ -211,24 +207,7 @@ def updateThread():
 
         lock.acquire()
          
-        if flaskapp.alarmButton == 'Alarm off':    # web button for going back to clockmode from alarm
-            state = 'clock'
-            flaskapp.alarmButton = 'notSet'
-            flaskapp.alarmTime = ''
-        
-        if flaskapp.timerButton == 'Timer off' and state != 'alarm' and state != 'event':    # web button for going back to clockmode from timer
-            print('this works')
-            state = 'clock'
-    
-        #print(timeTimer.tiMaster)   # amount of seconds remaining in timer, int
-        
-        if timeTimer.tiMaster > 0 and flaskapp.timerButton != 'Timer off':  #going to the timer
-            state = 'timer'
-            
-            
-        elif timeTimer.tiMaster == 0 and state != 'alarm' and state != 'event': # timer = 0 so clockmode is back on 
-            state = 'clock'
-        
+
         if testbutton.taskButton == 'on':
             print('taskbutton is working') 
                

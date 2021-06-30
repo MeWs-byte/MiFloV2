@@ -567,6 +567,10 @@ def intro2():
     pixels.show()
     time.sleep(0.1) 
     
+    
+       
+    
+    
    
 
    

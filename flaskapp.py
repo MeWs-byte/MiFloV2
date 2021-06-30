@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 
 import csv
 from customClass import EventObject
-import timeTimer
+
 
 import json
 
@@ -47,7 +47,7 @@ def index():
     #    print(type(timeTimerWeb)) # prints the value of name of the input in index.html        
     return render_template('index.html')
     
-
+''' 
 @app.route("/alarm")                    # alarm set
 def input():
     global alarmTime, eventList
@@ -103,7 +103,7 @@ def timer():
     </p></body>"""
               + timerTime
               )
-
+ '''
 
 @app.route("/userInfo")                    # alarm set
 def userInfo():
