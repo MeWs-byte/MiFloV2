@@ -4,7 +4,7 @@ a KISS implementation of the MiFlo Smart Clock
 With the MiFlo parents can set alerts, alarms and visual timers in google calendar to plan tasks and create a dedicated point of attention.
 For each completed task point are earned and random encouragements are displayed.
 
-Buid your own connected clock for kids with ADHD and ASD or anybody else for that matter.
+Build your own connected clock for kids with ADHD and ASD or anybody else for that matter.
 
 
 [Hardware Components, Schematics, Lasercut SVG's ](/hardware)
